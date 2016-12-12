@@ -19,8 +19,8 @@ using namespace glimac;
 int main(int argc, char **argv) {
 
     // Initialize SDL and open a window
-    float largeur = 800;
-    float hauteur = 800;
+    float largeur = 400;
+    float hauteur = 400;
     SDLWindowManager windowManager(largeur, hauteur, "GLImac");
 
     // Initialize glew for OpenGL3+ support
