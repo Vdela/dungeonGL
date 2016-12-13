@@ -14,7 +14,7 @@
 #include <glimac/glm.hpp>
 #include <glimac/Image.hpp>
 
-
+// Irene!
 // On va y arriver
 
 using namespace glimac;
