@@ -1,41 +1,27 @@
-#define GLEW_STATIC
+//
+// Created by Vincent on 13/12/2016.
+//
 
-#include <glimac/SDLWindowManager.hpp>
-#include <GL/glew.h>
-#include <iostream>
-#include <GL/glut.h>
-#include <GL/gl.h>
-#include <string>
-#include <SDL/SDL.h>
 
-#include <glimac/Program.hpp>
-#include <glimac/FilePath.hpp>
-#include <glimac/Sphere.hpp>
-#include <glimac/glm.hpp>
-#include <glimac/Image.hpp>
 
-// Irene!
-// On va y arriver
-// Valou!
+#include "../include/Sphere3D.h"
 
-using namespace glimac;
+Sphere3D::Sphere3D() {
 
-int main(int argc, char **argv) {
 
     // Initialize SDL and open a window
-    float largeur = 400;
-    float hauteur = 400;
+    float largeur = 800;
+    float hauteur = 800;
     SDLWindowManager windowManager(largeur, hauteur, "GLImac");
 
     // Initialize glew for OpenGL3+ support
     GLenum glewInitError = glewInit();
     if (GLEW_OK != glewInitError) {
         std::cerr << glewGetErrorString(glewInitError) << std::endl;
-        return 1;
     }
 
     //charge les shaders que l'on a ajouté dans le dossier shaders
-    FilePath applicationPath(argv[0]);
+    FilePath applicationPath(".\\opengl.exe");
     Program program = loadProgram(applicationPath.dirPath() + "\\..\\..\\shaders\\3D.vs.glsl",
                                   applicationPath.dirPath() + "\\..\\..\\shaders\\normals.fs.glsl");
 
@@ -61,12 +47,12 @@ int main(int argc, char **argv) {
 
     glEnable(GL_DEPTH_TEST);
 
-    glm::mat4 ProjMatrix;
-    ProjMatrix = glm::perspective<float>(glm::radians(70.f),largeur/hauteur,0.1f,100.f);
-    glm::mat4 MVMatrix;
-    MVMatrix = glm::translate<float>(glm::mat4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1), glm::vec3(0.f,0.f,-5.f));
-    glm::mat4 NormalMatrix;
-    NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
+    glm::mat4 projMatrix;
+    projMatrix = glm::perspective<float>(glm::radians(70.f),largeur/hauteur,0.1f,100.f);
+    glm::mat4 mvMatrix;
+    mvMatrix = glm::translate<float>(glm::mat4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1), glm::vec3(0.f,0.f,-5.f));
+    glm::mat4 normalMatrix;
+    normalMatrix = glm::transpose(glm::inverse(mvMatrix));
 
     Sphere sphere(1, 32, 16);
     //sphere.getVertexCount();//nb sommets
@@ -171,9 +157,9 @@ int main(int argc, char **argv) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //envoyer les matrices
-        glUniformMatrix4fv(uMVPMatrixLoc,1,GL_FALSE,glm::value_ptr(ProjMatrix * MVMatrix));
-        glUniformMatrix4fv(uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(MVMatrix));
-        glUniformMatrix4fv(uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(NormalMatrix));
+        glUniformMatrix4fv(uMVPMatrixLoc,1,GL_FALSE,glm::value_ptr(projMatrix * mvMatrix));
+        glUniformMatrix4fv(uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(mvMatrix));
+        glUniformMatrix4fv(uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
 
 
         //Dessiner avec le VAO
@@ -203,7 +189,7 @@ int main(int argc, char **argv) {
             NormalMatrix2 = glm::transpose(glm::inverse(MVMatrix2));
 
 
-            glUniformMatrix4fv(uMVPMatrixLoc,1,GL_FALSE,glm::value_ptr(ProjMatrix * MVMatrix2));
+            glUniformMatrix4fv(uMVPMatrixLoc,1,GL_FALSE,glm::value_ptr(projMatrix * MVMatrix2));
             glUniformMatrix4fv(uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(MVMatrix2));
             glUniformMatrix4fv(uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(NormalMatrix2));
             glBindVertexArray(vao);
@@ -220,5 +206,4 @@ int main(int argc, char **argv) {
     glDeleteBuffers(1, &vbo);
     glDeleteVertexArrays(1, &vao);
 
-    return 0;
 }

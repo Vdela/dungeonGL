@@ -19,7 +19,7 @@ include_directories( ${YOUR_DIRECTORY}lib/glimac/include  ${YOUR_DIRECTORY}lib/t
 add_subdirectory(lib/glimac)
 set(LIB_LIST glimac -lmingw32 -lSDLmain -lSDL  -lfreeglut -lglew32s -lopengl32  )
 
-add_executable(opengl ${SOURCE_FILES} ${HEADER_FILES} ${SHADER_FILES})
+add_executable(opengl ${SOURCE_FILES} ${HEADER_FILES} ${SHADER_FILES} src/Cube3D.cpp include/Cube3D.h src/Sphere3D.cpp include/Sphere3D.h src/TransformMatrix.cpp include/TransformMatrix.h)
 target_link_libraries(opengl ${LIB_LIST})
 
 
