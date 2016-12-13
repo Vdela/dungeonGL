@@ -31,8 +31,6 @@ Cube3D::Cube3D() {
     // Matrice de transformation
     this->uModelMatrixID = glGetUniformLocation( program.getGLId(), "uModelMatrix" );
 
-    std::cout << "OpenGL Version : " << glGetString(GL_VERSION) << std::endl;
-    std::cout << "GLEW Version : " << glewGetString(GLEW_VERSION) << std::endl;
 
     /*********************************
      * HERE SHOULD COME THE INITIALIZATION CODE
@@ -96,9 +94,26 @@ void Cube3D::Draw() {
     glBindVertexArray(0);
 }
 
-void Cube3D::Translate(float x, float y, float z) {
-    this->modelMatrix = TransformMatrix::translate( x , y , z);
+void Cube3D::setTransform(glm::mat3 transformMatrix) {
+    this->modelMatrix = transformMatrix;
 }
 
+void Cube3D::addTransform(glm::mat3 transformMatrix) {
+    this->modelMatrix = transformMatrix * this->modelMatrix;
+}
+
+/*
+void Cube3D::translate(float x, float y, float z) {
+    this->modelMatrix *= TransformMatrix::translate( x , y , z);
+}
+
+void Cube3D::rotate(float r) {
+    this->modelMatrix *= TransformMatrix::rotate( r );
+}
+
+void Cube3D::scale(float x, float y, float z) {
+    this->modelMatrix *= TransformMatrix::scale( x , y , z);
+}
+*/
 
 

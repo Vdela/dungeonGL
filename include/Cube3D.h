@@ -29,7 +29,13 @@ private:
 public:
     Cube3D();
     void Draw();
-    void Translate(float x, float y, float z);
+    void setTransform(glm::mat3);
+    void addTransform(glm::mat3);
+    /*
+    void translate(float x, float y, float z);
+    void rotate(float r);
+    void scale(float x, float y, float z);
+     */
 };
 
 

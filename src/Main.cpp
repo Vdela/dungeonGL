@@ -36,8 +36,20 @@ int main(int argc, char **argv) {
 
 
     //===== Construction du monde =====//
-    Cube3D cube1, cube2;
+    Cube3D cube1/*, cube2*/;
 
+    /*cube1.setTransform( TransformMatrix::rotate( 90) );
+    cube1.addTransform( TransformMatrix::rotate( -90) );*/
+
+    /*cube1.setTransform( TransformMatrix::translate( 0.5, 0, 0) );
+    cube1.addTransform( TransformMatrix::translate( 0.5, 0, 0) );*/
+/*
+    cube2.setTransform( TransformMatrix::translate( 0.5f, 0, 0 ) );
+    cube2.setTransform( TransformMatrix::translate( 0.5f, 0, 0 ) );**/
+
+
+    //cube2.translate(0.5, 0.0, 0.0);
+   // cube2.rotate( 180 );
 
 
 
@@ -53,15 +65,15 @@ int main(int argc, char **argv) {
         }
 
         // Jeu
-        cube1.Translate(-0.5, 0.0, 0.0);
-        cube2.Translate(0.5, 0.0, 0.0);
+        //cube1.addTransform( TransformMatrix::translate( 0.05, 0, 0) );
+        //cube1.addTransform( TransformMatrix::scale( 1.005, 1, 1) );
 
         // Clear de la fenêtre avant le nouveau rendu
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Rendu des objets
         cube1.Draw();
-        cube2.Draw();
+       // cube2.Draw();
 
         // Update the display
         windowManager.swapBuffers();
