@@ -1,6 +1,7 @@
 # ===== Custom ignore =====
 cmake-build-debug/
-.idea/
+.idea/workspace.xml
+.idea/tasks.xml
 
 
 # Windows image file caches

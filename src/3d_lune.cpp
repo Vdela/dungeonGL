@@ -19,7 +19,7 @@
 
 //// voilà mon commentaire //
 using namespace glimac;
-
+// another test.
 int main(int argc, char **argv) {
 
     // Initialize SDL and open a window
