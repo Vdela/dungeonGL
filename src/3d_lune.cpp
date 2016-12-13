@@ -1,5 +1,7 @@
 #define GLEW_STATIC
 
+//Ceci est un commentaire
+
 #include <glimac/SDLWindowManager.hpp>
 #include <GL/glew.h>
 #include <iostream>
@@ -14,6 +16,8 @@
 #include <glimac/glm.hpp>
 #include <glimac/Image.hpp>
 
+
+//// voilà mon commentaire //
 using namespace glimac;
 
 int main(int argc, char **argv) {
