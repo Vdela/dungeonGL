@@ -4,6 +4,7 @@
 #include "glimac/common.hpp"
 #include "glimac/Cone.hpp"
 #include "math.h"
+
 namespace glimac {
 
 void Cone::build(GLfloat height, GLfloat r, GLsizei discLat, GLsizei discHeight) {
