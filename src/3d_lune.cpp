@@ -14,6 +14,9 @@
 #include <glimac/glm.hpp>
 #include <glimac/Image.hpp>
 
+
+// On va y arriver
+
 using namespace glimac;
 
 int main(int argc, char **argv) {
