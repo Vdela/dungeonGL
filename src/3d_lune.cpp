@@ -1,5 +1,7 @@
 #define GLEW_STATIC
 
+//Ceci est un commentaire
+
 #include <glimac/SDLWindowManager.hpp>
 #include <GL/glew.h>
 #include <iostream>
