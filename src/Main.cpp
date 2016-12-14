@@ -31,6 +31,8 @@ void initGlew() {
 
 int main(int argc, char **argv) {
 
+    std::cout << "test log console" << std::endl;
+
     // Init de l'application
     SDLWindowManager windowManager(800, 800, "DungeonGL");
     initGlew();
@@ -46,6 +48,9 @@ int main(int argc, char **argv) {
     c1.setTranslation( -1, -2, -5 );
     c2.setTranslation( 0, -2, -5 );
     c3.setTranslation( 1, -2, -5 );
+
+    Triangle3D t;
+    t.setTranslation( 0,1.35,-3 );
 
 
 
@@ -67,16 +72,15 @@ int main(int argc, char **argv) {
         c1.addRotation( glm::vec3(1, 0, 0), 0.005f );
         c2.addRotation( glm::vec3(1, 0, 0), 0.005f );
         c3.addRotation( glm::vec3(1, 0, 0), 0.005f );
+        t.addRotation( glm::vec3(0, 1, 0), 0.005f );
 
         // Clear de la fenêtre avant le nouveau rendu
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Rendu des objets
-        cube.draw();
-        c1.draw();
-        c2.draw();
-        c3.draw();
-
+        // Rendu des objets de la scene
+        for ( std::vector<Object3D*>::const_iterator it = Object3D::getSceneObjects().begin() ;  it != Object3D::getSceneObjects().end() ; it++ ) {
+            (*it)->draw();
+        }
 
         // Update the display
         windowManager.swapBuffers();
