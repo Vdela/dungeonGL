@@ -14,6 +14,7 @@ class Sphere {
 
 public:
     // Constructeur: alloue le tableau de données et construit les attributs des vertex
+    Sphere() {};
     Sphere(GLfloat radius, GLsizei discLat, GLsizei discLong):
         m_nVertexCount(0) {
         build(radius, discLat, discLong); // Construction (voir le .cpp)

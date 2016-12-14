@@ -12,9 +12,13 @@
 class TransformMatrix {
 
 public:
+    /*
     static glm::mat3 translate(float x, float y, float z);
     static glm::mat3 scale(float x, float y, float z);
-    static glm::mat3 rotate(float a);
+    static glm::mat3 rotate(float x, float y, float z);
+     */
+    static glm::mat4 translate(float x, float y, float z);
+
 };
 
 

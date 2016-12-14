@@ -3,36 +3,17 @@
 //
 
 
-
 #include "../include/Sphere3D.h"
 
-Sphere3D::Sphere3D() {
-
-
-    // Initialize SDL and open a window
-    float largeur = 800;
-    float hauteur = 800;
-    SDLWindowManager windowManager(largeur, hauteur, "GLImac");
-
-    // Initialize glew for OpenGL3+ support
-    GLenum glewInitError = glewInit();
-    if (GLEW_OK != glewInitError) {
-        std::cerr << glewGetErrorString(glewInitError) << std::endl;
-    }
+Sphere3D::Sphere3D(SDLWindowManager windowManager) {
 
     //charge les shaders que l'on a ajouté dans le dossier shaders
     FilePath applicationPath(".\\opengl.exe");
     Program program = loadProgram(applicationPath.dirPath() + "\\..\\..\\shaders\\3D.vs.glsl",
                                   applicationPath.dirPath() + "\\..\\..\\shaders\\normals.fs.glsl");
 
-
-    program.use();
-
     std::unique_ptr<Image> ImE = loadImage("..\\..\\assets\\textures\\EarthMap.jpg");
     std::unique_ptr<Image> ImM = loadImage("..\\..\\assets\\textures\\MoonMap.jpg");
-
-    std::cout << "OpenGL Version : " << glGetString(GL_VERSION) << std::endl;
-    std::cout << "GLEW Version : " << glewGetString(GLEW_VERSION) << std::endl;
 
     /*********************************
      * HERE SHOULD COME THE INITIALIZATION CODE
@@ -45,43 +26,18 @@ Sphere3D::Sphere3D() {
     GLint  uMVMatrixLoc = glGetUniformLocation(program.getGLId(), "uMVMatrix");
     GLint  uNormalMatrixLoc = glGetUniformLocation(program.getGLId(), "uNormalMatrix");
 
-    glEnable(GL_DEPTH_TEST);
-
-    glm::mat4 projMatrix;
-    projMatrix = glm::perspective<float>(glm::radians(70.f),largeur/hauteur,0.1f,100.f);
-    glm::mat4 mvMatrix;
+    projMatrix = glm::perspective<float>(glm::radians(70.f), 800/800 ,0.1f,100.f); // 800/800 ==> window ratio
     mvMatrix = glm::translate<float>(glm::mat4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1), glm::vec3(0.f,0.f,-5.f));
-    glm::mat4 normalMatrix;
     normalMatrix = glm::transpose(glm::inverse(mvMatrix));
 
-    Sphere sphere(1, 32, 16);
-    //sphere.getVertexCount();//nb sommets
-    //sphere.getDataPointer(); // tab de sommets
+    sphere = Sphere(1, 32, 16);
 
     //glGenBuffers(GLsizei n, Gluint*buffers); créer un buffer (nb vbo à créer, pointer id vbo)
     GLuint vbo;
     glGenBuffers(1, &vbo); //vbo affecté directement
 
-    /*Binding VBO ->GL_ARRAYY_BUFFER
-    glBindBuffer(GLenum target, GLuint buffer)
-                nom de la cible , buffer à binder
-    */
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-
-
-    /*Remplir VBO
-    lBufferData(GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage)
-
-   Paramètres:
-
-   GLenum target: la cible sur laquelle le buffer est bindé (GL_ARRAY_BUFFER dans notre cas)
-      GLsizeiptr size: la taille du tableau en octets. C'est le nombre de flottants multiplié par la taille d'un float (sizeof(float)).
-      const GLvoid* data: le pointeur vers les données, notre tableau de flottants.
-   GLenum usage: un flag indiquant à OpenGL quel usage on va faire du buffer. On utilise GL_STATIC_DRAW pour un buffer dont les données ne changeront jamais.
-
-
-    */
     glBufferData(GL_ARRAY_BUFFER, sphere.getVertexCount()*sizeof(ShapeVertex), sphere.getDataPointer(), GL_STATIC_DRAW);
 
     //Debinder glBindBufer avec second para 0
@@ -104,21 +60,6 @@ Sphere3D::Sphere3D() {
     glEnableVertexAttribArray(VERTEX_ATTR_TEXCORD);
 
 
-    //spécification des attributs de vertex
-    /*glVertexAttribPointer(GLuint index,
-            GLint size, GLenum type, GLboolean normalized,
-            GLsizei stride, const GLvoid* pointer);
-
-    Paramètres:
-
-    GLuint index: l'index de l'attribut à spécifier
-    GLint size: le nombre de composantes de l'attribut. Dans notre cas c'est 2 car chaque position est décrite par deux nombres flottants.
-    GLenum type: une constante OpenGL indiquant le type de chaque composante. Dans notre cas on passe GL_FLOAT pour indiquer que chaque composante est un nombre flottant.
-    GLboolean normalized: pas besoin de s'occuper de ce paramètre pour le moment, on passe GL_FALSE
-    GLsizei stride: indique à OpenGL le nombre d'octets séparant l'attribut pour deux sommets consécutifs. Ca ne veut rien dire ? oui je sais. Imaginez vous être OpenGL. Vous venez de lire une position dans le tableau. Vous avez besoin de savoir ou est situé la position suivante. Dans notre cas elle est juste après, il faut donc avancer de deux flottants, soit 2 * sizeof(GLfloat) octets. Nous verrons dans l'exercice suivant que la position suivante peut être situé plus loin dans le tableau lorsqu'on rajoute des attributs de sommet.
-    const GLvoid* pointer: un pointeur, ou pas. Ce paramètre est un piège. Il faut en fait passer l'offset (décalage) en octets de la premiere instance de l'attribut dans le tableau. OK, ça ne veut encore rien dire. Dans notre cas, la première position est située au début du tableau, l'offset est donc 0.
-    */
-
     //on rebind vbo pour lui indiquer lequel il doit utiliser
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexAttribPointer(VERTEX_ATTR_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex),
@@ -129,7 +70,6 @@ Sphere3D::Sphere3D() {
                           (const GLvoid *) (offsetof(ShapeVertex, texCoords)));
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-
 
 
 
@@ -151,7 +91,6 @@ Sphere3D::Sphere3D() {
         /*********************************
          * HERE SHOULD COME THE RENDERING CODE
          *********************************/
-
 
         //Nettoyer la fenetre, para indique ce qu'il faut nettoyer
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -202,8 +141,35 @@ Sphere3D::Sphere3D() {
         // Update the display
         windowManager.swapBuffers();
     }
-    //liberation des ressources
-    glDeleteBuffers(1, &vbo);
-    glDeleteVertexArrays(1, &vao);
 
+
+}
+
+void Sphere3D::draw() {
+
+    /*********************************
+    * HERE SHOULD COME THE RENDERING CODE
+    *********************************/
+
+    //envoyer les matrices
+    glUniformMatrix4fv(uMVPMatrixLoc,1,GL_FALSE,glm::value_ptr(projMatrix * mvMatrix));
+    glUniformMatrix4fv(uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(mvMatrix));
+    glUniformMatrix4fv(uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
+
+
+    //Dessiner avec le VAO
+    glBindVertexArray(vao);
+
+    glDrawArrays(GL_TRIANGLES, 0, sphere.getVertexCount());
+
+    glBindVertexArray(0);
+
+}
+
+void Sphere3D::setTransform(glm::mat4 transformMatrix) {
+    this->modelMatrix = transformMatrix;
+}
+
+void Sphere3D::addTransform(glm::mat4 transformMatrix) {
+    this->modelMatrix = transformMatrix * this->modelMatrix;
 }

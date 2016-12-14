@@ -22,8 +22,25 @@
 using namespace glimac;
 
 class Sphere3D {
+private:
+    GLuint vao;
+    glm::mat4 modelMatrix;
+    GLint uModelMatrixID;
+
+    GLint uMVPMatrixLoc;
+    GLint uMVMatrixLoc;
+    GLint uNormalMatrixLoc;
+    Sphere sphere;
+
+    glm::mat4 projMatrix;
+    glm::mat4 mvMatrix;
+    glm::mat4 normalMatrix;
+
 public:
-    Sphere3D();
+    Sphere3D(SDLWindowManager windowManager);
+    void draw();
+    void setTransform(glm::mat4);
+    void addTransform(glm::mat4);
 };
 
 

@@ -14,7 +14,7 @@
 #include <glimac/glm.hpp>
 #include <glimac/Image.hpp>
 
-#include "../include/Cube3D.h"
+#include "../include/Triangle3D.h"
 #include "../include/Sphere3D.h"
 
 using namespace glimac;
@@ -33,23 +33,13 @@ int main(int argc, char **argv) {
     // Init de l'application
     SDLWindowManager windowManager(800, 800, "DungeonGL");
     initGlew();
+    glEnable(GL_DEPTH_TEST);
 
 
     //===== Construction du monde =====//
-    Cube3D cube1/*, cube2*/;
-
-    /*cube1.setTransform( TransformMatrix::rotate( 90) );
-    cube1.addTransform( TransformMatrix::rotate( -90) );*/
-
-    /*cube1.setTransform( TransformMatrix::translate( 0.5, 0, 0) );
-    cube1.addTransform( TransformMatrix::translate( 0.5, 0, 0) );*/
-/*
-    cube2.setTransform( TransformMatrix::translate( 0.5f, 0, 0 ) );
-    cube2.setTransform( TransformMatrix::translate( 0.5f, 0, 0 ) );**/
-
-
-    //cube2.translate(0.5, 0.0, 0.0);
-   // cube2.rotate( 180 );
+    Triangle3D triangle;
+    //Sphere3D sphere(windowManager);
+    triangle.setTranslation( 0, 0, -5 );
 
 
 
@@ -65,15 +55,16 @@ int main(int argc, char **argv) {
         }
 
         // Jeu
-        //cube1.addTransform( TransformMatrix::translate( 0.05, 0, 0) );
-        //cube1.addTransform( TransformMatrix::scale( 1.005, 1, 1) );
+        triangle.addRotation( glm::vec3(0, 0, 1), 0.025f );
+        triangle.setScale( 2, 1.00f, 1.00f );
+        //cube.addTranslation( 0, 0, -0.025f );
 
         // Clear de la fenêtre avant le nouveau rendu
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Rendu des objets
-        cube1.Draw();
-       // cube2.Draw();
+        triangle.draw();
+
 
         // Update the display
         windowManager.swapBuffers();
