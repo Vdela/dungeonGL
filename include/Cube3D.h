@@ -3,8 +3,8 @@
 //
 #define GLEW_STATIC
 
-#ifndef IMACGL_TRIANGLE3D_H
-#define IMACGL_TRIANGLE3D_H
+#ifndef IMACGL_CUBE3D_H
+#define IMACGL_CUBE3D_H
 
 #include <iostream>
 #include <vector>
@@ -15,17 +15,18 @@
 
 #include <glimac/SDLWindowManager.hpp>
 #include <glimac/Program.hpp>
-#include <glimac/Sphere.hpp>
 #include <glimac/Image.hpp>
+#include <glimac/BBox.hpp>
 
 #include "TransformMatrix.h"
 
-class Triangle3D {
+class Cube3D {
 
 private:
     GLuint vao;
-    glm::mat4 modelMatrix;
+    GLuint ibo;
 
+    glm::mat4 modelMatrix;
     GLint uModelMatrixID;
 
     glm::mat4 translationMatrix;
@@ -33,13 +34,8 @@ private:
     glm::mat4 scaleMatrix;
 
 public:
-    Triangle3D();
+    Cube3D();
     void draw();
-    /*
-    void setTransform(glm::mat4 transformMatrix);
-    void addTransform(glm::mat4 transformMatrix);
-    void addTransformLocal(glm::mat4 transformMatrix);
-    */
 
     void setTranslation(glm::vec3 translation);
     void addTranslation(glm::vec3 translation);
@@ -56,4 +52,4 @@ public:
 };
 
 
-#endif //IMACGL_TRIANGLE3D_H
+#endif //IMACGL_CUBE3D_H

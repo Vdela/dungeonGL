@@ -15,6 +15,7 @@
 #include <glimac/Image.hpp>
 
 #include "../include/Triangle3D.h"
+#include "../include/Cube3D.h"
 #include "../include/Sphere3D.h"
 
 using namespace glimac;
@@ -37,9 +38,14 @@ int main(int argc, char **argv) {
 
 
     //===== Construction du monde =====//
-    Triangle3D triangle;
+    Cube3D cube;
     //Sphere3D sphere(windowManager);
-    triangle.setTranslation( 0, 0, -5 );
+    cube.setTranslation( 0, 0, -5 );
+
+    Cube3D c1,c2,c3;
+    c1.setTranslation( -1, -2, -5 );
+    c2.setTranslation( 0, -2, -5 );
+    c3.setTranslation( 1, -2, -5 );
 
 
 
@@ -55,15 +61,21 @@ int main(int argc, char **argv) {
         }
 
         // Jeu
-        triangle.addRotation( glm::vec3(0, 0, 1), 0.025f );
-        triangle.setScale( 2, 1.00f, 1.00f );
-        //cube.addTranslation( 0, 0, -0.025f );
+        cube.addRotation( glm::vec3(0, 1, 0), 0.025f );
+        cube.addRotation( glm::vec3(1, 0, 0), 0.01f );
+        cube.addRotation( glm::vec3(0, 0, 1), 0.015f );
+        c1.addRotation( glm::vec3(1, 0, 0), 0.005f );
+        c2.addRotation( glm::vec3(1, 0, 0), 0.005f );
+        c3.addRotation( glm::vec3(1, 0, 0), 0.005f );
 
         // Clear de la fenêtre avant le nouveau rendu
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Rendu des objets
-        triangle.draw();
+        cube.draw();
+        c1.draw();
+        c2.draw();
+        c3.draw();
 
 
         // Update the display

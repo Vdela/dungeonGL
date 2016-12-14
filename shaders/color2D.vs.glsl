@@ -12,7 +12,7 @@ void main() {
   //gl_Position = vec4(aVertexPosition, 0, 1);
   //gl_Position = vec4( uModelMatrix * vec4(aVertexPosition,1), 1);
 
-  gl_Position = uModelMatrix * vec4(aVertexPosition, 1); //here
+  gl_Position = uModelMatrix * vec4(aVertexPosition, 1);
 
   //gl_Position = vec4( (uModelMatrix * vec4(aVertexPosition,1)).xyz, 1);
   //gl_Position = vec4( (uModelMatrix * vec3(aVertexPosition)), 1);
