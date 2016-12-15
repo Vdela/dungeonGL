@@ -12,41 +12,33 @@
 #include <GL/glut.h>
 
 #include <vector>
-/*
-struct Triangle{
-    glm::vec3 pos;
-    glm::vec3 color;
 
-    Triangle( glm::vec3 pos, glm::vec3 color){
-        this->pos = pos;
-        this->color = color;
-    }
+#include <glimac/Program.hpp>
+#include <glimac/FilePath.hpp>
 
-};*/
 
 class Object3D {
 
 protected:
     glm::mat4 modelMatrix;
-    //GLint uModelMatrixID;
 
     glm::mat4 translationMatrix;
     glm::mat4 rotationMatrix;
     glm::mat4 scaleMatrix;
-
 
     GLint  uMVPMatrixLoc;
     GLint  uMVMatrixLoc;
     GLint  uNormalMatrixLoc;
 
     static const glm::mat4 projMatrix;
-
     static std::vector<Object3D*> sceneObjects;
+    static GLuint programID;
 public:
     Object3D();
     virtual void draw() = 0;
 
     static const std::vector<Object3D*>& getSceneObjects() { return sceneObjects; }
+    static void setProgramID(GLuint programID) { Object3D::programID = programID; }
 
     void setTranslation(glm::vec3 translation);
     void addTranslation(glm::vec3 translation);

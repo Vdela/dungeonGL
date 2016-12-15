@@ -13,10 +13,6 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 
-#include <glimac/SDLWindowManager.hpp>
-#include <glimac/Program.hpp>
-#include <glimac/Image.hpp>
-
 #include "Object3D.h"
 
 class Triangle3D : public Object3D {
@@ -27,6 +23,7 @@ private:
 public:
     Triangle3D();
     void draw();
+
 };
 
 

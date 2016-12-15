@@ -11,15 +11,10 @@ using namespace glimac;
 
 
 Cube3D::Cube3D() {
-    //charge les shaders que l'on a ajouté dans le dossier shaders
-    FilePath applicationPath(".\\opengl.exe");
-    Program program = loadProgram(applicationPath.dirPath() + "\\..\\..\\shaders\\3D.vs.glsl",
-                                  applicationPath.dirPath() + "\\..\\..\\shaders\\tex3D.fs.glsl");
-    program.use();
 
-    uMVPMatrixLoc = glGetUniformLocation(program.getGLId(), "uMVPMatrix");
-    uMVMatrixLoc = glGetUniformLocation(program.getGLId(), "uMVMatrix");
-    uNormalMatrixLoc = glGetUniformLocation(program.getGLId(), "uNormalMatrix");
+    uMVPMatrixLoc = glGetUniformLocation(Object3D::programID, "uMVPMatrix");
+    uMVMatrixLoc = glGetUniformLocation(Object3D::programID, "uMVMatrix");
+    uNormalMatrixLoc = glGetUniformLocation(Object3D::programID, "uNormalMatrix");
 
     //********************************
     //HERE SHOULD COME THE INITIALIZATION CODE
