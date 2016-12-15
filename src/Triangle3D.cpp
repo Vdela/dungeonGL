@@ -12,12 +12,13 @@ using namespace glimac;
 Triangle3D::Triangle3D() {
     //charge les shaders que l'on a ajouté dans le dossier shaders
     FilePath applicationPath(".\\opengl.exe");
-    Program program = loadProgram(applicationPath.dirPath() + "\\..\\..\\shaders\\color2D.vs.glsl",
-                                  applicationPath.dirPath() + "\\..\\..\\shaders\\color2D.fs.glsl");
+    Program program = loadProgram(applicationPath.dirPath() + "\\..\\..\\shaders\\3D.vs.glsl",
+                                  applicationPath.dirPath() + "\\..\\..\\shaders\\tex3D.fs.glsl");
     program.use();
 
-    // Matrice de transformation
-    this->uModelMatrixID = glGetUniformLocation( program.getGLId(), "uModelMatrix" );
+    uMVPMatrixLoc = glGetUniformLocation(program.getGLId(), "uMVPMatrix");
+    uMVMatrixLoc = glGetUniformLocation(program.getGLId(), "uMVMatrix");
+    uNormalMatrixLoc = glGetUniformLocation(program.getGLId(), "uNormalMatrix");
 
 
     /*********************************
@@ -30,14 +31,14 @@ Triangle3D::Triangle3D() {
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-    std::vector<Triangle> vertices;
+    std::vector<ShapeVertex> vertices;
     float unit = 0.5f;
-    vertices.push_back( Triangle( glm::vec3(-unit,-unit,0), glm::vec3(1, 0, 0) ) );
-    vertices.push_back( Triangle( glm::vec3(unit,-unit,0), glm::vec3(1, 1, 0) ) );
-    vertices.push_back( Triangle( glm::vec3(0,unit,0), glm::vec3(1, 1, 1) ) );
+    vertices.push_back( ShapeVertex( glm::vec3(-unit,-unit,0), glm::vec3(1, 0, 0), glm::vec2(0,0) ) );
+    vertices.push_back( ShapeVertex( glm::vec3(unit,-unit,0), glm::vec3(1, 1, 0), glm::vec2(0,0) ) );
+    vertices.push_back( ShapeVertex( glm::vec3(0,unit,0), glm::vec3(1, 1, 1), glm::vec2(0,0) ) );
 
 
-    glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(Triangle), vertices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(ShapeVertex), vertices.data(), GL_STATIC_DRAW);
 
     //Debind du glBindBufer (second paramètre à 0)
     glBindBuffer(GL_ARRAY_BUFFER, 0 );
@@ -50,18 +51,20 @@ Triangle3D::Triangle3D() {
     //binding du vao : pas de cible car une seule cible possible pour vao
     glBindVertexArray(vao);
 
-    //activation des attributs de vertex, prend en para l'index renseignant le type de data
-    //on prefere les déclarer auparavant dans des constantes plutot que en clair
+
     const GLuint VERTEX_ATTR_POSITION = 0;
-    const GLuint VERTEX_ATTR_COLOR= 1;
+    const GLuint VERTEX_ATTR_NORMAL = 1;
+    const GLuint VERTEX_ATTR_TEXCORD = 2;
     glEnableVertexAttribArray(VERTEX_ATTR_POSITION);
-    glEnableVertexAttribArray(VERTEX_ATTR_COLOR);
+    glEnableVertexAttribArray(VERTEX_ATTR_NORMAL);
+    glEnableVertexAttribArray(VERTEX_ATTR_TEXCORD);
 
 
     //on rebind vbo pour lui indiquer lequel il doit utiliser
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glVertexAttribPointer(VERTEX_ATTR_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Triangle), (const GLvoid*)( offsetof(Triangle, pos) ) );
-    glVertexAttribPointer(VERTEX_ATTR_COLOR, 3, GL_FLOAT, GL_FALSE, sizeof(Triangle), (const GLvoid*)( offsetof(Triangle, color) ) );
+    glVertexAttribPointer(VERTEX_ATTR_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex), (const GLvoid*)( offsetof(ShapeVertex, position) ) );
+    glVertexAttribPointer(VERTEX_ATTR_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex), (const GLvoid*)( offsetof(ShapeVertex, normal) ) );
+    glVertexAttribPointer(VERTEX_ATTR_TEXCORD, 2, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex), (const GLvoid*)( offsetof(ShapeVertex, texCoords) ) );
     glBindBuffer(GL_ARRAY_BUFFER, 0 );
     glBindVertexArray(0);
 
@@ -75,8 +78,11 @@ void Triangle3D::draw() {
 
     // Transformations
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
-    glUniformMatrix4fv( uModelMatrixID, 1, GL_FALSE, glm::value_ptr(projMatrix * modelMatrix) );
-    // !!! 4fv !!!
+    glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelMatrix));
+
+    glUniformMatrix4fv(uMVPMatrixLoc,1,GL_FALSE,glm::value_ptr(projMatrix * modelMatrix));
+    glUniformMatrix4fv(uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(modelMatrix));
+    glUniformMatrix4fv(uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
 
     //Dessiner avec le VAO
     glBindVertexArray(vao);

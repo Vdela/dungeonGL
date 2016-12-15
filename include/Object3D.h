@@ -6,12 +6,13 @@
 #define IMACGL_OBJECT3D_H
 
 #include <glimac/glm.hpp>
+#include <glimac/common.hpp>
 
 #include <GL/glew.h>
 #include <GL/glut.h>
 
 #include <vector>
-
+/*
 struct Triangle{
     glm::vec3 pos;
     glm::vec3 color;
@@ -21,17 +22,22 @@ struct Triangle{
         this->color = color;
     }
 
-};
+};*/
 
 class Object3D {
 
 protected:
     glm::mat4 modelMatrix;
-    GLint uModelMatrixID;
+    //GLint uModelMatrixID;
 
     glm::mat4 translationMatrix;
     glm::mat4 rotationMatrix;
     glm::mat4 scaleMatrix;
+
+
+    GLint  uMVPMatrixLoc;
+    GLint  uMVMatrixLoc;
+    GLint  uNormalMatrixLoc;
 
     static const glm::mat4 projMatrix;
 

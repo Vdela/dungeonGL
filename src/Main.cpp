@@ -37,6 +37,11 @@ int main(int argc, char **argv) {
     initGlew();
     glEnable(GL_DEPTH_TEST);
 
+   /* //charge les shaders que l'on a ajouté dans le dossier shaders
+    FilePath applicationPath(".\\opengl.exe");
+    Program program = loadProgram(applicationPath.dirPath() + "\\..\\..\\shaders\\3D.vs.glsl",
+                                  applicationPath.dirPath() + "\\..\\..\\shaders\\tex3D.fs.glsl");
+    program.use();*/
 
     //===== Construction du monde =====//
     Cube3D cube;
