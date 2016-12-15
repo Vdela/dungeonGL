@@ -22,7 +22,7 @@ private:
     SimpleTexture shaderProgram;
 
 public:
-    Triangle3D();
+    Triangle3D(std::string textureName);
     void draw();
 
 };

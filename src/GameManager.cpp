@@ -38,7 +38,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     Cube3D cTop("cubeDebugUV.png" );
     cTop.setTranslation( -1, 2, -5 );
 
-    Triangle3D t;
+    Triangle3D t("EarthMap.jpg");
     t.setTranslation( 1,1.35,-3 );
 
 

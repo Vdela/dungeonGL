@@ -9,7 +9,7 @@
 
 using namespace glimac;
 
-Triangle3D::Triangle3D() {
+Triangle3D::Triangle3D(std::string textureName) {
 
     shaderProgram = SimpleTexture();
     //*********************************
@@ -24,10 +24,14 @@ Triangle3D::Triangle3D() {
 
     std::vector<ShapeVertex> vertices;
     float unit = 0.5f;
+    vertices.push_back( ShapeVertex( glm::vec3(-unit,-unit,0), glm::vec3(1, 0, 0), glm::vec2(0,1) ) );
+    vertices.push_back( ShapeVertex( glm::vec3(unit,-unit,0), glm::vec3(1, 1, 0), glm::vec2(1,1) ) );
+    vertices.push_back( ShapeVertex( glm::vec3(0,unit,0), glm::vec3(1, 1, 1), glm::vec2(0.5,0) ) );
+    /*
     vertices.push_back( ShapeVertex( glm::vec3(-unit,-unit,0), glm::vec3(1, 0, 0), glm::vec2(0.5,0) ) );
     vertices.push_back( ShapeVertex( glm::vec3(unit,-unit,0), glm::vec3(1, 1, 0), glm::vec2(0,1) ) );
-    vertices.push_back( ShapeVertex( glm::vec3(0,unit,0), glm::vec3(1, 1, 1), glm::vec2(1,0) ) );
-
+    vertices.push_back( ShapeVertex( glm::vec3(0,unit,0), glm::vec3(1, 1, 1), glm::vec2(1,1) ) );
+*/
 
     glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(ShapeVertex), vertices.data(), GL_STATIC_DRAW);
 
@@ -61,7 +65,7 @@ Triangle3D::Triangle3D() {
 
     // Chargement Texture
     FilePath applicationPath(".\\opengl.exe");
-    std::unique_ptr<Image> textureImg = loadImage( applicationPath.dirPath() + "\\..\\..\\assets\\textures\\wood.jpg" );
+    std::unique_ptr<Image> textureImg = loadImage( applicationPath.dirPath() + "\\..\\..\\assets\\textures\\" + textureName );
 
     if ( textureImg == NULL ) {
         std::cerr << "IMAGE NOT FOUND!" << std::endl;

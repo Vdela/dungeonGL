@@ -21,9 +21,8 @@ struct SimpleTexture : ShaderProgram{
     GLint uNormalMatrixLoc;
     GLint uTextureID;
 
-    SimpleTexture() { //const FilePath& applicationPath
-
-        FilePath applicationPath(".\\opengl.exe");
+    SimpleTexture() {
+        FilePath applicationPath(".\\opengl.exe"); // TODO mettre ça ailleurs, c'est pas propre là
         program = loadProgram(applicationPath.dirPath() + "\\..\\..\\shaders\\3D.vs.glsl",
                                       applicationPath.dirPath() + "\\..\\..\\shaders\\tex3D.fs.glsl");
 
@@ -32,6 +31,8 @@ struct SimpleTexture : ShaderProgram{
         uNormalMatrixLoc = glGetUniformLocation( program.getGLId(), "uNormalMatrix");
         uTextureID = glGetUniformLocation( program.getGLId(), "uTexture" );
     }
+
+
 };
 
 #endif //IMACGL_SHADERPROGRAM_H

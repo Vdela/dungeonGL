@@ -216,6 +216,7 @@ void Cube3D::draw() {
 
 
     // Transformations
+
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
     glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelMatrix));
 
@@ -224,6 +225,7 @@ void Cube3D::draw() {
     glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr(projMatrix * modelMatrix));
     glUniformMatrix4fv( shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(modelMatrix));
     glUniformMatrix4fv( shaderProgram.uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
+
 
     glBindVertexArray(vao);
 
