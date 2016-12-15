@@ -30,6 +30,9 @@ protected:
     GLint  uMVMatrixLoc;
     GLint  uNormalMatrixLoc;
 
+    GLint uTextureID;
+    GLuint texture;
+
     static const glm::mat4 projMatrix;
     static std::vector<Object3D*> sceneObjects;
     static GLuint programID;

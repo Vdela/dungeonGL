@@ -36,14 +36,15 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     //=================================//
     //===== Construction du monde =====//
     //=================================//
-    Cube3D cube;
+    Cube3D c1;
     //Sphere3D sphere(windowManager);
-    cube.setTranslation( 0, 0, -5 );
+    c1.setTranslation( 0, 0, -5 );
 
-    Cube3D c1,c2,c3;
-    c1.setTranslation( -1, -2, -5 );
+    Cube3D c2;
     c2.setTranslation( 0, -2, -5 );
-    c3.setTranslation( 1, -2, -5 );
+
+    Cube3D cTop;
+    cTop.setTranslation( 0, 2, -5 );
 
     Triangle3D t;
     t.setTranslation( 0,1.35,-3 );
@@ -65,12 +66,9 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
         }
 
         // Jeu
-        cube.addRotation( glm::vec3(0, 1, 0), 0.025f );
-        cube.addRotation( glm::vec3(1, 0, 0), 0.01f );
-        cube.addRotation( glm::vec3(0, 0, 1), 0.015f );
-        c1.addRotation( glm::vec3(1, 0, 0), 0.005f );
-        c2.addRotation( glm::vec3(1, 0, 0), 0.005f );
-        c3.addRotation( glm::vec3(1, 0, 0), 0.005f );
+        c1.addRotation( glm::vec3(0, 1, 0), 0.015f );
+        c2.addRotation( glm::vec3(1, 0, 0), 0.015f );
+        cTop.addRotation( glm::vec3(1, 1, 1), 0.015f );
         t.addRotation( glm::vec3(0, 1, 0), 0.005f );
 
         // Clear de la fenêtre avant le nouveau rendu
