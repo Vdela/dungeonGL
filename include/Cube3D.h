@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+#include <string>
 
 #include <glimac/SDLWindowManager.hpp>
 #include <glimac/Program.hpp>
@@ -21,10 +22,10 @@ class Cube3D : public Object3D {
 private:
     GLuint vao;
     GLuint ibo;
-
+    SimpleTexture shaderProgram;
 
 public:
-    Cube3D();
+    Cube3D(std::string textureName);
     void draw();
 };
 

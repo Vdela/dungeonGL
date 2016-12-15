@@ -10,13 +10,15 @@
 using namespace glimac;
 
 
-Cube3D::Cube3D() {
-
+Cube3D::Cube3D(std::string textureName) {
+/*
     uMVPMatrixLoc = glGetUniformLocation(Object3D::programID, "uMVPMatrix");
     uMVMatrixLoc = glGetUniformLocation(Object3D::programID, "uMVMatrix");
     uNormalMatrixLoc = glGetUniformLocation(Object3D::programID, "uNormalMatrix");
-
     uTextureID = glGetUniformLocation( Object3D::programID, "uTexture" );
+*/
+
+    shaderProgram = SimpleTexture();
 
     //********************************
     //HERE SHOULD COME THE INITIALIZATION CODE
@@ -189,7 +191,8 @@ Cube3D::Cube3D() {
 
     // Chargement Texture
     FilePath applicationPath(".\\opengl.exe");
-    std::unique_ptr<Image> textureImg = loadImage( applicationPath.dirPath() + "\\..\\..\\assets\\textures\\cubeDebugUV.png" );
+    //std::unique_ptr<Image> textureImg = loadImage( applicationPath.dirPath() + "\\..\\..\\assets\\textures\\cubeDebugUV.png" );
+    std::unique_ptr<Image> textureImg = loadImage( applicationPath.dirPath() + "\\..\\..\\assets\\textures\\" + textureName );
 
     if ( textureImg == NULL ) {
         std::cerr << "IMAGE NOT FOUND!" << std::endl;
@@ -211,13 +214,16 @@ void Cube3D::draw() {
      * HERE SHOULD COME THE RENDERING CODE
      *********************************/
 
+
     // Transformations
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
     glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelMatrix));
 
-    glUniformMatrix4fv(uMVPMatrixLoc,1,GL_FALSE,glm::value_ptr(projMatrix * modelMatrix));
-    glUniformMatrix4fv(uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(modelMatrix));
-    glUniformMatrix4fv(uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
+    shaderProgram.program.use();
+
+    glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr(projMatrix * modelMatrix));
+    glUniformMatrix4fv( shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(modelMatrix));
+    glUniformMatrix4fv( shaderProgram.uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
 
     glBindVertexArray(vao);
 

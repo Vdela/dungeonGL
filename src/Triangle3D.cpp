@@ -11,11 +11,7 @@ using namespace glimac;
 
 Triangle3D::Triangle3D() {
 
-    uMVPMatrixLoc = glGetUniformLocation(Object3D::programID, "uMVPMatrix");
-    uMVMatrixLoc = glGetUniformLocation(Object3D::programID, "uMVMatrix");
-    uNormalMatrixLoc = glGetUniformLocation(Object3D::programID, "uNormalMatrix");
-
-    uTextureID = glGetUniformLocation( Object3D::programID, "uTexture" );
+    shaderProgram = SimpleTexture();
     //*********************************
     // HERE SHOULD COME THE INITIALIZATION CODE
     //*********************************
@@ -86,13 +82,16 @@ void Triangle3D::draw() {
      * HERE SHOULD COME THE RENDERING CODE
      *********************************/
 
+
     // Transformations
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
     glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelMatrix));
 
-    glUniformMatrix4fv(uMVPMatrixLoc,1,GL_FALSE,glm::value_ptr(projMatrix * modelMatrix));
-    glUniformMatrix4fv(uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(modelMatrix));
-    glUniformMatrix4fv(uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
+    shaderProgram.program.use();
+
+    glUniformMatrix4fv(shaderProgram.uMVPMatrixLoc,1,GL_FALSE,glm::value_ptr(projMatrix * modelMatrix));
+    glUniformMatrix4fv(shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(modelMatrix));
+    glUniformMatrix4fv(shaderProgram.uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
 
     //Dessiner avec le VAO
     glBindVertexArray(vao);

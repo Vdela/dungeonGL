@@ -17,6 +17,8 @@
 #include <glimac/FilePath.hpp>
 #include <glimac/Image.hpp>
 
+#include "ShaderProgram.h"
+
 
 class Object3D {
 
@@ -27,11 +29,6 @@ protected:
     glm::mat4 rotationMatrix;
     glm::mat4 scaleMatrix;
 
-    GLint  uMVPMatrixLoc;
-    GLint  uMVMatrixLoc;
-    GLint  uNormalMatrixLoc;
-
-    GLint uTextureID;
     GLuint texture;
 
     static const glm::mat4 projMatrix;

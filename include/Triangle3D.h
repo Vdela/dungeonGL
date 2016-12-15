@@ -19,6 +19,7 @@ class Triangle3D : public Object3D {
 
 private:
     GLuint vao;
+    SimpleTexture shaderProgram;
 
 public:
     Triangle3D();

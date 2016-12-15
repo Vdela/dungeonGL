@@ -24,26 +24,18 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     initGlew();
     glEnable(GL_DEPTH_TEST);
 
-    //charge les shaders que l'on a ajouté dans le dossier shaders
-    FilePath applicationPath(".\\opengl.exe");
-    Program program = loadProgram(applicationPath.dirPath() + "\\..\\..\\shaders\\3D.vs.glsl",
-                                   applicationPath.dirPath() + "\\..\\..\\shaders\\tex3D.fs.glsl");
-    program.use();
-    Object3D::setProgramID( program.getGLId() );
-
-
 
     //=================================//
     //===== Construction du monde =====//
     //=================================//
-    Cube3D c1;
+    Cube3D c1( "wood.jpg" );
     //Sphere3D sphere(windowManager);
     c1.setTranslation( 0, 0, -5 );
 
-    Cube3D c2;
+    Cube3D c2("cubeDebugUV.png" );
     c2.setTranslation( 0, -2, -5 );
 
-    Cube3D cTop;
+    Cube3D cTop("cubeDebugUV.png" );
     cTop.setTranslation( -1, 2, -5 );
 
     Triangle3D t;
