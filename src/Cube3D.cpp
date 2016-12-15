@@ -9,16 +9,6 @@
 
 using namespace glimac;
 
-struct Triangle{
-    glm::vec3 pos;
-    glm::vec3 color;
-
-    Triangle( glm::vec3 pos, glm::vec3 color){
-        this->pos = pos;
-        this->color = color;
-    }
-
-};
 
 Cube3D::Cube3D() {
     //charge les shaders que l'on a ajouté dans le dossier shaders
@@ -101,8 +91,7 @@ Cube3D::Cube3D() {
     // cela a pour effet d'enregistrer l'IBO dans le VAO
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
-    //activation des attributs de vertex, prend en para l'index renseignant le type de data
-    //on prefere les déclarer auparavant dans des constantes plutot que en clair
+
     const GLuint VERTEX_ATTR_POSITION = 0;
     const GLuint VERTEX_ATTR_COLOR= 1;
     glEnableVertexAttribArray(VERTEX_ATTR_POSITION);
@@ -124,19 +113,14 @@ void Cube3D::draw() {
      * HERE SHOULD COME THE RENDERING CODE
      *********************************/
 
-    glm::mat4 projMatrix;
-    projMatrix = glm::perspective<float>(glm::radians(70.f),1.0,0.1f,100.f);
     // Transformations
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
     glUniformMatrix4fv( uModelMatrixID, 1, GL_FALSE, glm::value_ptr(projMatrix * modelMatrix) );
-    // !!! 4fv !!!
 
     //Dessiner avec le VAO
     glBindVertexArray(vao);
 
-    //glDrawArrays(GL_TRIANGLES, 0, 3); // avant ibo
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
     glBindVertexArray(0);
 }
-

@@ -9,17 +9,6 @@
 
 using namespace glimac;
 
-struct Triangle{
-    glm::vec3 pos;
-    glm::vec3 color;
-
-    Triangle( glm::vec3 pos, glm::vec3 color){
-        this->pos = pos;
-        this->color = color;
-    }
-
-};
-
 Triangle3D::Triangle3D() {
     //charge les shaders que l'on a ajouté dans le dossier shaders
     FilePath applicationPath(".\\opengl.exe");
@@ -84,8 +73,6 @@ void Triangle3D::draw() {
      * HERE SHOULD COME THE RENDERING CODE
      *********************************/
 
-    glm::mat4 projMatrix;
-    projMatrix = glm::perspective<float>(glm::radians(70.f),1.0,0.1f,100.f);
     // Transformations
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
     glUniformMatrix4fv( uModelMatrixID, 1, GL_FALSE, glm::value_ptr(projMatrix * modelMatrix) );

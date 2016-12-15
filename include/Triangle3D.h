@@ -17,7 +17,6 @@
 #include <glimac/Program.hpp>
 #include <glimac/Image.hpp>
 
-#include "TransformMatrix.h"
 #include "Object3D.h"
 
 class Triangle3D : public Object3D {

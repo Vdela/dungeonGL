@@ -12,6 +12,17 @@
 
 #include <vector>
 
+struct Triangle{
+    glm::vec3 pos;
+    glm::vec3 color;
+
+    Triangle( glm::vec3 pos, glm::vec3 color){
+        this->pos = pos;
+        this->color = color;
+    }
+
+};
+
 class Object3D {
 
 protected:
@@ -21,6 +32,8 @@ protected:
     glm::mat4 translationMatrix;
     glm::mat4 rotationMatrix;
     glm::mat4 scaleMatrix;
+
+    static const glm::mat4 projMatrix;
 
     static std::vector<Object3D*> sceneObjects;
 public:

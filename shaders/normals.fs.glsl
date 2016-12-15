@@ -8,8 +8,8 @@ out vec3 fFragColor;
 
 
 void main() {
-    fFragColor = normalize(vNormal_vs);
-    //fFragColor = vec3(1,1,1);
+    //fFragColor = normalize(vNormal_vs);
+    fFragColor = vec3(1,0,0);
 }
 
 

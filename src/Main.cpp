@@ -16,7 +16,6 @@
 
 #include "../include/Triangle3D.h"
 #include "../include/Cube3D.h"
-#include "../include/Sphere3D.h"
 
 using namespace glimac;
 

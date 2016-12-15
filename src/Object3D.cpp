@@ -7,6 +7,9 @@
 //map<string, Node*> Node::nodesMap = map<string, Node*>();
 std::vector<Object3D*> Object3D::sceneObjects = std::vector<Object3D*>();
 
+// Matrice de projection, à utiliser pour obtenir une projection en 3D des objets
+glm::mat4 const Object3D::projMatrix = glm::perspective<float>(glm::radians(70.f),1.0,0.1f,100.f);
+
 Object3D::Object3D() {
     sceneObjects.push_back( this );
 }

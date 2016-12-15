@@ -16,7 +16,6 @@
 #include <glimac/BBox.hpp>
 
 #include "Object3D.h"
-#include "TransformMatrix.h"
 
 class Cube3D : public Object3D {
 
