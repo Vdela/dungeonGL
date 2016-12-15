@@ -12,7 +12,6 @@
 
 #include <glimac/SDLWindowManager.hpp>
 #include <glimac/Program.hpp>
-#include <glimac/Image.hpp>
 #include <glimac/BBox.hpp>
 
 #include "Object3D.h"

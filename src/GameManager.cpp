@@ -44,10 +44,10 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     c2.setTranslation( 0, -2, -5 );
 
     Cube3D cTop;
-    cTop.setTranslation( 0, 2, -5 );
+    cTop.setTranslation( -1, 2, -5 );
 
     Triangle3D t;
-    t.setTranslation( 0,1.35,-3 );
+    t.setTranslation( 1,1.35,-3 );
 
 
     //=================================//

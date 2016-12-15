@@ -15,6 +15,7 @@ Triangle3D::Triangle3D() {
     uMVMatrixLoc = glGetUniformLocation(Object3D::programID, "uMVMatrix");
     uNormalMatrixLoc = glGetUniformLocation(Object3D::programID, "uNormalMatrix");
 
+    uTextureID = glGetUniformLocation( Object3D::programID, "uTexture" );
     //*********************************
     // HERE SHOULD COME THE INITIALIZATION CODE
     //*********************************
@@ -27,9 +28,9 @@ Triangle3D::Triangle3D() {
 
     std::vector<ShapeVertex> vertices;
     float unit = 0.5f;
-    vertices.push_back( ShapeVertex( glm::vec3(-unit,-unit,0), glm::vec3(1, 0, 0), glm::vec2(0,0) ) );
-    vertices.push_back( ShapeVertex( glm::vec3(unit,-unit,0), glm::vec3(1, 1, 0), glm::vec2(0,0) ) );
-    vertices.push_back( ShapeVertex( glm::vec3(0,unit,0), glm::vec3(1, 1, 1), glm::vec2(0,0) ) );
+    vertices.push_back( ShapeVertex( glm::vec3(-unit,-unit,0), glm::vec3(1, 0, 0), glm::vec2(0.5,0) ) );
+    vertices.push_back( ShapeVertex( glm::vec3(unit,-unit,0), glm::vec3(1, 1, 0), glm::vec2(0,1) ) );
+    vertices.push_back( ShapeVertex( glm::vec3(0,unit,0), glm::vec3(1, 1, 1), glm::vec2(1,0) ) );
 
 
     glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(ShapeVertex), vertices.data(), GL_STATIC_DRAW);
@@ -62,6 +63,21 @@ Triangle3D::Triangle3D() {
     glBindBuffer(GL_ARRAY_BUFFER, 0 );
     glBindVertexArray(0);
 
+    // Chargement Texture
+    FilePath applicationPath(".\\opengl.exe");
+    std::unique_ptr<Image> textureImg = loadImage( applicationPath.dirPath() + "\\..\\..\\assets\\textures\\wood.jpg" );
+
+    if ( textureImg == NULL ) {
+        std::cerr << "IMAGE NOT FOUND!" << std::endl;
+    }
+
+    glGenTextures( 1, &texture );
+    glBindTexture( GL_TEXTURE_2D, texture );
+    glTexImage2D( GL_TEXTURE_2D, 0, 4, textureImg->getWidth(), textureImg->getHeight(), 0, GL_RGBA, GL_FLOAT, textureImg->getPixels() );
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 }
 
 void Triangle3D::draw() {
@@ -81,6 +97,9 @@ void Triangle3D::draw() {
     //Dessiner avec le VAO
     glBindVertexArray(vao);
 
+    glBindTexture( GL_TEXTURE_2D, texture );
     glDrawArrays(GL_TRIANGLES, 0, 3);
+    glBindTexture( GL_TEXTURE_2D, 0 );
+
     glBindVertexArray(0);
 }

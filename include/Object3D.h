@@ -15,6 +15,7 @@
 
 #include <glimac/Program.hpp>
 #include <glimac/FilePath.hpp>
+#include <glimac/Image.hpp>
 
 
 class Object3D {
