@@ -45,20 +45,45 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     //=================================//
     //========== Loop du jeu ==========//
     //=================================//
-
     // Application loop:
     bool done = false;
+
+
     while(!done) {
         // Event loop:
+
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
             if(e.type == SDL_QUIT) {
                 done = true; // Leave the loop after this iteration
             }
         }
+        SDL_PollEvent(&e);
+
+        switch(e.type) {
+
+            case SDL_KEYDOWN :
+
+                switch(e.key.keysym.sym) {
+
+                    case SDLK_a:
+                        c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
+                    break ;
+
+                    case SDLK_s:
+                        c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
+                    break ;
+
+
+                }
+
+
+        }
+
+
 
         // Jeu
-        c1.addRotation( glm::vec3(0, 1, 0), 0.015f );
+
         c2.addRotation( glm::vec3(1, 0, 0), 0.015f );
         cTop.addRotation( glm::vec3(1, 1, 1), 0.015f );
         t.addRotation( glm::vec3(0, 1, 0), 0.005f );
