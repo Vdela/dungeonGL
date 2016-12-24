@@ -27,6 +27,13 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     //=================================//
     //===== Construction du monde =====//
     //=================================//
+
+
+
+    Niveau niveau1;
+    niveau1.lectureMap((char*)"map3.ppm");
+
+
     Cube3D c1( "wood.jpg" );
     //Sphere3D sphere(windowManager);
     c1.setTranslation( 1, 1.2, -3 );

@@ -219,7 +219,7 @@ void Cube3D::draw() {
 
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 
-    modelMatrix = projMatrix*modelMatrix*GameManager::getInstance().camera1.getViewMatrix();
+    //modelMatrix = projMatrix*modelMatrix*GameManager::getInstance().camera1.getViewMatrix();
 
     glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelMatrix));
 

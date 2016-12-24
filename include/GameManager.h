@@ -20,10 +20,13 @@
 #include <glimac/Sphere.hpp>
 #include <glimac/glm.hpp>
 #include <glimac/Image.hpp>
+#include <glimac/FreeflyCamera.hpp>
 
 #include "Triangle3D.h"
 #include "Cube3D.h"
-#include "../lib/glimac/include/glimac/FreeflyCamera.hpp"
+#include "Niveau.h"
+
+
 using namespace glimac;
 
 class GameManager {

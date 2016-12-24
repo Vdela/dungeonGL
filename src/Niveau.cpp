@@ -8,11 +8,11 @@ Niveau::Niveau(){}
 
 void Niveau::lectureMap(char* fileName){
 
-    //FilePath applicationPath(".\\opengl.exe");
+    glimac::FilePath applicationPath(".\\opengl.exe");
 
-    //ifstream fichier(applicationPath.dirPath() + "\\..\\..\\files\\" + fileName, ios::in);
+    ifstream fichier(applicationPath.dirPath() + "\\..\\..\\files\\" + fileName, ios::in);
 
-    ifstream fichier(fileName, ios::in);
+    //ifstream fichier(fileName, ios::in);
 
     if(fichier){
 
@@ -24,11 +24,34 @@ void Niveau::lectureMap(char* fileName){
 
         fichier >> formatImage >> heightImage >> widthImage >> nbColor;
 
-        cin.ignore();
+        //cin.ignore();
 
         char valeur[3];
 
+
         for(int i = 0; i < heightImage; i++){
+            carte.push_back( vector<int>() );
+            for(int j = 0; j < widthImage; j++){
+                for(int k = 0; k < 3; k++){fichier.get(valeur[k]);}
+                if(valeur[0] == 0 && valeur[1] == 0 && valeur[2] == 0){
+                    carte[i].push_back( 0 );
+                }
+                else if(valeur[0] == 255 && valeur[1] == 255 && valeur[2] == 255){
+                    carte[i].push_back( 1 );
+                }
+                else if(valeur[0] == 255 && valeur[1] == 0 && valeur[2] == 0) {
+                    carte[i].push_back( 2 );
+                }
+                else if(valeur[0] == 0 && valeur[1] == 255 && valeur[2] == 0){
+                    carte[i].push_back( 3 );
+                }
+                else {
+                    carte[i].push_back( -1 ); // Valeur innatendue
+                }
+            }
+        }
+
+        /*for(int i = 0; i < heightImage; i++){
             for(int j = 0; j < widthImage; j++){
                 for(int k = 0; k < 3; k++){fichier.get(valeur[k]);}
                 if(valeur[0] == 0 && valeur[1] == 0 && valeur[2] == 0){
@@ -44,7 +67,8 @@ void Niveau::lectureMap(char* fileName){
                     carte[i][j] = 3;
                 }
             }
-        }
+        }*/
+
     }
     else{
         cerr << "Impossible d'ouvrir le fichier de la map" << endl;
