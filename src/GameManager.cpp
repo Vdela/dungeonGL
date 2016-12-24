@@ -3,7 +3,7 @@
 //
 
 #include "../include/GameManager.h"
-
+#include "../lib/glimac/include/glimac/FreeflyCamera.hpp"
 
 GameManager GameManager::instance = GameManager();
 
@@ -24,13 +24,12 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     initGlew();
     glEnable(GL_DEPTH_TEST);
 
-
     //=================================//
     //===== Construction du monde =====//
     //=================================//
     Cube3D c1( "wood.jpg" );
     //Sphere3D sphere(windowManager);
-    c1.setTranslation( 0, 0, -5 );
+    c1.setTranslation( 1, 1.2, -3 );
 
     Cube3D c2("cubeDebugUV.png" );
     c2.setTranslation( 0, -2, -5 );
@@ -48,10 +47,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     // Application loop:
     bool done = false;
 
-
     while(!done) {
         // Event loop:
-
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
             if(e.type == SDL_QUIT) {
@@ -67,11 +64,13 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                 switch(e.key.keysym.sym) {
 
                     case SDLK_a:
-                        c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
+                        //c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
+                    GameManager::camera1.rotateLeft(90.0f);
                     break ;
 
                     case SDLK_s:
-                        c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
+                       // c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
+                        camera1.moveFront(10.0);
                     break ;
 
 

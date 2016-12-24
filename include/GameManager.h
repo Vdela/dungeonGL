@@ -23,7 +23,7 @@
 
 #include "Triangle3D.h"
 #include "Cube3D.h"
-
+#include "../lib/glimac/include/glimac/FreeflyCamera.hpp"
 using namespace glimac;
 
 class GameManager {
@@ -31,11 +31,13 @@ class GameManager {
 public:
     static GameManager& getInstance();
     void initGame(uint32_t width, uint32_t height, char* gameName);
-
+     FreeflyCamera camera1;
 private:
     GameManager();
     static GameManager instance;
     void initGlew();
+
+
 
 
 };

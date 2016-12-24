@@ -14,7 +14,7 @@ public:
     void rotateLeft(float degrees); 
     void rotateUp(float degrees);
     void computeDirectionVectors();
-    glm::mat4 getViewMatrix() const;
+	glm::mat4 getViewMatrix() const;
 
 private:
 	float m_fPhi;
