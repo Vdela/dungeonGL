@@ -24,15 +24,13 @@ void Niveau::lectureMap(char* fileName){
 
         fichier >> formatImage >> heightImage >> widthImage >> nbColor;
 
-        //cin.ignore();
-
         char valeur[3];
 
 
         for(int i = 0; i < heightImage; i++){
             carte.push_back( vector<int>() );
             for(int j = 0; j < widthImage; j++){
-                for(int k = 0; k < 3; k++){fichier.get(valeur[k]);}
+                fichier >> valeur;
                 if(valeur[0] == 0 && valeur[1] == 0 && valeur[2] == 0){
                     carte[i].push_back( 0 );
                 }
@@ -46,29 +44,10 @@ void Niveau::lectureMap(char* fileName){
                     carte[i].push_back( 3 );
                 }
                 else {
-                    carte[i].push_back( -1 ); // Valeur innatendue
+                    carte[i].push_back( -1 ); // Valeur inattendue
                 }
             }
         }
-
-        /*for(int i = 0; i < heightImage; i++){
-            for(int j = 0; j < widthImage; j++){
-                for(int k = 0; k < 3; k++){fichier.get(valeur[k]);}
-                if(valeur[0] == 0 && valeur[1] == 0 && valeur[2] == 0){
-                    carte[i][j] = 0;
-                }
-                else if(valeur[0] == 255 && valeur[1] == 255 && valeur[2] == 255){
-                    carte[i][j] = 1;
-                }
-                else if(valeur[0] == 255 && valeur[1] == 0 && valeur[2] == 0) {
-                    carte[i][j] = 2;
-                }
-                else if(valeur[0] == 0 && valeur[1] == 255 && valeur[2] == 0){
-                    carte[i][j] = 3;
-                }
-            }
-        }*/
-
     }
     else{
         cerr << "Impossible d'ouvrir le fichier de la map" << endl;

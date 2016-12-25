@@ -10,6 +10,7 @@
 #include <fstream>
 #include <string>
 #include <cstdio>
+#include <stdlib.h>
 
 #include <glimac/SDLWindowManager.hpp>
 #include <glimac/Program.hpp>
