@@ -12,8 +12,6 @@ void Niveau::lectureMap(char* fileName){
 
     ifstream fichier(applicationPath.dirPath() + "\\..\\..\\files\\" + fileName, ios::in);
 
-    //ifstream fichier(fileName, ios::in);
-
     if(fichier){
 
         string contenu;
@@ -24,28 +22,30 @@ void Niveau::lectureMap(char* fileName){
 
         fichier >> formatImage >> heightImage >> widthImage >> nbColor;
 
-        char valeur[3];
-
-
         for(int i = 0; i < heightImage; i++){
             carte.push_back( vector<int>() );
             for(int j = 0; j < widthImage; j++){
-                fichier >> valeur;
-                if(valeur[0] == 0 && valeur[1] == 0 && valeur[2] == 0){
+                int r, g, b;
+                fichier >> r;
+                fichier >> g;
+                fichier >> b;
+
+                if(r == 0 && g == 0 && b == 0){
                     carte[i].push_back( 0 );
                 }
-                else if(valeur[0] == 255 && valeur[1] == 255 && valeur[2] == 255){
+                else if(r == 255 &&g == 255 &&b == 255){
                     carte[i].push_back( 1 );
                 }
-                else if(valeur[0] == 255 && valeur[1] == 0 && valeur[2] == 0) {
+                else if(r == 255 && g == 0 && b == 0) {
                     carte[i].push_back( 2 );
                 }
-                else if(valeur[0] == 0 && valeur[1] == 255 && valeur[2] == 0){
+                else if(r == 0 && g == 255 && b == 0){
                     carte[i].push_back( 3 );
                 }
                 else {
                     carte[i].push_back( -1 ); // Valeur inattendue
                 }
+
             }
         }
     }
