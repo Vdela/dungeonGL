@@ -98,9 +98,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
         // Jeu
 
-        demon.addRotation( glm::vec3(0, 1, 0), Time::deltaTime );
-        /*cTop.addRotation( glm::vec3(1, 1, 1), 0.015f );
-        t.addRotation( glm::vec3(0, 1, 0), 0.005f );*/
+        //demon.addRotation( glm::vec3(0, 1, 0), Time::deltaTime * 0.5d );
 
         // Clear de la fenêtre avant le nouveau rendu
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
