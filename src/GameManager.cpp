@@ -36,7 +36,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
     Cube3D c1( "wood.jpg" );
     //Sphere3D sphere(windowManager);
-    c1.setTranslation( 1, 1.2, -3 );
+    c1.setTranslation( 1, 1.2, -5 );
 
     Cube3D c2("cubeDebugUV.png" );
     c2.setTranslation( 0, -2, -5 );
@@ -55,6 +55,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     bool done = false;
 
     while(!done) {
+        GameManager::getInstance().camera1.getViewMatrix();
         // Event loop:
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
@@ -72,13 +73,24 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
                     case SDLK_a:
                         //c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
-                    GameManager::camera1.rotateLeft(90.0f);
+                   GameManager::getInstance().camera1.rotateLeft(0.05f);
+                    break ;
+
+                    case SDLK_d:
+                        //c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
+                        GameManager::getInstance().camera1.rotateLeft(-0.05f);
+                        break ;
+
+
+                    case SDLK_w:
+                       // c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
+                    GameManager::getInstance().camera1.moveFront(0.005f);
                     break ;
 
                     case SDLK_s:
-                       // c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
-                        camera1.moveFront(10.0);
-                    break ;
+                        // c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
+                        GameManager::getInstance().camera1.moveFront(-0.005f);
+                        break ;
 
 
                 }
@@ -86,11 +98,9 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
         }
 
-
-
         // Jeu
 
-        c2.addRotation( glm::vec3(1, 0, 0), 0.015f );
+       // c2.addRotation( glm::vec3(1, 0, 0), 0.015f );
         cTop.addRotation( glm::vec3(1, 1, 1), 0.015f );
         t.addRotation( glm::vec3(0, 1, 0), 0.005f );
 

@@ -219,14 +219,14 @@ void Cube3D::draw() {
 
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 
-    //modelMatrix = projMatrix*modelMatrix*GameManager::getInstance().camera1.getViewMatrix();
 
-    glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelMatrix));
+   // modelMatrix = GameManager::getInstance().camera1.getViewMatrix();
+    glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelMatrix ));
 
     shaderProgram.program.use();
 
-    glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr(projMatrix * modelMatrix));
-    glUniformMatrix4fv( shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(modelMatrix));
+    glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr(  projMatrix*   GameManager::getInstance().camera1.getViewMatrix() * modelMatrix ));
+    glUniformMatrix4fv( shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(GameManager::getInstance().camera1.getViewMatrix()*modelMatrix  ));
     glUniformMatrix4fv( shaderProgram.uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
 
 
