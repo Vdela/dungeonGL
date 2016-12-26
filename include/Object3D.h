@@ -23,6 +23,8 @@
 class Object3D {
 
 protected:
+    glm::mat4* parentModel;
+
     glm::mat4 modelMatrix;
 
     glm::mat4 translationMatrix;
@@ -54,6 +56,8 @@ public:
     void setScale(float x, float y, float z);
     void addScale(glm::vec3 scale);
     void addScale(float x, float y, float z);
+
+    void setParentMatrix( glm::mat4* parentModelMatrix ) { parentModel = parentModelMatrix; }
 };
 
 

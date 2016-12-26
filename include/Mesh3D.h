@@ -18,6 +18,7 @@
 #include <glimac/Geometry.hpp>
 
 #include "Object3D.h"
+#include "GameManager.h"
 
 class Mesh3D : public Object3D {
 
@@ -27,7 +28,8 @@ private:
     SimpleTexture shaderProgram;
     Geometry geometry;
 public:
-    Mesh3D();
+    Mesh3D() {};
+    Mesh3D(std::string meshName, std::string meshMt, std::string textureName);
     void draw();
 };
 

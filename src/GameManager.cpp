@@ -4,6 +4,10 @@
 
 #include "../include/GameManager.h"
 #include "../lib/glimac/include/glimac/FreeflyCamera.hpp"
+#include "../include/Triangle3D.h"
+#include "../include/Cube3D.h"
+#include "../include/Mesh3D.h"
+#include "../include/Demon3D.h"
 
 GameManager GameManager::instance = GameManager();
 
@@ -31,21 +35,13 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
 
     Niveau niveau1;
-    niveau1.lectureMap((char*)"map3_bis.ppm");
+    niveau1.lectureMap((char*)"map3.ppm");
 
 
-    Cube3D c1( "wood.jpg" );
-    //Sphere3D sphere(windowManager);
-    c1.setTranslation( 1, 1.2, -5 );
-
-    Cube3D c2("cubeDebugUV.png" );
-    c2.setTranslation( 0, -2, -5 );
-
-    Cube3D cTop("cubeDebugUV.png" );
-    cTop.setTranslation( -1, 2, -5 );
-
-    Triangle3D t("EarthMap.jpg");
-    t.setTranslation( 1,1.35,-3 );
+    Demon3D demon;
+    float scale = 0.25;
+    demon.setScale( scale, scale, scale );
+    demon.setTranslation( 0, -2, -5 );
 
 
     //=================================//
@@ -55,6 +51,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     bool done = false;
 
     while(!done) {
+        Time::updateDeltaTime();
+
         GameManager::getInstance().camera1.getViewMatrix();
         // Event loop:
         SDL_Event e;
@@ -100,9 +98,9 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
         // Jeu
 
-       // c2.addRotation( glm::vec3(1, 0, 0), 0.015f );
-        cTop.addRotation( glm::vec3(1, 1, 1), 0.015f );
-        t.addRotation( glm::vec3(0, 1, 0), 0.005f );
+        demon.addRotation( glm::vec3(0, 1, 0), Time::deltaTime );
+        /*cTop.addRotation( glm::vec3(1, 1, 1), 0.015f );
+        t.addRotation( glm::vec3(0, 1, 0), 0.005f );*/
 
         // Clear de la fenêtre avant le nouveau rendu
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

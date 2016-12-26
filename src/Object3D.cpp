@@ -14,6 +14,7 @@ GLuint Object3D::programID; // Doit être set depuis GameManager
 
 Object3D::Object3D() {
     sceneObjects.push_back( this );
+    parentModel = new glm::mat4();
 }
 
 void Object3D::setTranslation(glm::vec3 translation) {

@@ -19,7 +19,7 @@ include_directories( ${YOUR_DIRECTORY}lib/glimac/include  ${YOUR_DIRECTORY}lib/t
 add_subdirectory(lib/glimac)
 set(LIB_LIST glimac -lmingw32 -lSDLmain -lSDL  -lfreeglut -lglew32s -lopengl32  )
 
-add_executable(opengl ${SOURCE_FILES} ${HEADER_FILES} ${SHADER_FILES} src/Triangle3D.cpp include/Triangle3D.h src/Object3D.cpp include/Object3D.h src/GameManager.cpp include/GameManager.h include/ShaderProgram.h src/Niveau.cpp include/Niveau.h src/Mesh3D.cpp include/Mesh3D.h)
+add_executable(opengl ${SOURCE_FILES} ${HEADER_FILES} ${SHADER_FILES} src/Triangle3D.cpp include/Triangle3D.h src/Object3D.cpp include/Object3D.h src/GameManager.cpp include/GameManager.h include/ShaderProgram.h src/Niveau.cpp include/Niveau.h src/Mesh3D.cpp include/Mesh3D.h src/Demon3D.cpp include/Demon3D.h include/Time.h src/Time.cpp)
 target_link_libraries(opengl ${LIB_LIST})
 
 

@@ -22,10 +22,8 @@
 #include <glimac/Image.hpp>
 #include <glimac/FreeflyCamera.hpp>
 
-#include "Triangle3D.h"
-#include "Cube3D.h"
 #include "Niveau.h"
-
+#include "Time.h"
 
 using namespace glimac;
 

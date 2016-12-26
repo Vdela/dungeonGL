@@ -1,0 +1,28 @@
+//
+// Created by Vincent on 26/12/2016.
+//
+
+#define GLEW_STATIC
+
+
+#ifndef IMACGL_DEMON3D_H
+#define IMACGL_DEMON3D_H
+
+class Object3D;
+class Mesh3D;
+
+class Demon3D : public Object3D {
+
+
+private:
+    Mesh3D * skull;
+    Mesh3D * chest;
+
+public:
+    Demon3D();
+    void draw();
+
+};
+
+
+#endif //IMACGL_DEMON3D_H
