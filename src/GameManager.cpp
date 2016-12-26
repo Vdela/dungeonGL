@@ -8,7 +8,7 @@
 GameManager GameManager::instance = GameManager();
 
 GameManager::GameManager() {
-
+    applicationPath = FilePath(".\\opengl.exe");
 }
 
 GameManager& GameManager::getInstance() {
@@ -122,4 +122,8 @@ void GameManager::initGlew() {
         std::cerr << glewGetErrorString(glewInitError) << std::endl;
         exit(1);
     }
+}
+
+FilePath GameManager::getAppPath() {
+    return applicationPath.dirPath();
 }

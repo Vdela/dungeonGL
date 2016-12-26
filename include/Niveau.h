@@ -18,6 +18,8 @@
 #include <glimac/FilePath.hpp>
 #include <glimac/common.hpp>
 
+#include "GameManager.h"
+
 using namespace std;
 
 class Niveau{

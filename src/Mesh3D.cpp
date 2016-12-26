@@ -1,17 +1,16 @@
 //
-// Created by Vincent on 13/12/2016.
+// Created by Vincent on 26/12/2016.
 //
-#define GLEW_STATIC
 
+#include "../include/Mesh3D.h"
 
-
-#include "../include/Cube3D.h"
 
 using namespace glimac;
 
 
-Cube3D::Cube3D(std::string textureName) {
+Mesh3D::Mesh3D() {
 
+    //geometry.loadOBJ(  )
 
     shaderProgram = SimpleTexture();
 
@@ -147,7 +146,8 @@ Cube3D::Cube3D(std::string textureName) {
 
 
     // Chargement Texture
-    std::unique_ptr<Image> textureImg = loadImage( GameManager::getInstance().getAppPath() + "\\..\\..\\assets\\textures\\" + textureName );
+    FilePath applicationPath(".\\opengl.exe");
+    std::unique_ptr<Image> textureImg = loadImage( applicationPath.dirPath() + "\\..\\..\\assets\\textures\\" );
 
     if ( textureImg == NULL ) {
         std::cerr << "IMAGE NOT FOUND!" << std::endl;
@@ -163,11 +163,10 @@ Cube3D::Cube3D(std::string textureName) {
 
 }
 
-void Cube3D::draw() {
-
-     /*********************************
-     * HERE SHOULD COME THE RENDERING CODE
-     *********************************/
+void Mesh3D::draw() {
+    /*********************************
+    * HERE SHOULD COME THE RENDERING CODE
+    *********************************/
 
     // Transformations
 
@@ -191,8 +190,5 @@ void Cube3D::draw() {
     glBindTexture( GL_TEXTURE_2D, 0 );
 
     glBindVertexArray(0);
-
-
-
 
 }

@@ -64,8 +64,7 @@ Triangle3D::Triangle3D(std::string textureName) {
     glBindVertexArray(0);
 
     // Chargement Texture
-    FilePath applicationPath(".\\opengl.exe");
-    std::unique_ptr<Image> textureImg = loadImage( applicationPath.dirPath() + "\\..\\..\\assets\\textures\\" + textureName );
+    std::unique_ptr<Image> textureImg = loadImage( GameManager::getInstance().getAppPath() + "\\..\\..\\assets\\textures\\" + textureName );
 
     if ( textureImg == NULL ) {
         std::cerr << "IMAGE NOT FOUND!" << std::endl;

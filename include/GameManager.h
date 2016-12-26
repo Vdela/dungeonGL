@@ -34,11 +34,14 @@ class GameManager {
 public:
     static GameManager& getInstance();
     void initGame(uint32_t width, uint32_t height, char* gameName);
-     FreeflyCamera camera1;
+    FreeflyCamera camera1;
+    FilePath getAppPath();
 private:
     GameManager();
     static GameManager instance;
     void initGlew();
+
+    FilePath applicationPath;
 
 
 

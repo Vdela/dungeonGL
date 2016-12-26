@@ -8,9 +8,7 @@ Niveau::Niveau(){}
 
 void Niveau::lectureMap(char* fileName){
 
-    glimac::FilePath applicationPath(".\\opengl.exe");
-
-    ifstream fichier(applicationPath.dirPath() + "\\..\\..\\files\\" + fileName, ios::in);
+    ifstream fichier( GameManager::getInstance().getAppPath() + "\\..\\..\\files\\" + fileName, ios::in);
 
     if(fichier){
 

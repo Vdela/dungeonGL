@@ -14,6 +14,7 @@
 #include <GL/glut.h>
 
 #include "Object3D.h"
+#include "GameManager.h"
 
 class Triangle3D : public Object3D {
 

@@ -1,10 +1,11 @@
 //
-// Created by Vincent on 13/12/2016.
+// Created by Vincent on 26/12/2016.
 //
+
 #define GLEW_STATIC
 
-#ifndef IMACGL_CUBE3D_H
-#define IMACGL_CUBE3D_H
+#ifndef IMACGL_MESH3D_H
+#define IMACGL_MESH3D_H
 
 #include <iostream>
 #include <vector>
@@ -14,21 +15,22 @@
 #include <glimac/SDLWindowManager.hpp>
 #include <glimac/Program.hpp>
 #include <glimac/BBox.hpp>
+#include <glimac/Geometry.hpp>
 
 #include "Object3D.h"
-#include "GameManager.h"
 
-class Cube3D : public Object3D {
+class Mesh3D : public Object3D {
 
 private:
     GLuint vao;
     GLuint ibo;
     SimpleTexture shaderProgram;
-
+    Geometry geometry;
 public:
-    Cube3D(std::string textureName);
+    Mesh3D();
     void draw();
 };
 
 
-#endif //IMACGL_CUBE3D_H
+
+#endif //IMACGL_MESH3D_H
