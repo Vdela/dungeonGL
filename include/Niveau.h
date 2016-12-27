@@ -22,6 +22,8 @@
 #include "Object3D.h"
 #include "Cube3D.h"
 #include "GameManager.h"
+#include "Mesh3D.h"
+#include "Quad3D.h"
 
 using namespace std;
 
@@ -45,7 +47,6 @@ public:
     unsigned int getWidthMap(void);
 
     void lectureMap(char* fileName);
-    //void associationCell(int heightImage, int widthImage);
 
     void createMap(void);
 
