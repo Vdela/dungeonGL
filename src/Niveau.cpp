@@ -84,30 +84,32 @@ void Niveau::createMap(void) {
             switch ( carteId[i][j] ) {
                 case CellType::Wall : {
                     Cube3D * wall = new Cube3D( "wood.jpg" );
-                    Cell cellule(carteId[i][j], i, j, wall);
+                    Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
-                    wall->setTranslation( i, -1, j );
+                    wall->setTranslation( i, 0, j );
                     break;
                 }
                 case CellType::Floor : {
-                    Cube3D * wall = new Cube3D( "bone01.png" );
-                    Cell cellule(carteId[i][j], i, j, wall);
+                    Quad3D * floor = new Quad3D( "bone01.png" );
+                    Quad3D * ceiling = new Quad3D( "bone01.png" );
+                    Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
-                    wall->setTranslation( i, -1.5f, j );
+                    floor->setTranslation( i, -0.5f, j );
+                    ceiling->setTranslation( i, 0.5f, j );
                     break;
                 }
                 case CellType::Start : {
                     Cube3D * wall = new Cube3D( "cubeDebugUV.png" );
-                    Cell cellule(carteId[i][j], i, j, wall);
+                    Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
-                    wall->setTranslation( i, -1.25f, j );
+                    wall->setTranslation( i, -0.5f, j );
                     break;
                 }
                 case CellType::End : {
                     Cube3D * wall = new Cube3D( "cubeDebugUV.png" );
-                    Cell cellule(carteId[i][j], i, j, wall);
+                    Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
-                    wall->setTranslation( i, -1.25f, j );
+                    wall->setTranslation( i, -0.5f, j );
                     break;
                 }
                 case CellType::EmptyCell : {

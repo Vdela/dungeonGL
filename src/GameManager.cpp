@@ -35,17 +35,16 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
 
     Niveau niveau1;
-    niveau1.lectureMap((char*)"map1.ppm");
+    niveau1.lectureMap((char*)"map3.ppm");
 
     niveau1.createMap();
 
 
-    /*Demon3D demon;
+    Demon3D demon;
     float scale = 0.25;
     demon.setScale( scale, scale, scale );
     demon.setTranslation( 0, -2, -5 );
-    //demon.setRotation( glm::vec3(0, 1, 0), 4.65 );
-    demon.setRotation( glm::vec3(0, 1, 0), 270 );*/
+    demon.setRotation( glm::vec3(0, 1, 0), 270 );
 
 
     //=================================//
@@ -77,22 +76,18 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                 switch(e.key.keysym.sym) {
 
                     case SDLK_a:
-                        //c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
                    GameManager::getInstance().camera1.rotateLeft( rotSpeed * (float)Time::deltaTime );
                     break ;
 
                     case SDLK_d:
-                        //c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
                         GameManager::getInstance().camera1.rotateLeft( - rotSpeed * (float)Time::deltaTime );
                         break ;
 
                     case SDLK_w:
-                       // c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
                     GameManager::getInstance().camera1.moveFront( moveSpeed * (float)Time::deltaTime );
                     break ;
 
                     case SDLK_s:
-                        // c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
                         GameManager::getInstance().camera1.moveFront( - moveSpeed * (float)Time::deltaTime );
                         break ;
 

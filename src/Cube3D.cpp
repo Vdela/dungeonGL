@@ -106,7 +106,7 @@ Cube3D::Cube3D(std::string textureName) {
             7, 5, 6,
             11, 9, 8,//back
             11, 9, 10,
-            15, 13, 12,//bottom non ok
+            15, 13, 12,//bottom
             15, 13, 14,
             19, 17, 16,//left
             19, 17, 18,

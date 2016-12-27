@@ -25,6 +25,7 @@ private:
     Mesh3D * rightHand;
 
     Oscillation bodyOscillation;
+    Oscillation bodyOscillation2;
 
 public:
     Demon3D();

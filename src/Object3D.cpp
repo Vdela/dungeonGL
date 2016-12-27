@@ -50,6 +50,10 @@ void Object3D::setScale(float x, float y, float z) {
     this->scaleMatrix = glm::scale( glm::mat4(), glm::vec3(x, y, z) );
 }
 
+void Object3D::setScale(float xyz) {
+    this->scaleMatrix = glm::scale( glm::mat4(), glm::vec3(xyz, xyz, xyz) );
+}
+
 void Object3D::addScale(glm::vec3 scale) {
     this->scaleMatrix *= glm::scale(glm::mat4(), scale);
 }

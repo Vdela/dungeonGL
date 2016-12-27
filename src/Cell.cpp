@@ -8,15 +8,15 @@ Cell::Cell(CellType type, float cellPosX, float cellPosY) {
     this->type = type;
     this->cellPosition.x = cellPosX;
     this->cellPosition.y = cellPosY;
-    this->cellObject3D = NULL;
+    //this->cellObject3D = NULL;
 }
-
+/*
 Cell::Cell(CellType type, float cellPosX, float cellPosY, Object3D * object3D) {
     this->type = type;
     this->cellPosition.x = cellPosX;
     this->cellPosition.y = cellPosY;
     this->cellObject3D = object3D;
-}
+}*/
 
 Cell::~Cell(){}
 
@@ -35,8 +35,4 @@ void Cell::setType(CellType type)
 glm::vec2 Cell::getCellPosition(void)
 {
     return this->cellPosition;
-}
-
-void Cell::setObject3D(Object3D * object3D) {
-    this->cellObject3D = object3D;
 }

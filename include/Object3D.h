@@ -56,10 +56,13 @@ public:
 
     void setScale(glm::vec3 scale);
     void setScale(float x, float y, float z);
+    void setScale(float xyz);
     void addScale(glm::vec3 scale);
     void addScale(float x, float y, float z);
 
     void setParentMatrix( glm::mat4* parentModelMatrix ) { parentModel = parentModelMatrix; }
+
+    glm::mat4& getModelMatrix(){ return modelMatrix; }
 };
 
 
