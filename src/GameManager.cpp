@@ -94,6 +94,12 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                         // c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
                         GameManager::getInstance().camera1.moveFront(-0.005f);
                         break ;
+                    case SDLK_UP:
+                    GameManager::getInstance().camera1.rotateUp(0.05f);
+                        break;
+
+                    case SDLK_DOWN:
+                    GameManager::getInstance().camera1.rotateUp(-0.05f);
 
 
                 }
