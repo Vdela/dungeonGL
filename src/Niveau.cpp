@@ -18,14 +18,14 @@ void Niveau::lectureMap(char* fileName){
         int widthImage;
         int nbColor;
 
-        fichier >> formatImage >> heightImage >> widthImage >> nbColor;
+        fichier >> formatImage >> widthImage >> heightImage >> nbColor;
 
         this->heightMap = (unsigned int) heightImage;
         this->widthMap = (unsigned int) widthImage;
-
-        for(int i = 0; i < heightImage; i++){
+        int i, j; // i=largeur, j=hauteur
+        for(i = 0; i < heightImage; i++){
             carteId.push_back( vector<CellType>() );
-            for(int j = 0; j < widthImage; j++){
+            for(j = 0; j < widthImage; j++){
                 int r, g, b;
                 fichier >> r;
                 fichier >> g;
@@ -44,36 +44,16 @@ void Niveau::lectureMap(char* fileName){
                     carteId[i].push_back( CellType::End );
                 }
                 else {
-                    carteId[i].push_back( CellType::InvalidCell ); // Valeur inattendue
+                    carteId[i].push_back( CellType::EmptyCell ); // Autre couleur
                 }
 
             }
         }
-
-        //associationCell(heightImage, widthImage);
     }
     else{
         cerr << "Impossible d'ouvrir le fichier de la map" << endl;
     }
 }
-/*
-void Niveau::associationCell(int heightImage, int widthImage) {
-
-    float x = 0;
-    float z = 0;
-
-    for (int i = 0; i < heightImage; i++) {
-        cellules.push_back(vector<Cell>());
-        for (int j = 0; j < widthImage; j++) {
-
-            Cell cellule(carteId[i][j], x, z);
-            cellules[i].push_back(cellule);
-
-            x+=1;
-        }
-        z+=1;
-    }
-}*/
 
 Niveau::~Niveau() {
 
@@ -128,6 +108,11 @@ void Niveau::createMap(void) {
                     Cell cellule(carteId[i][j], i, j, wall);
                     cellules[i].push_back(cellule);
                     wall->setTranslation( i, -1.25f, j );
+                    break;
+                }
+                case CellType::EmptyCell : {
+                    Cell cellule(carteId[i][j], i, j);
+                    cellules[i].push_back(cellule);
                     break;
                 }
                 default:

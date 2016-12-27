@@ -35,7 +35,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
 
     Niveau niveau1;
-    niveau1.lectureMap((char*)"map3.ppm");
+    niveau1.lectureMap((char*)"map1.ppm");
 
     niveau1.createMap();
 
@@ -71,8 +71,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
             case SDL_KEYDOWN :
 
-                float moveSpeed = 3.0f;
-                float rotSpeed = 60.0f;
+                float moveSpeed = 6.0f;
+                float rotSpeed = 120.0f;
 
                 switch(e.key.keysym.sym) {
 

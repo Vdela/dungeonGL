@@ -20,7 +20,7 @@ enum CellType {
     Water,
     Start,
     End,
-    InvalidCell
+    EmptyCell
 };
 
 class Cell{
@@ -28,21 +28,17 @@ private:
     CellType type; // Voir enum CellType ci-dessus
     glm::vec2 cellPosition; //position du Cell dans le tableau (pas position réelle de l'objet3D)
     Object3D * cellObject3D; // Le Cell peut être représenté par un Cube3D, un Quad3D, etc
-    //string textureName;
 public:
     Cell(){};
     ~Cell();
+    Cell(CellType type, float cellPosX, float cellPosY);
     Cell(CellType type, float cellPosX, float cellPosY, Object3D * object3D);
 
     CellType getType(void);
     void setType(CellType type);
     void setObject3D(Object3D * object3D);
 
-    //string getTextureName(void);
-
     glm::vec2 getCellPosition(void);
-    /*void setPosition(float x, float y, float z);
-    void setPosition(glm::vec3 position);*/
 
 
 };
