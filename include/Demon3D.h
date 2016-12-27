@@ -24,7 +24,7 @@ private:
     Mesh3D * leftHand;
     Mesh3D * rightHand;
 
-    Oscillation oscillation;
+    Oscillation bodyOscillation;
 
 public:
     Demon3D();

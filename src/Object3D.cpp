@@ -34,12 +34,12 @@ void Object3D::addTranslation(float x, float y, float z) {
 }
 
 
-void Object3D::setRotation(glm::vec3 rotation, float speed) {
-    this->rotationMatrix = glm::rotate(glm::mat4(), speed, rotation);
+void Object3D::setRotation(glm::vec3 rotation, float angleDegree) {
+    this->rotationMatrix = glm::rotate(glm::mat4(), (float)(angleDegree * PI/180), rotation);
 }
 
-void Object3D::addRotation(glm::vec3 rotation, float speed) {
-    this->rotationMatrix *= glm::rotate(glm::mat4(), speed, rotation);
+void Object3D::addRotation(glm::vec3 rotation, float angleDegree) {
+    this->rotationMatrix *= glm::rotate(glm::mat4(), (float)(angleDegree * PI/180), rotation);
 }
 
 void Object3D::setScale(glm::vec3 scale) {

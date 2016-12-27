@@ -5,6 +5,8 @@
 #ifndef IMACGL_OBJECT3D_H
 #define IMACGL_OBJECT3D_H
 
+#define PI 3.14159265358979323846
+
 #include <glimac/glm.hpp>
 #include <glimac/common.hpp>
 
@@ -49,8 +51,8 @@ public:
     void setTranslation(float x, float y, float z);
     void addTranslation(float x, float y, float z);
 
-    void setRotation(glm::vec3 rotation, float speed);
-    void addRotation(glm::vec3 rotation, float speed);
+    void setRotation(glm::vec3 rotation, float angleDegree);
+    void addRotation(glm::vec3 rotation, float angleDegree);
 
     void setScale(glm::vec3 scale);
     void setScale(float x, float y, float z);

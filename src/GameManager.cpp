@@ -42,6 +42,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     float scale = 0.25;
     demon.setScale( scale, scale, scale );
     demon.setTranslation( 0, -2, -5 );
+    //demon.setRotation( glm::vec3(0, 1, 0), 4.65 );
+    demon.setRotation( glm::vec3(0, 1, 0), 270 );
 
 
     //=================================//
@@ -98,7 +100,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
         // Jeu
 
-        //demon.addRotation( glm::vec3(0, 1, 0), Time::deltaTime * 0.5d );
+        //demon.addRotation( glm::vec3(0, 1, 0), Time::deltaTime );
 
         // Clear de la fenêtre avant le nouveau rendu
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

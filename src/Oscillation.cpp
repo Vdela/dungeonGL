@@ -42,18 +42,19 @@ void Oscillation::nextValue() {
 void Oscillation::nextValueSmooth() {
 
     float change;
-    float delta = (maxValue - minValue) * 0.05f;
     float range = maxValue - minValue;
-    float mid = range * 0.5f;
+    float mid = minValue + (range / 2);
+    float delta = (maxValue - mid) * 0.15f;
 
 
     if ( upping ) {
         if ( current > mid ) {
-            change = (mid - (maxValue + delta) - current) * speed * (float) Time::deltaTime;//
+            change = ( current - (maxValue + delta) ) * speed * (float) Time::deltaTime;
+            if (change < 0) change = -change;
         } else {
-            change = ((minValue-delta) - current) * speed * (float)Time::deltaTime;
+            change = ((minValue - delta) - current) * speed * (float)Time::deltaTime;
+            if (change < 0) change = -change;
         }
-        if (change < 0) change = -change;
         current += change;
         if ( current > maxValue ) {
             current = maxValue;
@@ -61,11 +62,12 @@ void Oscillation::nextValueSmooth() {
         }
     } else {
         if ( current > mid ) {
-            change = ((minValue-delta) - current) * speed * (float)Time::deltaTime;
+            change = ( current - (maxValue + delta) ) * speed * (float) Time::deltaTime;
+            if (change < 0) change = -change;
         } else {
-            change = ((maxValue + delta) - current) * speed * (float) Time::deltaTime;//
+            change = ((minValue - delta) - current) * speed * (float) Time::deltaTime;
+            if (change < 0) change = -change;
         }
-        if (change < 0) change = -change;
         current -= change;
         if ( current < minValue ) {
             current = minValue;
