@@ -9,12 +9,13 @@ class FreeflyCamera {
 
 public:
     FreeflyCamera();
-    void moveFront(float t); 
+    void moveFront(float t);
 	void moveLeft(float t);
     void rotateLeft(float degrees); 
     void rotateUp(float degrees);
     void computeDirectionVectors();
 	glm::mat4 getViewMatrix() const;
+	glm::vec3 getPosition() { return m_Position; }
 
 private:
 	float m_fPhi;

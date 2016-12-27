@@ -25,7 +25,7 @@ class Mesh3D : public Object3D {
 private:
     GLuint vao;
     GLuint ibo;
-    SimpleTexture shaderProgram;
+    SimpleTextureLambert shaderProgram;
     Geometry geometry;
 public:
     Mesh3D() {};

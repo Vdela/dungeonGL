@@ -3,10 +3,6 @@
 //
 
 #include "../include/GameManager.h"
-#include "../lib/glimac/include/glimac/FreeflyCamera.hpp"
-#include "../include/Triangle3D.h"
-#include "../include/Cube3D.h"
-#include "../include/Mesh3D.h"
 #include "../include/Demon3D.h"
 
 GameManager GameManager::instance = GameManager();
@@ -41,11 +37,13 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
 
     Demon3D demon;
-    float scale = 0.25;
+    float scale = 0.05f;
     demon.setScale( scale, scale, scale );
-    demon.setTranslation( 0, -2, -5 );
+    demon.setTranslation( 1, -0.5f, 2 );
     demon.setRotation( glm::vec3(0, 1, 0), 270 );
 
+
+    GameManager::getInstance().camera1.moveFront( - 10 );
 
     //=================================//
     //========== Loop du jeu ==========//
@@ -90,6 +88,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                     case SDLK_s:
                         GameManager::getInstance().camera1.moveFront( - moveSpeed * (float)Time::deltaTime );
                         break ;
+                    default:
+                        break ;
 
 
                 }
@@ -99,7 +99,6 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
         // Jeu
 
-        //demon.addRotation( glm::vec3(0, 1, 0), Time::deltaTime );
 
         // Clear de la fenêtre avant le nouveau rendu
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
