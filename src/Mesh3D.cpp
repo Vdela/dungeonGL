@@ -15,7 +15,7 @@ Mesh3D::Mesh3D(std::string meshName, std::string meshMtl, std::string textureNam
                       true
     );
 
-    shaderProgram = SimpleTexture();
+    shaderProgram = SimpleTextureLambert();
 
     //********************************
     //HERE SHOULD COME THE INITIALIZATION CODE
@@ -99,9 +99,12 @@ void Mesh3D::draw() {
     shaderProgram.program.use();
 
     glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr( projMatrix * GameManager::getInstance().camera1.getViewMatrix() * (*parentModel) * modelMatrix ) );
-    glUniformMatrix4fv( shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(modelMatrix));
+    glUniformMatrix4fv( shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr((*parentModel) * modelMatrix));
     glUniformMatrix4fv( shaderProgram.uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
 
+    glm::vec3 camPos = GameManager::getInstance().camera1.getPosition();
+    glUniform3f( shaderProgram.uLightPosLoc, camPos.x, camPos.y, camPos.z );
+    glUniform3f( shaderProgram.uLightIntensityLoc, 1,1,1 ); // white
 
     glBindVertexArray(vao);
 

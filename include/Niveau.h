@@ -23,7 +23,6 @@
 #include "Cube3D.h"
 #include "GameManager.h"
 #include "Mesh3D.h"
-#include "Quad3D.h"
 
 using namespace std;
 
