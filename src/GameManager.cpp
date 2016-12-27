@@ -71,33 +71,33 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
             case SDL_KEYDOWN :
 
-                float moveSpeed = 3.0f;
-                float rotSpeed = 60.0f;
-
                 switch(e.key.keysym.sym) {
 
                     case SDLK_a:
                         //c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
-                   GameManager::getInstance().camera1.rotateLeft( rotSpeed * (float)Time::deltaTime );
+                   GameManager::getInstance().camera1.rotateLeft(0.05f);
                     break ;
 
                     case SDLK_d:
                         //c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
-                        GameManager::getInstance().camera1.rotateLeft( - rotSpeed * (float)Time::deltaTime );
+                        GameManager::getInstance().camera1.rotateLeft(-0.05f);
+
                         break ;
+
 
                     case SDLK_w:
                        // c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
-                    GameManager::getInstance().camera1.moveFront( moveSpeed * (float)Time::deltaTime );
+                    GameManager::getInstance().camera1.moveFront(0.005f);
                     break ;
 
                     case SDLK_s:
                         // c1.addRotation( glm::vec3(0, 1, 0), 90.0f );
-                        GameManager::getInstance().camera1.moveFront( - moveSpeed * (float)Time::deltaTime );
+                        GameManager::getInstance().camera1.moveFront(-0.005f);
                         break ;
 
 
                 }
+
 
 
         }
