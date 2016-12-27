@@ -24,7 +24,7 @@ void Niveau::lectureMap(char* fileName){
         this->widthMap = (unsigned int) widthImage;
 
         for(int i = 0; i < heightImage; i++){
-            carteId.push_back( vector<int>() );
+            carteId.push_back( vector<CellType>() );
             for(int j = 0; j < widthImage; j++){
                 int r, g, b;
                 fichier >> r;
@@ -32,31 +32,31 @@ void Niveau::lectureMap(char* fileName){
                 fichier >> b;
 
                 if(r == 0 && g == 0 && b == 0){
-                    carteId[i].push_back( 0 );
+                    carteId[i].push_back( CellType::Wall );
                 }
                 else if(r == 255 &&g == 255 &&b == 255){
-                    carteId[i].push_back( 1 );
+                    carteId[i].push_back( CellType::Floor );
                 }
                 else if(r == 255 && g == 0 && b == 0) {
-                    carteId[i].push_back( 2 );
+                    carteId[i].push_back( CellType::Start );
                 }
                 else if(r == 0 && g == 255 && b == 0){
-                    carteId[i].push_back( 3 );
+                    carteId[i].push_back( CellType::End );
                 }
                 else {
-                    carteId[i].push_back( -1 ); // Valeur inattendue
+                    carteId[i].push_back( CellType::InvalidCell ); // Valeur inattendue
                 }
 
             }
         }
 
-        associationCell(heightImage, widthImage);
+        //associationCell(heightImage, widthImage);
     }
     else{
         cerr << "Impossible d'ouvrir le fichier de la map" << endl;
     }
 }
-
+/*
 void Niveau::associationCell(int heightImage, int widthImage) {
 
     float x = 0;
@@ -66,31 +66,20 @@ void Niveau::associationCell(int heightImage, int widthImage) {
         cellules.push_back(vector<Cell>());
         for (int j = 0; j < widthImage; j++) {
 
-            if (carteId[i][j] == 0) {
-                Cell cellule(carteId[i][j], x, -1, z, "wood.jpg");
-                cellules[i].push_back(cellule);
-            } else if (carteId[i][j] == 1) {
-                Cell cellule(carteId[i][j], x, -2, z, "sol.jpg");
-                cellules[i].push_back(cellule);
-            } else if (carteId[i][j] == 2) {
-                Cell cellule(carteId[i][j], x, -2, z, "sol.jpg");
-                cellules[i].push_back(cellule);
-            } else if (carteId[i][j] == 3) {
-                Cell cellule(carteId[i][j], x, -2, z, "sol.jpg");
-                cellules[i].push_back(cellule);
-            }
+            Cell cellule(carteId[i][j], x, z);
+            cellules[i].push_back(cellule);
 
             x+=1;
         }
         z+=1;
     }
-}
+}*/
 
 Niveau::~Niveau() {
 
 }
 
-vector<vector<int> > Niveau::getCarteId(void) {
+vector<vector<CellType> > Niveau::getCarteId(void) {
     return carteId;
 }
 
@@ -109,11 +98,45 @@ unsigned int Niveau::getWidthMap(void) {
 void Niveau::createMap(void) {
 
     for(int i = 0; i < heightMap; i++){
-        for(int j = 0; i < widthMap; i++){
-            Cube3D * cube = new Cube3D(cellules[i][j].getTextureName());
-            cube->setTranslation(cellules[i][j].getPosition()[0], cellules[i][j].getPosition()[1], cellules[i][j].getPosition()[2]);
+        cellules.push_back( std::vector<Cell>() );
+        for(int j = 0; j < widthMap; j++){
+
+            switch ( carteId[i][j] ) {
+                case CellType::Wall : {
+                    Cube3D * wall = new Cube3D( "wood.jpg" );
+                    Cell cellule(carteId[i][j], i, j, wall);
+                    cellules[i].push_back(cellule);
+                    wall->setTranslation( i, -1, j );
+                    break;
+                }
+                case CellType::Floor : {
+                    Cube3D * wall = new Cube3D( "bone01.png" );
+                    Cell cellule(carteId[i][j], i, j, wall);
+                    cellules[i].push_back(cellule);
+                    wall->setTranslation( i, -1.5f, j );
+                    break;
+                }
+                case CellType::Start : {
+                    Cube3D * wall = new Cube3D( "cubeDebugUV.png" );
+                    Cell cellule(carteId[i][j], i, j, wall);
+                    cellules[i].push_back(cellule);
+                    wall->setTranslation( i, -1.25f, j );
+                    break;
+                }
+                case CellType::End : {
+                    Cube3D * wall = new Cube3D( "cubeDebugUV.png" );
+                    Cell cellule(carteId[i][j], i, j, wall);
+                    cellules[i].push_back(cellule);
+                    wall->setTranslation( i, -1.25f, j );
+                    break;
+                }
+                default:
+                    break;
+            }
+
         }
     }
+
 }
 
 

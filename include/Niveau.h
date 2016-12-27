@@ -32,20 +32,20 @@ private:
     unsigned int nbMonstres;
     unsigned int heightMap;
     unsigned int widthMap;
-    vector<vector<int> > carteId;
+    vector<vector<CellType > > carteId;
     vector<vector<Cell> > cellules;
 public:
     Niveau();
     ~Niveau();
 
-    vector<vector<int> > getCarteId(void);
+    vector<vector<CellType> > getCarteId(void);
     vector<vector<Cell> > getCellules(void);
 
     unsigned int getHeightMap(void);
     unsigned int getWidthMap(void);
 
     void lectureMap(char* fileName);
-    void associationCell(int heightImage, int widthImage);
+    //void associationCell(int heightImage, int widthImage);
 
     void createMap(void);
 

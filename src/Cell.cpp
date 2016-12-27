@@ -4,39 +4,53 @@
 
 #include "../include/Cell.h"
 
-Cell::Cell(int type, float x, float y, float z, string textureName){
+
+Cell::Cell(CellType type, float cellPosX, float cellPosY, Object3D * object3D) {
     this->type = type;
-    this->position[0] = x;
-    this->position[1] = y;
-    this->position[2] = z;
-    this->textureName = textureName;
+    this->cellPosition.x = cellPosX;
+    this->cellPosition.y = cellPosY;
+    this->cellObject3D = object3D;
 }
 
 Cell::~Cell(){}
 
 
-int Cell::getType(void)
+CellType Cell::getType(void)
 {
     return type;
 }
 
-void Cell::setType(int type)
+void Cell::setType(CellType type)
 {
     this->type = type;
 }
 
-float* Cell::getPosition(void)
+
+glm::vec2 Cell::getCellPosition(void)
 {
-    return this->position;
+    return this->cellPosition;
 }
 
+void Cell::setObject3D(Object3D * object3D) {
+    this->cellObject3D = object3D;
+}
+
+/*
 void Cell::setPosition(float x, float y, float z)
 {
-    this->position[0] = x;
-    this->position[1] = y;
-    this->position[2] = z;
+    this->position.x = x;
+    this->position.y = y;
+    this->position.z = z;
 }
 
+void Cell::setPosition(glm::vec3 position)
+{
+    this->position = position;
+}
+*/
+
+/*
 string Cell::getTextureName(void) {
     return this->textureName;
 }
+*/
