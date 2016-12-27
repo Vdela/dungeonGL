@@ -18,6 +18,9 @@
 #include <glimac/FilePath.hpp>
 #include <glimac/common.hpp>
 
+#include "Cell.h"
+#include "Object3D.h"
+#include "Cube3D.h"
 #include "GameManager.h"
 
 using namespace std;
@@ -27,10 +30,24 @@ class Niveau{
 private:
     unsigned int nbTresors;
     unsigned int nbMonstres;
-    vector<vector<int> > carte;
+    unsigned int heightMap;
+    unsigned int widthMap;
+    vector<vector<int> > carteId;
+    vector<vector<Cell> > cellules;
 public:
     Niveau();
+    ~Niveau();
+
+    vector<vector<int> > getCarteId(void);
+    vector<vector<Cell> > getCellules(void);
+
+    unsigned int getHeightMap(void);
+    unsigned int getWidthMap(void);
+
     void lectureMap(char* fileName);
+    void associationCell(int heightImage, int widthImage);
+
+    void createMap(void);
 
 };
 

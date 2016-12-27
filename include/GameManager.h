@@ -24,6 +24,7 @@
 
 #include "Niveau.h"
 #include "Time.h"
+#include "Cell.h"
 
 using namespace glimac;
 
@@ -40,9 +41,6 @@ private:
     void initGlew();
 
     FilePath applicationPath;
-
-
-
 
 };
 

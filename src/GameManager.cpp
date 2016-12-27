@@ -37,13 +37,15 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     Niveau niveau1;
     niveau1.lectureMap((char*)"map3.ppm");
 
+    niveau1.createMap();
 
-    Demon3D demon;
+
+    /*Demon3D demon;
     float scale = 0.25;
     demon.setScale( scale, scale, scale );
     demon.setTranslation( 0, -2, -5 );
     //demon.setRotation( glm::vec3(0, 1, 0), 4.65 );
-    demon.setRotation( glm::vec3(0, 1, 0), 270 );
+    demon.setRotation( glm::vec3(0, 1, 0), 270 );*/
 
 
     //=================================//

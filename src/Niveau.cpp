@@ -20,8 +20,11 @@ void Niveau::lectureMap(char* fileName){
 
         fichier >> formatImage >> heightImage >> widthImage >> nbColor;
 
+        this->heightMap = (unsigned int) heightImage;
+        this->widthMap = (unsigned int) widthImage;
+
         for(int i = 0; i < heightImage; i++){
-            carte.push_back( vector<int>() );
+            carteId.push_back( vector<int>() );
             for(int j = 0; j < widthImage; j++){
                 int r, g, b;
                 fichier >> r;
@@ -29,33 +32,90 @@ void Niveau::lectureMap(char* fileName){
                 fichier >> b;
 
                 if(r == 0 && g == 0 && b == 0){
-                    carte[i].push_back( 0 );
+                    carteId[i].push_back( 0 );
                 }
                 else if(r == 255 &&g == 255 &&b == 255){
-                    carte[i].push_back( 1 );
+                    carteId[i].push_back( 1 );
                 }
                 else if(r == 255 && g == 0 && b == 0) {
-                    carte[i].push_back( 2 );
+                    carteId[i].push_back( 2 );
                 }
                 else if(r == 0 && g == 255 && b == 0){
-                    carte[i].push_back( 3 );
+                    carteId[i].push_back( 3 );
                 }
                 else {
-                    carte[i].push_back( -1 ); // Valeur inattendue
+                    carteId[i].push_back( -1 ); // Valeur inattendue
                 }
 
             }
         }
+
+        associationCell(heightImage, widthImage);
     }
     else{
         cerr << "Impossible d'ouvrir le fichier de la map" << endl;
     }
-
-    /*cout << carte[0][0] << carte[0][1] << carte[0][2] << carte[0][3] << endl;
-    cout << carte[1][0] << carte[1][1] << carte[1][2] << carte[1][3] << endl;
-    cout << carte[2][0] << carte[2][1] << carte[2][2] << carte[2][3] << endl;
-    cout << carte[3][0] << carte[3][1] << carte[3][2] << carte[3][3] << endl;*/
 }
+
+void Niveau::associationCell(int heightImage, int widthImage) {
+
+    float x = 0;
+    float z = 0;
+
+    for (int i = 0; i < heightImage; i++) {
+        cellules.push_back(vector<Cell>());
+        for (int j = 0; j < widthImage; j++) {
+
+            if (carteId[i][j] == 0) {
+                Cell cellule(carteId[i][j], x, -1, z, "wood.jpg");
+                cellules[i].push_back(cellule);
+            } else if (carteId[i][j] == 1) {
+                Cell cellule(carteId[i][j], x, -2, z, "sol.jpg");
+                cellules[i].push_back(cellule);
+            } else if (carteId[i][j] == 2) {
+                Cell cellule(carteId[i][j], x, -2, z, "sol.jpg");
+                cellules[i].push_back(cellule);
+            } else if (carteId[i][j] == 3) {
+                Cell cellule(carteId[i][j], x, -2, z, "sol.jpg");
+                cellules[i].push_back(cellule);
+            }
+
+            x+=1;
+        }
+        z+=1;
+    }
+}
+
+Niveau::~Niveau() {
+
+}
+
+vector<vector<int> > Niveau::getCarteId(void) {
+    return carteId;
+}
+
+vector<vector<Cell> > Niveau::getCellules(void) {
+    return cellules;
+}
+
+unsigned int Niveau::getHeightMap(void) {
+    return this->heightMap;
+}
+
+unsigned int Niveau::getWidthMap(void) {
+    return this->widthMap;
+}
+
+void Niveau::createMap(void) {
+
+    for(int i = 0; i < heightMap; i++){
+        for(int j = 0; i < widthMap; i++){
+            Cube3D * cube = new Cube3D(cellules[i][j].getTextureName());
+            cube->setTranslation(cellules[i][j].getPosition()[0], cellules[i][j].getPosition()[1], cellules[i][j].getPosition()[2]);
+        }
+    }
+}
+
 
 
 
