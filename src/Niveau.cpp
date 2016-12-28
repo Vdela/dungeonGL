@@ -83,18 +83,14 @@ void Niveau::createMap(void) {
 
             switch ( carteId[i][j] ) {
                 case CellType::Wall : {
-                    //Cube3D * wall = new Cube3D( "wood.jpg" );
                     Mesh3D * wall = new Mesh3D( "wall.obj", "wall.mtl", "wood.jpg" );
                     Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
-                    //wall->setScale( 0.02f );
                     wall->setTranslation( i, 0, j );
                     break;
                 }
                 case CellType::Floor : {
-                    //Quad3D * floor = new Quad3D( "bone01.png" );
                     Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "bone01.png" );
-                    //Quad3D * ceiling = new Quad3D( "bone01.png" );
                     Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "bone01.png" );
                     Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);

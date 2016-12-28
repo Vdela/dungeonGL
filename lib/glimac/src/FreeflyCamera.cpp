@@ -30,7 +30,7 @@ namespace glimac {
 
     void FreeflyCamera::rotateUp(float degrees)
     {
-        float radians = degrees / 180 * M_PI;
+        float radians = (float)(degrees / 180 * M_PI);
         m_fTheta += radians;
         FreeflyCamera::computeDirectionVectors();
     }
@@ -38,7 +38,7 @@ namespace glimac {
     void FreeflyCamera::computeDirectionVectors()
     {
         m_FrontVector = glm::vec3(cos(m_fTheta) * sin(m_fPhi), sin(m_fTheta), cos(m_fTheta) * cos(m_fPhi));
-        m_LeftVector = glm::vec3(sin(m_fPhi+(M_PI*0.5)), 0, cos(m_fPhi+(M_PI*0.5)));
+        m_LeftVector = glm::vec3(sin((float)(m_fPhi+(M_PI*0.5))), 0, cos((float)(m_fPhi+(M_PI*0.5))));
         m_UpVector = glm::cross(m_FrontVector, m_LeftVector);
 
     }
@@ -46,6 +46,13 @@ namespace glimac {
     glm::mat4 FreeflyCamera::getViewMatrix() const
     {
         return glm::lookAt(m_Position, m_Position + m_FrontVector, m_UpVector);
+    }
+
+    void FreeflyCamera::setRotation(float degrees)
+    {
+        float radians = (float)(degrees / 180 * M_PI);
+        m_fPhi = radians;
+        FreeflyCamera::computeDirectionVectors();
     }
 
 }

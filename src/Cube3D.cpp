@@ -6,6 +6,7 @@
 
 
 #include "../include/Cube3D.h"
+#include "../include/Player.h"
 
 using namespace glimac;
 
@@ -179,8 +180,8 @@ void Cube3D::draw() {
 
     shaderProgram.program.use();
 
-    glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr(  projMatrix*   GameManager::getInstance().camera1.getViewMatrix() * modelMatrix ));
-    glUniformMatrix4fv( shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(GameManager::getInstance().camera1.getViewMatrix()*modelMatrix  ));
+    glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr(  projMatrix*   Player::getInstance().camera.getViewMatrix() * modelMatrix ));
+    glUniformMatrix4fv( shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr(Player::getInstance().camera.getViewMatrix()*modelMatrix  ));
     glUniformMatrix4fv( shaderProgram.uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
 
 
