@@ -34,7 +34,7 @@ void Player::draw() {
     // Transformations
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 
-
+    float newMinDist;
 
     if ( inAnim ) {
         if (moving) {
@@ -42,11 +42,13 @@ void Player::draw() {
             this->addTranslation(step);
             currentPos += step;
             camera.setPosition(currentPos);
-            if (glm::distance(currentPos, targetPos) <= 0.02f) {
+            newMinDist = glm::distance(currentPos, targetPos);
+            if (glm::distance(currentPos, targetPos) <= 2 * glm::length(step) || newMinDist > minDistSecurity ) {
                 camera.setPosition(targetPos);
                 moving = false;
                 inAnim = false;
             }
+            minDistSecurity = newMinDist;
         }
 
         if (rotating) {
@@ -54,11 +56,13 @@ void Player::draw() {
             this->addRotation(glm::vec3(0, 1, 0), step);
             currentRot += step;
             camera.setRotation(currentRot);
-            if (glm::distance(currentRot, targetRot) <= 1.0f) {
+            newMinDist = glm::distance(currentRot, targetRot);
+            if (glm::distance(currentRot, targetRot) <= abs(2 * step) || newMinDist > minDistSecurity ) {
                 camera.setRotation(targetRot);
                 rotating = false;
                 inAnim = false;
             }
+            minDistSecurity = newMinDist;
         }
     }
 
@@ -77,6 +81,7 @@ void Player::stepForward() {
     startingMovePos = glm::vec3( mapPosition.x, 0, mapPosition.y );
     setPositionOnMap( (int)(mapPosition.x + lookDirection.x),
                       (int)(mapPosition.y + lookDirection.y) );
+    minDistSecurity = 100.0f;
 }
 
 void Player::stepBack() {
@@ -89,6 +94,7 @@ void Player::stepBack() {
     startingMovePos = glm::vec3( mapPosition.x, 0, mapPosition.y );
     setPositionOnMap( (int)(mapPosition.x - lookDirection.x),
                       (int)(mapPosition.y - lookDirection.y) );
+    minDistSecurity = 100.0f;
 }
 
 void Player::stepLeft() {
@@ -109,6 +115,7 @@ void Player::stepLeft() {
         setPositionOnMap((int) (mapPosition.x - lookDirection.y),
                          (int) (mapPosition.y - lookDirection.x));
     }
+    minDistSecurity = 100.0f;
 }
 
 void Player::stepRight() {
@@ -129,6 +136,7 @@ void Player::stepRight() {
         setPositionOnMap((int) (mapPosition.x - lookDirection.y),
                          (int) (mapPosition.y - lookDirection.x));
     }
+    minDistSecurity = 100.0f;
 }
 
 void Player::rotateLeft() {
@@ -157,6 +165,7 @@ void Player::rotateLeft() {
             lookDirection = glm::vec2( 0, -1 );
             break;
     }
+    minDistSecurity = 100.0f;
 
 }
 
@@ -186,6 +195,7 @@ void Player::rotateRight() {
             lookDirection = glm::vec2( 0, -1 );
             break;
     }
+    minDistSecurity = 100.0f;
 
 }
 
