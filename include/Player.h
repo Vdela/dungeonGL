@@ -49,6 +49,8 @@ public:
     void draw();
 
     glm::vec2 getPositionOnMap(){ return mapPosition; }
+    glm::vec2 getLookDirection() { return lookDirection; }
+    glm::vec2 getLeftDirection();
     void setPositionOnMap(int posX, int posY);
     void stepForward();
     void stepBack();

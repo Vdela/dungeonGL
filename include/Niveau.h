@@ -45,6 +45,10 @@ public:
     unsigned int getHeightMap(void);
     unsigned int getWidthMap(void);
 
+    Cell* getCell( glm::vec2 pos ) {
+        return &cellules[(int)pos.x][(int)pos.y];
+    }
+
     void lectureMap(char* fileName);
 
     void createMap(void);

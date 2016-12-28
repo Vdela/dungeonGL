@@ -37,6 +37,8 @@ public:
     CellType getType(void);
     void setType(CellType type);
 
+    static bool walkableCell( Cell * cell );
+
     glm::vec2 getCellPosition(void);
 
 
