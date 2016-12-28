@@ -141,6 +141,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
         }
 
         // Jeu
+
         heart.addRotation( glm::vec3(0, 1, 0), (float)Time::deltaTime * 10.0f );
 
 
