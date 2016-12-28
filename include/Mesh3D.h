@@ -18,16 +18,17 @@
 #include <glimac/Geometry.hpp>
 
 #include "Object3D.h"
+#include "MeshShared.h"
+
 
 class Mesh3D : public Object3D {
 
 private:
-    GLuint vao;
-    GLuint ibo;
     SimpleTextureLambert shaderProgram;
-    Geometry geometry;
+    MeshShared * meshShared;
+    Texture * texture;
 public:
-    Mesh3D() {};
+    //Mesh3D() {};
     Mesh3D(std::string meshName, std::string meshMt, std::string textureName);
     void draw();
 };

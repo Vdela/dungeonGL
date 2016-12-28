@@ -20,7 +20,6 @@
 
 #include "Cell.h"
 #include "Object3D.h"
-#include "Cube3D.h"
 #include "GameManager.h"
 #include "Mesh3D.h"
 

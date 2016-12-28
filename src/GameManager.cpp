@@ -36,7 +36,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
 
     Niveau niveau1;
-    niveau1.lectureMap((char*)"map3.ppm");
+    niveau1.lectureMap((char*)"map2.ppm");
     niveau1.createMap();
 
 

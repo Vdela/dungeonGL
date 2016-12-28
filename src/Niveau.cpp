@@ -133,18 +133,24 @@ void Niveau::createMap(void) {
                     break;
                 }
                 case CellType::Start : {
-                    Cube3D * wall = new Cube3D( "cubeDebugUV.png" );
+                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "cubeDebugUV.png" );
+                    Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "cubeDebugUV.png" );
                     Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
-                    wall->setTranslation( i, -1.0f, j );
+                    floor->setTranslation( i, -0.5f, j );
+                    ceiling->setTranslation( i, 0.5f, j );
+                    ceiling->setRotation( glm::vec3(1,0,0), 180 );
                     break;
                 }
                 case CellType::End : {
-                    Cube3D * wall = new Cube3D( "cubeDebugUV.png" );
+                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "cubeDebugUV.png" );
+                    Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "cubeDebugUV.png" );
                     Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
-                    wall->setTranslation( i, -1.0f, j );
-                    break;
+                    floor->setTranslation( i, -0.5f, j );
+                    ceiling->setTranslation( i, 0.5f, j );
+                    ceiling->setRotation( glm::vec3(1,0,0), 180 );
+                    break;;
                 }
                 case CellType::EmptyCell : {
                     Cell cellule(carteId[i][j], i, j);

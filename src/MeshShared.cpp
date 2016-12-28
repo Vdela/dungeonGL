@@ -4,15 +4,18 @@
 
 #include "../include/MeshShared.h"
 #include "../include/Player.h"
+#include "../include/Texture.h"
 
 
 using namespace glimac;
 
+std::map<std::string,MeshShared*> MeshShared::meshesMap = std::map<std::string,MeshShared*>();
 
-MeshShared::MeshShared(std::string meshName, std::string meshMtl, std::string textureName) {
-/*
-    geometry.loadOBJ( GameManager::getInstance().getAppPath() + "\\..\\..\\assets\\models\\" + meshName,
-                      GameManager::getInstance().getAppPath() + "\\..\\..\\assets\\models\\" + meshMtl,
+MeshShared::MeshShared(std::string meshName, std::string meshMtl, Texture * texture) {
+
+    FilePath path(".\\opengl.exe");
+    geometry.loadOBJ( path.dirPath() + "\\..\\..\\assets\\models\\" + meshName,
+                      path.dirPath() + "\\..\\..\\assets\\models\\" + meshMtl,
                       true
     );
 
@@ -69,18 +72,20 @@ MeshShared::MeshShared(std::string meshName, std::string meshMtl, std::string te
 
 
     // Chargement Texture
-    std::unique_ptr<Image> textureImg = loadImage( GameManager::getInstance().getAppPath() + "\\..\\..\\assets\\textures\\" + textureName);
+    std::unique_ptr<Image> textureImg = loadImage( path.dirPath() + "\\..\\..\\assets\\textures\\" + texture->textureName);
 
     if ( textureImg == NULL ) {
         std::cerr << "IMAGE NOT FOUND!" << std::endl;
     }
 
-    glGenTextures( 1, &texture );
-    glBindTexture( GL_TEXTURE_2D, texture );
+    glGenTextures( 1, &texture->textId );
+    glBindTexture( GL_TEXTURE_2D, texture->textId );
     glTexImage2D( GL_TEXTURE_2D, 0, 4, textureImg->getWidth(), textureImg->getHeight(), 0, GL_RGBA, GL_FLOAT, textureImg->getPixels() );
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-*/
+
+
+    meshesMap[meshName] = this;
 
 }

@@ -33,7 +33,6 @@ protected:
     glm::mat4 rotationMatrix;
     glm::mat4 scaleMatrix;
 
-    GLuint texture;
 
     static const glm::mat4 projMatrix;
 

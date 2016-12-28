@@ -16,18 +16,22 @@
 #include <glimac/Program.hpp>
 #include <glimac/BBox.hpp>
 #include <glimac/Geometry.hpp>
+#include <map>
 
 #include "Object3D.h"
 
+class Texture;
+
 class MeshShared {
 private:
+public:
     GLuint vao;
     GLuint ibo;
     SimpleTextureLambert shaderProgram;
     Geometry geometry;
-public:
     MeshShared() {};
-    MeshShared(std::string meshName, std::string meshMt, std::string textureName);
+    MeshShared(std::string meshName, std::string meshMt, Texture * texture);
+    static std::map<std::string,MeshShared*> meshesMap;
 };
 
 
