@@ -13,6 +13,7 @@
 #include "Object3D.h"
 
 using namespace std;
+class Porte;
 
 enum CellType {
     Wall,
@@ -28,6 +29,8 @@ private:
     CellType type; // Voir enum CellType ci-dessus
     glm::vec2 cellPosition; //position du Cell dans le tableau (pas position réelle de l'objet3D)
    // Object3D * cellObject3D; // Le Cell peut être représenté par un Cube3D, un Quad3D, etc
+    //Porte *m_porte;
+//    Porte par;
 public:
     //Cell(){};
     ~Cell();
@@ -40,7 +43,7 @@ public:
     static bool walkableCell( Cell * cell );
 
     glm::vec2 getCellPosition(void);
-
+    Porte* m_porte;
 
 };
 

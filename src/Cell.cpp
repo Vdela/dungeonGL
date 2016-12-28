@@ -3,7 +3,6 @@
 //
 
 #include "../include/Cell.h"
-
 Cell::Cell(CellType type, float cellPosX, float cellPosY) {
     this->type = type;
     this->cellPosition.x = cellPosX;

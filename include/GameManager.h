@@ -25,7 +25,7 @@
 #include "Niveau.h"
 #include "Time.h"
 #include "Cell.h"
-
+#include "Porte.h"
 using namespace glimac;
 
 class GameManager {
