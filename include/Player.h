@@ -7,6 +7,9 @@
 
 #include "Mesh3D.h"
 #include "Oscillation.h"
+#include "Time.h"
+
+#include <glimac/FreeflyCamera.hpp>
 
 enum LookDirEnum {
     lookNorth,

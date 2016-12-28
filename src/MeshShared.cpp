@@ -1,19 +1,18 @@
 //
-// Created by Vincent on 26/12/2016.
+// Created by Vincent on 28/12/2016.
 //
 
-#include "../include/Mesh3D.h"
+#include "../include/MeshShared.h"
 #include "../include/Player.h"
 
 
 using namespace glimac;
 
 
-Mesh3D::Mesh3D(std::string meshName, std::string meshMtl, std::string textureName) {
-
-    FilePath path(".\\opengl.exe");
-    geometry.loadOBJ( path.dirPath() + "\\..\\..\\assets\\models\\" + meshName,
-                      path.dirPath() + "\\..\\..\\assets\\models\\" + meshMtl,
+MeshShared::MeshShared(std::string meshName, std::string meshMtl, std::string textureName) {
+/*
+    geometry.loadOBJ( GameManager::getInstance().getAppPath() + "\\..\\..\\assets\\models\\" + meshName,
+                      GameManager::getInstance().getAppPath() + "\\..\\..\\assets\\models\\" + meshMtl,
                       true
     );
 
@@ -70,7 +69,7 @@ Mesh3D::Mesh3D(std::string meshName, std::string meshMtl, std::string textureNam
 
 
     // Chargement Texture
-    std::unique_ptr<Image> textureImg = loadImage( path.dirPath() + "\\..\\..\\assets\\textures\\" + textureName);
+    std::unique_ptr<Image> textureImg = loadImage( GameManager::getInstance().getAppPath() + "\\..\\..\\assets\\textures\\" + textureName);
 
     if ( textureImg == NULL ) {
         std::cerr << "IMAGE NOT FOUND!" << std::endl;
@@ -82,38 +81,6 @@ Mesh3D::Mesh3D(std::string meshName, std::string meshMtl, std::string textureNam
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-
-}
-
-void Mesh3D::draw() {
-    /*********************************
-    * HERE SHOULD COME THE RENDERING CODE
-    *********************************/
-
-    // Transformations
-
-    modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
-
-
-    glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelMatrix));
-
-    shaderProgram.program.use();
-
-    glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr( projMatrix * Player::getInstance().camera.getViewMatrix() * (*parentModel) * modelMatrix ) );
-    glUniformMatrix4fv( shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr((*parentModel) * modelMatrix));
-    glUniformMatrix4fv( shaderProgram.uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
-
-    glm::vec3 camPos = Player::getInstance().camera.getPosition();
-    glUniform3f( shaderProgram.uLightPosLoc, camPos.x, camPos.y, camPos.z );
-    glUniform3f( shaderProgram.uLightIntensityLoc, 1,1,1 ); // white
-
-    glBindVertexArray(vao);
-
-    glBindTexture( GL_TEXTURE_2D, texture );
-    glDrawElements(GL_TRIANGLES, geometry.getIndexCount(), GL_UNSIGNED_INT, 0);
-    glBindTexture( GL_TEXTURE_2D, 0 );
-
-    glBindVertexArray(0);
+*/
 
 }
