@@ -8,7 +8,7 @@ Player* Player::instance = new Player();
 
 Player::Player() {
 
-    playerOscillation = new Oscillation( -0.05f, 0.15f, 1.0f );
+    playerOscillation = new Oscillation( 0.0f, 0.02f, 3.5f );
     lookDirection = glm::vec2( 0, -1 );
     lookDirFlag = LookDirEnum::lookNorth;
     currentRot = 180;
@@ -34,7 +34,7 @@ void Player::draw() {
     // Transformations
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 
-    //playerOscillation->nextValueSmooth();
+
 
     if ( inAnim ) {
         if (moving) {
@@ -42,8 +42,8 @@ void Player::draw() {
             this->addTranslation(step);
             currentPos += step;
             camera.setPosition(currentPos);
-            if (glm::distance(currentPos, targetPos) <= 0.005f) {
-                camera.setPosition(currentPos);
+            if (glm::distance(currentPos, targetPos) <= 0.02f) {
+                camera.setPosition(targetPos);
                 moving = false;
                 inAnim = false;
             }
@@ -54,13 +54,16 @@ void Player::draw() {
             this->addRotation(glm::vec3(0, 1, 0), step);
             currentRot += step;
             camera.setRotation(currentRot);
-            if (glm::distance(currentRot, targetRot) <= 0.5f) {
+            if (glm::distance(currentRot, targetRot) <= 1.0f) {
                 camera.setRotation(targetRot);
                 rotating = false;
                 inAnim = false;
             }
         }
     }
+
+    playerOscillation->nextValueSmooth();
+    camera.setPosition( glm::vec3( camera.getPosition().x, playerOscillation->getValue(), camera.getPosition().z ) );
 
 }
 
