@@ -29,7 +29,7 @@ private:
     glm::vec2 cellPosition; //position du Cell dans le tableau (pas position réelle de l'objet3D)
    // Object3D * cellObject3D; // Le Cell peut être représenté par un Cube3D, un Quad3D, etc
 public:
-    Cell(){};
+    //Cell(){};
     ~Cell();
     Cell(CellType type, float cellPosX, float cellPosY);
     //Cell(CellType type, float cellPosX, float cellPosY, Object3D * object3D);

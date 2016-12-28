@@ -31,7 +31,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
     // Init Player
     Player& player = Player::getInstance();
-    player.setPositionOnMap(3, 1); //cran vers le bas ; cran vers la droite
+    player.setPositionOnMap(1, 1); //cran vers le bas ; cran vers la droite
     //player.setPositionOnMap(2, 25); //x, y // POUR MAP 1
 
 

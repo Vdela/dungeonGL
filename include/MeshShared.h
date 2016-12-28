@@ -1,11 +1,11 @@
 //
-// Created by Vincent on 26/12/2016.
+// Created by Vincent on 28/12/2016.
 //
 
 #define GLEW_STATIC
 
-#ifndef IMACGL_MESH3D_H
-#define IMACGL_MESH3D_H
+#ifndef IMACGL_MESHSHARED_H
+#define IMACGL_MESHSHARED_H
 
 #include <iostream>
 #include <vector>
@@ -19,19 +19,16 @@
 
 #include "Object3D.h"
 
-class Mesh3D : public Object3D {
-
+class MeshShared {
 private:
     GLuint vao;
     GLuint ibo;
     SimpleTextureLambert shaderProgram;
     Geometry geometry;
 public:
-    Mesh3D() {};
-    Mesh3D(std::string meshName, std::string meshMt, std::string textureName);
-    void draw();
+    MeshShared() {};
+    MeshShared(std::string meshName, std::string meshMt, std::string textureName);
 };
 
 
-
-#endif //IMACGL_MESH3D_H
+#endif //IMACGL_MESHSHARED_H
