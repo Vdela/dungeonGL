@@ -45,6 +45,7 @@ void Player::draw() {
             newMinDist = glm::distance(currentPos, targetPos);
             if (glm::distance(currentPos, targetPos) <= 2 * glm::length(step) || newMinDist > minDistSecurity ) {
                 camera.setPosition(targetPos);
+                currentPos = targetPos;
                 moving = false;
                 inAnim = false;
             }
@@ -59,6 +60,7 @@ void Player::draw() {
             newMinDist = glm::distance(currentRot, targetRot);
             if (glm::distance(currentRot, targetRot) <= abs(2 * step) || newMinDist > minDistSecurity ) {
                 camera.setRotation(targetRot);
+                currentRot = targetRot;
                 rotating = false;
                 inAnim = false;
             }
