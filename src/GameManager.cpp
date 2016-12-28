@@ -31,7 +31,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
     // Init Player
     Player& player = Player::getInstance();
-    player.setPositionOnMap(1, 4); //x, y
+    player.setPositionOnMap(3, 1); //cran vers le bas ; cran vers la droite
+    //player.setPositionOnMap(2, 25); //x, y // POUR MAP 1
 
 
     Niveau niveau1;
@@ -40,10 +41,13 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
 
     Demon3D demon;
-    float scale = 0.05f;
-    demon.setScale( scale, scale, scale );
+    demon.setScale( 0.05f );
     demon.setTranslation( 1, -0.5f, 2 );
     demon.setRotation( glm::vec3(0, 1, 0), 270 );
+
+    Mesh3D heart( "heart.obj", "heart.mtl", "wood.jpg" );
+    heart.setScale( 1.0f );
+    heart.setTranslation( 1, 0, 5 );
 
     //=================================//
     //========== Loop du jeu ==========//
@@ -115,6 +119,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
         }
 
         // Jeu
+        heart.addRotation( glm::vec3(0, 1, 0), (float)Time::deltaTime * 10.0f );
 
 
         // Clear de la fenêtre avant le nouveau rendu

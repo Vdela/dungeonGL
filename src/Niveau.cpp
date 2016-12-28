@@ -43,6 +43,9 @@ void Niveau::lectureMap(char* fileName){
                 else if(r == 0 && g == 255 && b == 0){
                     carteId[i].push_back( CellType::End );
                 }
+                else if(r == 0 && g == 0 && b == 255){
+                    carteId[i].push_back( CellType::Water );
+                }
                 else {
                     carteId[i].push_back( CellType::EmptyCell ); // Autre couleur
                 }
@@ -95,6 +98,16 @@ void Niveau::createMap(void) {
                     Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
                     floor->setTranslation( i, -0.5f, j );
+                    ceiling->setTranslation( i, 0.5f, j );
+                    ceiling->setRotation( glm::vec3(1,0,0), 180 );
+                    break;
+                }
+                case CellType::Water : {
+                    Mesh3D * water = new Mesh3D( "quad.obj", "quad.mtl", "water.png" );
+                    Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "bone01.png" );
+                    Cell cellule(carteId[i][j], i, j);
+                    cellules[i].push_back(cellule);
+                    water->setTranslation( i, -0.5f, j );
                     ceiling->setTranslation( i, 0.5f, j );
                     ceiling->setRotation( glm::vec3(1,0,0), 180 );
                     break;
