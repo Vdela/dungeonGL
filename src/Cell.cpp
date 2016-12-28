@@ -36,3 +36,12 @@ glm::vec2 Cell::getCellPosition(void)
 {
     return this->cellPosition;
 }
+
+bool Cell::walkableCell(Cell *cell) {
+    if ( cell == NULL ) return false;
+    if ( cell->type == CellType::Floor || cell->type == CellType::Start || cell->type == CellType::End ) {
+        return true;
+    } else {
+        return false;
+    }
+}

@@ -206,3 +206,19 @@ void Player::setPositionOnMap(int posX, int posY) {
     setTranslation( (float)posX, 0, (float)posY);
     camera.setPosition( glm::vec3(posX, 0, posY) );
 }
+
+glm::vec2 Player::getLeftDirection() {
+    if ( lookDirFlag == LookDirEnum::lookNorth ) {
+        return glm::vec2(-1, 0);
+    }
+    else if ( lookDirFlag == LookDirEnum::lookWest ) {
+        return glm::vec2( 0, 1 );
+    }
+    else if ( lookDirFlag == LookDirEnum::lookSouth ) {
+        return glm::vec2( 1, 0 );
+    }
+    else {
+        return glm::vec2( 0, -1 );
+    }
+
+}

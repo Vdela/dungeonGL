@@ -82,19 +82,27 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                         break ;
 
                     case SDLK_w: // z en azerty
-                        player.stepForward();
+                        if ( Cell::walkableCell( niveau1.getCell( player.getPositionOnMap() + player.getLookDirection() ) ) ) {
+                            player.stepForward();
+                        }
                     break ;
 
                     case SDLK_s:
-                        player.stepBack();
+                        if ( Cell::walkableCell( niveau1.getCell( player.getPositionOnMap() - player.getLookDirection() ) ) ) {
+                            player.stepBack();
+                        }
                         break ;
 
                     case SDLK_q: // a en azerty
-                        player.stepLeft();
+                        if ( Cell::walkableCell( niveau1.getCell( player.getPositionOnMap() + player.getLeftDirection() ) ) ) {
+                            player.stepLeft();
+                        }
                         break ;
 
                     case SDLK_e:
-                        player.stepRight();
+                        if ( Cell::walkableCell( niveau1.getCell( player.getPositionOnMap() - player.getLeftDirection() ) ) ) {
+                            player.stepRight();
+                        }
                         break ;
 
                     default:
