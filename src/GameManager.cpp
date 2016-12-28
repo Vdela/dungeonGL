@@ -4,6 +4,7 @@
 
 #include "../include/GameManager.h"
 #include "../include/Demon3D.h"
+#include "../include/Player.h"
 
 GameManager GameManager::instance = GameManager();
 
@@ -28,11 +29,13 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     //===== Construction du monde =====//
     //=================================//
 
+    // Init Player
+    Player& player = Player::getInstance();
+    player.setPositionOnMap(1, 4); //x, y
 
 
     Niveau niveau1;
     niveau1.lectureMap((char*)"map3.ppm");
-
     niveau1.createMap();
 
 
@@ -41,9 +44,6 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     demon.setScale( scale, scale, scale );
     demon.setTranslation( 1, -0.5f, 2 );
     demon.setRotation( glm::vec3(0, 1, 0), 270 );
-
-
-    GameManager::getInstance().camera1.moveFront( - 10 );
 
     //=================================//
     //========== Loop du jeu ==========//
@@ -54,7 +54,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     while(!done) {
         Time::updateDeltaTime();
 
-        GameManager::getInstance().camera1.getViewMatrix();
+        player.camera.getViewMatrix();
         // Event loop:
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
@@ -73,21 +73,30 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
                 switch(e.key.keysym.sym) {
 
-                    case SDLK_a:
-                   GameManager::getInstance().camera1.rotateLeft( rotSpeed * (float)Time::deltaTime );
+                    case SDLK_a: // q en azerty
+                        player.rotateLeft();
                     break ;
 
                     case SDLK_d:
-                        GameManager::getInstance().camera1.rotateLeft( - rotSpeed * (float)Time::deltaTime );
+                        player.rotateRight();
                         break ;
 
-                    case SDLK_w:
-                    GameManager::getInstance().camera1.moveFront( moveSpeed * (float)Time::deltaTime );
+                    case SDLK_w: // z en azerty
+                        player.stepForward();
                     break ;
 
                     case SDLK_s:
-                        GameManager::getInstance().camera1.moveFront( - moveSpeed * (float)Time::deltaTime );
+                        player.stepBack();
                         break ;
+
+                    case SDLK_q: // a en azerty
+                        player.stepLeft();
+                        break ;
+
+                    case SDLK_e:
+                        player.stepRight();
+                        break ;
+
                     default:
                         break ;
 
@@ -107,6 +116,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
         for ( std::vector<Object3D*>::const_iterator it = Object3D::getSceneObjects().begin() ;  it != Object3D::getSceneObjects().end() ; it++ ) {
             (*it)->draw();
         }
+        player.draw();
 
         // Update the display
         windowManager.swapBuffers();
