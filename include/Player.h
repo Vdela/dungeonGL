@@ -41,6 +41,8 @@ private:
     float moveSpeed = 2.0f;
     float rotSpeed = 2.0f;
 
+    float minDistSecurity;
+
 public:
     static Player& getInstance();
     FreeflyCamera camera;
