@@ -38,6 +38,8 @@ private:
     unsigned int widthMap;
     vector<vector<CellType > > carteId;
     vector<vector<Cell> > cellules;
+    glm::vec2 startPos;
+    glm::vec2 endPos;
 public:
     Niveau();
     ~Niveau();
@@ -53,6 +55,9 @@ public:
 
     void setNbTresors(unsigned int nbTresors);
     void setNbMonstres(unsigned int nbMonstres);
+
+    glm::vec2 getStartPos() { return startPos; }
+    glm::vec2 getEndPos() { return endPos; }
 
     Cell* getCell( glm::vec2 pos ) {
         return &cellules[(int)pos.x][(int)pos.y];

@@ -31,23 +31,18 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     //===== Construction du monde =====//
     //=================================//
 
-    // Init Player
-    Player& player = Player::getInstance();
-    player.setPositionOnMap(1, 1); //cran vers le bas ; cran vers la droite
-    //player.setPositionOnMap(2, 25); //x, y // POUR MAP 1
-   // Porte porte;
 
     //Init niveau
     Dungeon donjon;
     donjon.chargementDonjon((char*) "test1.txt");
     Niveau* pNiveau = donjon.getNiveau();
     pNiveau->createMap();
-/*
-    Mesh3D wood( "quad.obj", "quad.mtl", "wood.jpg");
-    Mesh3D water( "quad.obj", "quad.mtl", "water.png");
-    Mesh3D bone01( "quad.obj", "quad.mtl", "bone01.png");
-    Mesh3D bone02( "quad.obj", "quad.mtl", "bone02.png");
-*/
+
+    // Init Player
+    Player& player = Player::getInstance();
+    glm::vec2 startPos = pNiveau->getStartPos();
+    player.setPositionOnMap((int)startPos.x, (int)startPos.y); //cran vers le bas ; cran vers la droite
+
 /*
     Demon3D demon;
     demon.setScale( 0.05f );
