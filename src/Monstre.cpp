@@ -6,16 +6,15 @@
 
 Monstre::Monstre() {}
 
-Monstre::Monstre(unsigned int id, float x, float z, string nom, int type, int caracteristique, int nbPtDeVie, string Modele3D) {
+Monstre::Monstre(unsigned int id, float x, float y, float z, string nom, int type, int caracteristique, int nbPtDeVie) {
     this->id = id;
     this->position[0] = x;
-    this->position[1] = 0;
+    this->position[1] = y;
     this->position[2] = z;
     this->nom = nom;
     this->type = type;
     this->caracteristique = caracteristique;
     this->nbPtDeVie = nbPtDeVie;
-    this->Modele3D = Modele3D;
 }
 
 Monstre::~Monstre() {}
@@ -60,14 +59,6 @@ int Monstre::getCaracteristique(void) {
 
 void Monstre::setCaracteristique(int caracteristique) {
     this->caracteristique = caracteristique;
-}
-
-string Monstre::getModele3D() {
-    return this->Modele3D;
-}
-
-void Monstre::setModele3D(string Modele3D) {
-    this->Modele3D = Modele3D;
 }
 
 int Monstre::getNbPtDeVie(void) {

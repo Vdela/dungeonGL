@@ -20,6 +20,7 @@ enum CellType {
     Floor,
     Water,
     Start,
+    Door,
     End,
     EmptyCell
 };
@@ -41,6 +42,7 @@ public:
     void setType(CellType type);
 
     static bool walkableCell( Cell * cell );
+    static bool devant_Porte( Cell * cell );
 
     glm::vec2 getCellPosition(void);
     Porte* m_porte;

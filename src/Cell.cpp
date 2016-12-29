@@ -44,3 +44,12 @@ bool Cell::walkableCell(Cell *cell) {
         return false;
     }
 }
+
+bool Cell::devant_Porte(Cell *cell) {
+    if ( cell == NULL ) return false;
+    if ( cell->type == CellType::Door ) {
+        return true;
+    } else {
+        return false;
+    }
+}

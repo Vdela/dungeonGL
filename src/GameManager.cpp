@@ -31,32 +31,19 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     //===== Construction du monde =====//
     //=================================//
 
-
     //Init niveau
     Dungeon donjon;
     donjon.chargementDonjon((char*) "test1.txt");
     Niveau* pNiveau = donjon.getNiveau();
     pNiveau->createMap();
+    pNiveau->createTresors();
+    pNiveau->createMonstres();
 
     // Init Player
     Player& player = Player::getInstance();
     glm::vec2 startPos = pNiveau->getStartPos();
     player.setPositionOnMap((int)startPos.x, (int)startPos.y, true); //cran vers le bas ; cran vers la droite
 
-
-/*
-    Demon3D demon;
-    demon.setScale( 0.05f );
-    demon.setTranslation( 1, -0.5f, 2 );
-    demon.setRotation( glm::vec3(0, 1, 0), 270 );
-
-    Mesh3D treasure( "boite_tresor.obj", "boite_tresor.mtl", "water.png");
-    treasure.setScale( 0.005f );
-    treasure.setTranslation( 1, -0.5f, 6);
-
-    Porte porte1;
-    porte1.setScale(0.02f,0.025f,0.05f);
-    porte1.setTranslation( 1, -0.5f, 2 );*/
 
     //=================================//
     //========== Loop du jeu ==========//

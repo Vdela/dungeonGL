@@ -179,11 +179,41 @@ void Niveau::createMap(void) {
 
 }
 
-vector<Monstre> Niveau::getMonstres(void) {
+void Niveau::createTresors() {
+    for(int i = 0; i < nbTresors; i++){
+        switch (tresors[i].getType()) {
+            case 1: {
+                Mesh3D * treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "wood.jpg");
+                treasure->setScale(1.0f);
+                treasure->setTranslation(tresors[i].getPosition()[0], tresors[i].getPosition()[1],
+                                        tresors[i].getPosition()[2]);
+                break;
+            }
+            case 2: {
+                Mesh3D * treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "wood.jpg");
+                treasure->setScale(0.005f);
+                treasure->setTranslation(tresors[i].getPosition()[0], tresors[i].getPosition()[1],
+                                        tresors[i].getPosition()[2]);
+                break;
+            }
+        }
+    }
+}
+
+void Niveau::createMonstres() {
+    for(int i = 0; i < nbMonstres; i++){
+        Demon3D * demon = new Demon3D();
+        demon->setScale( 0.05f );
+        demon->setTranslation( monstres[i].getPosition()[0], monstres[i].getPosition()[1], monstres[i].getPosition()[2] );
+        demon->setRotation( glm::vec3(0, 1, 0), 270 );
+    }
+}
+
+vector<Monstre>& Niveau::getMonstres(void) {
     return monstres;
 }
 
-vector<Tresor> Niveau::getTresors(void) {
+vector<Tresor>& Niveau::getTresors(void) {
     return tresors;
 }
 
