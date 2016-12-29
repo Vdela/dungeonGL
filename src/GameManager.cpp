@@ -42,24 +42,25 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     donjon.chargementDonjon((char*) "test1.txt");
     Niveau* pNiveau = donjon.getNiveau();
     pNiveau->createMap();
-
-
+/*
+    Mesh3D wood( "quad.obj", "quad.mtl", "wood.jpg");
+    Mesh3D water( "quad.obj", "quad.mtl", "water.png");
+    Mesh3D bone01( "quad.obj", "quad.mtl", "bone01.png");
+    Mesh3D bone02( "quad.obj", "quad.mtl", "bone02.png");
+*/
+/*
     Demon3D demon;
     demon.setScale( 0.05f );
     demon.setTranslation( 1, -0.5f, 2 );
     demon.setRotation( glm::vec3(0, 1, 0), 270 );
 
-    Mesh3D heart( "heart.obj", "heart.mtl", "wood.jpg" );
-    heart.setScale( 1.0f );
-    heart.setTranslation( 1, 0, 5 );
-
-    Mesh3D treasure( "boite_tresor.obj", "boite_tresor.mtl", "wood.jpg");
+    Mesh3D treasure( "boite_tresor.obj", "boite_tresor.mtl", "water.png");
     treasure.setScale( 0.005f );
     treasure.setTranslation( 1, -0.5f, 6);
 
     Porte porte1;
     porte1.setScale(0.02f,0.025f,0.05f);
-    porte1.setTranslation( 1, -0.5f, 2 );
+    porte1.setTranslation( 1, -0.5f, 2 );*/
 
     //=================================//
     //========== Loop du jeu ==========//
@@ -133,8 +134,6 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
         }
 
         // Jeu
-
-        heart.addRotation( glm::vec3(0, 1, 0), (float)Time::deltaTime * 10.0f );
 
 
         // Clear de la fenêtre avant le nouveau rendu

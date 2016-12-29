@@ -82,10 +82,11 @@ MeshShared::MeshShared(std::string meshName, std::string meshMtl, Texture * text
     glBindTexture( GL_TEXTURE_2D, texture->textId );
     glTexImage2D( GL_TEXTURE_2D, 0, 4, textureImg->getWidth(), textureImg->getHeight(), 0, GL_RGBA, GL_FLOAT, textureImg->getPixels() );
 
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 
-    meshesMap[meshName] = this;
+    meshesMap[meshName + texture->textureName] = this;
 
 }

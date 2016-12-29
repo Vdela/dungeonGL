@@ -141,8 +141,8 @@ void Niveau::createMap(void) {
                     break;
                 }
                 case CellType::Start : {
-                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "cubeDebugUV.png" );
-                    Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "cubeDebugUV.png" );
+                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "bone02.png" );
+                    Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "bone02.png" );
                     Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
                     floor->setTranslation( i, -0.5f, j );
@@ -151,8 +151,8 @@ void Niveau::createMap(void) {
                     break;
                 }
                 case CellType::End : {
-                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "cubeDebugUV.png" );
-                    Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "cubeDebugUV.png" );
+                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "bone02.png" );
+                    Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "bone02.png" );
                     Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
                     floor->setTranslation( i, -0.5f, j );

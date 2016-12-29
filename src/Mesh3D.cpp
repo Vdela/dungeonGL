@@ -15,11 +15,11 @@ Mesh3D::Mesh3D(std::string meshName, std::string meshMtl, std::string textureNam
         Texture * texture = new Texture(textureName);
     }
 
-    if ( MeshShared::meshesMap[ meshName ] == NULL ) {
+    if ( MeshShared::meshesMap[ meshName + textureName ] == NULL ) {
         MeshShared * meshShared = new MeshShared( meshName, meshMtl, Texture::textures[ textureName ] );
     }
 
-    this->meshShared = MeshShared::meshesMap[ meshName ];
+    this->meshShared = MeshShared::meshesMap[ meshName + textureName ];
     this->texture = Texture::textures[ textureName ];
 
 }
@@ -28,6 +28,9 @@ void Mesh3D::draw() {
     /*********************************
     * HERE SHOULD COME THE RENDERING CODE
     *********************************/
+
+
+
 
     // Transformations
 

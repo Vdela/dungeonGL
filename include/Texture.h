@@ -27,8 +27,9 @@ public:
     GLuint textId;
     std::string textureName;
     static std::map<std::string,Texture*> textures;
-
+    std::unique_ptr<Image> textureImg;
     Texture(std::string textureName);
+
 };
 
 
