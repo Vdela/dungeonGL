@@ -43,7 +43,9 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     Player& player = Player::getInstance();
     glm::vec2 startPos = pNiveau->getStartPos();
     player.setPositionOnMap((int)startPos.x, (int)startPos.y, true); //cran vers le bas ; cran vers la droite
-
+    Mesh3D * blade = new Mesh3D( "blade.obj", "blade.mtl", "iron.png" );
+    blade->setTranslation( (int)startPos.x, 0, (int)startPos.y );
+    player.setWeapon( blade );
 
     //=================================//
     //========== Loop du jeu ==========//
@@ -102,6 +104,10 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                         }
                         break ;
 
+                    case SDLK_SPACE:
+                            player.hit();
+                        break ;
+
                     default:
                         break ;
 
@@ -114,7 +120,6 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
         }
 
         // Jeu
-
 
         // Clear de la fenêtre avant le nouveau rendu
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );

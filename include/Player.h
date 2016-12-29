@@ -2,14 +2,19 @@
 // Created by Vincent on 28/12/2016.
 //
 
+#define GLEW_STATIC
+
 #ifndef IMACGL_PLAYER_H
 #define IMACGL_PLAYER_H
 
-#include "Mesh3D.h"
+#include <gl/glew.h>
 #include "Oscillation.h"
 #include "Time.h"
 
 #include <glimac/FreeflyCamera.hpp>
+#include "Object3D.h"
+
+class Mesh3D;
 
 enum LookDirEnum {
     lookNorth,
@@ -46,6 +51,10 @@ private:
 
     float minDistSecurity;
 
+    Mesh3D * weapon;
+    Oscillation * hitOscillation;
+    bool hitting;
+
 public:
     static Player& getInstance();
     FreeflyCamera camera;
@@ -61,6 +70,9 @@ public:
     void stepRight();
     void rotateLeft();
     void rotateRight();
+
+    void setWeapon(Mesh3D * weapon);
+    void hit();
 
 };
 

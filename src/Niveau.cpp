@@ -183,7 +183,7 @@ void Niveau::createTresors() {
     for(int i = 0; i < nbTresors; i++){
         switch (tresors[i].getType()) {
             case 1: {
-                Mesh3D * treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "wood.png");
+                Mesh3D * treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "heart.png");
                 treasure->setScale(1.0f);
                 treasure->setTranslation(tresors[i].getPosition()[0], tresors[i].getPosition()[1],
                                         tresors[i].getPosition()[2]);

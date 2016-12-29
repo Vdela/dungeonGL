@@ -34,7 +34,6 @@ MeshShared::MeshShared(std::string meshName, std::string meshMtl, Texture * text
 
     //Debind du glBindBufer (second paramètre à 0)
     glBindBuffer(GL_ARRAY_BUFFER, 0 );
-
     // Ajout ibo
     glGenBuffers(1, &ibo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);

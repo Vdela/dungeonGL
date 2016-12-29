@@ -3,6 +3,7 @@
 //
 
 #include "../include/Player.h"
+#include "../include/Mesh3D.h"
 
 Player* Player::instance = new Player();
 
@@ -17,6 +18,9 @@ Player::Player() {
     moving = false;
     rotating = false;
 
+    weapon = NULL;
+    hitOscillation = new Oscillation( 0, 300, 260 );
+
 }
 
 Player& Player::getInstance() {
@@ -30,9 +34,6 @@ void Player::draw() {
     /*********************************
     * HERE SHOULD COME THE RENDERING CODE
     *********************************/
-
-    // Transformations
-    modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 
     float newMinDist;
 
@@ -70,6 +71,31 @@ void Player::draw() {
 
     playerOscillation->nextValueSmooth();
     camera.setPosition( glm::vec3( camera.getPosition().x, playerOscillation->getValue(), camera.getPosition().z ) );
+
+    modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
+
+    if ( weapon != NULL ) {
+        if (hitting) {
+            hitOscillation->nextValue();
+            if ( hitOscillation->getValue() <= 55 ) {
+                camera.moveFront((float)Time::deltaTime * 1);
+            } else {
+                camera.moveFront((float)Time::deltaTime * -1);
+            }
+            if ( hitOscillation->getValue() >= 110 ) {
+                hitting = false;
+                inAnim = false;
+                hitOscillation->setValue( hitOscillation->getMinValue() );
+                camera.setPosition( glm::vec3(currentPos.x, camera.getPosition().y, currentPos.z) );
+            }
+        }
+        weapon->setScale( 0.75f );
+        weapon->setTranslation( camera.getPosition() );
+        weapon->addTranslation(  0, -0.225f - hitOscillation->getValue()*0.008f, 0 );
+        weapon->setRotation(  glm::vec3(0,1,0), currentRot + 180 - 35 + hitOscillation->getValue() );
+        weapon->addRotation(  glm::vec3(1,0,0), 40 );
+        weapon->addRotation(  glm::vec3(0,0,1), 80 );
+    }
 
 }
 
@@ -204,7 +230,10 @@ void Player::rotateRight() {
 void Player::setPositionOnMap(int posX, int posY, bool updateCamera) {
     mapPosition = glm::vec2( posX, posY );
     setTranslation( (float)posX, 0, (float)posY);
-    if (updateCamera) camera.setPosition( glm::vec3(posX, 0, posY) );
+    if (updateCamera) {
+        camera.setPosition( glm::vec3(posX, 0, posY) );
+        currentPos = glm::vec3( posX, 0, posY );
+    }
 }
 
 glm::vec2 Player::getLeftDirection() {
@@ -221,4 +250,15 @@ glm::vec2 Player::getLeftDirection() {
         return glm::vec2( 0, -1 );
     }
 
+}
+
+void Player::setWeapon(Mesh3D *weapon) {
+    this->weapon = weapon;
+}
+
+void Player::hit() {
+    if (inAnim) return;
+    if (hitting) return;
+    inAnim = true;
+    hitting = true;
 }

@@ -18,8 +18,11 @@ private:
 public:
     Oscillation(float min, float max, float speed);
     float getValue();
+    float setValue(float value){ current = value; };
     void nextValue();
     void nextValueSmooth();
+    float getMaxValue(){ return maxValue; }
+    float getMinValue(){ return minValue; }
 
 };
 

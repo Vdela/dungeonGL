@@ -2,17 +2,20 @@
 // Created by Vincent on 14/12/2016.
 //
 
+
+#define GLEW_STATIC
+
 #ifndef IMACGL_OBJECT3D_H
 #define IMACGL_OBJECT3D_H
 
 #define PI 3.14159265358979323846
 
-#include <glimac/glm.hpp>
-#include <glimac/common.hpp>
 
 #include <GL/glew.h>
 #include <GL/glut.h>
 
+#include <glimac/glm.hpp>
+#include <glimac/common.hpp>
 #include <vector>
 
 #include <glimac/Program.hpp>
