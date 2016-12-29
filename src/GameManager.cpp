@@ -5,6 +5,7 @@
 #include "../include/GameManager.h"
 #include "../include/Demon3D.h"
 #include "../include/Player.h"
+#include "../include/Dungeon.h"
 #include "../include/Porte.h"
 
 GameManager GameManager::instance = GameManager();
@@ -36,11 +37,11 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     //player.setPositionOnMap(2, 25); //x, y // POUR MAP 1
    // Porte porte;
 
-
-
-    Niveau niveau1;
-    niveau1.lectureMap((char*)"map2.ppm");
-    niveau1.createMap();
+    //Init niveau
+    Dungeon donjon;
+    donjon.chargementDonjon((char*) "test1.txt");
+    Niveau* pNiveau = donjon.getNiveau();
+    pNiveau->createMap();
 
 
     Demon3D demon;
@@ -52,12 +53,14 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     heart.setScale( 1.0f );
     heart.setTranslation( 1, 0, 5 );
 
+    Mesh3D treasure( "boite_tresor.obj", "boite_tresor.mtl", "wood.jpg");
+    treasure.setScale( 0.005f );
+    treasure.setTranslation( 1, -0.5f, 6);
 
     Porte porte1;
     porte1.setScale(0.02f,0.025f,0.05f);
     porte1.setTranslation( 1, -0.5f, 2 );
 
-   // porte1.setRotation( glm::vec3(0, 0, 0), 270 );
     //=================================//
     //========== Loop du jeu ==========//
     //=================================//
@@ -95,25 +98,25 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                         break ;
 
                     case SDLK_w: // z en azerty
-                        if ( Cell::walkableCell( niveau1.getCell( player.getPositionOnMap() + player.getLookDirection() ) ) ) {
+                        if ( Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() + player.getLookDirection() ) ) ) {
                             player.stepForward();
                         }
                     break ;
 
                     case SDLK_s:
-                        if ( Cell::walkableCell( niveau1.getCell( player.getPositionOnMap() - player.getLookDirection() ) ) ) {
+                        if ( Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() - player.getLookDirection() ) ) ) {
                             player.stepBack();
                         }
                         break ;
 
                     case SDLK_q: // a en azerty
-                        if ( Cell::walkableCell( niveau1.getCell( player.getPositionOnMap() + player.getLeftDirection() ) ) ) {
+                        if ( Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() + player.getLeftDirection() ) ) ) {
                             player.stepLeft();
                         }
                         break ;
 
                     case SDLK_e:
-                        if ( Cell::walkableCell( niveau1.getCell( player.getPositionOnMap() - player.getLeftDirection() ) ) ) {
+                        if ( Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() - player.getLeftDirection() ) ) ) {
                             player.stepRight();
                         }
                         break ;

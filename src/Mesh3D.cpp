@@ -6,7 +6,6 @@
 #include "../include/Player.h"
 #include "../include/Texture.h"
 
-
 using namespace glimac;
 
 

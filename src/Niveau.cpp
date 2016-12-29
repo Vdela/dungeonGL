@@ -78,6 +78,14 @@ unsigned int Niveau::getWidthMap(void) {
     return this->widthMap;
 }
 
+void Niveau::setNbTresors(unsigned int nbTresors){
+    this->nbTresors = nbTresors;
+}
+
+void Niveau::setNbMonstres(unsigned int nbMonstres){
+    this->nbMonstres = nbMonstres;
+}
+
 void Niveau::createMap(void) {
 
     for(int i = 0; i < heightMap; i++){
@@ -166,6 +174,12 @@ void Niveau::createMap(void) {
 
 }
 
+vector<Monstre> Niveau::getMonstres(void) {
+    return monstres;
+}
 
+vector<Tresor> Niveau::getTresors(void) {
+    return tresors;
+}
 
 

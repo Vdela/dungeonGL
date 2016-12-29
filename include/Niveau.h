@@ -22,6 +22,8 @@
 #include "Object3D.h"
 #include "GameManager.h"
 #include "Mesh3D.h"
+#include "Tresor.h"
+#include "Monstre.h"
 
 using namespace std;
 
@@ -30,6 +32,8 @@ class Niveau{
 private:
     unsigned int nbTresors;
     unsigned int nbMonstres;
+    vector<Monstre> monstres;
+    vector<Tresor> tresors;
     unsigned int heightMap;
     unsigned int widthMap;
     vector<vector<CellType > > carteId;
@@ -38,11 +42,17 @@ public:
     Niveau();
     ~Niveau();
 
+    vector<Monstre> getMonstres(void);
+    vector<Tresor> getTresors(void);
+
     vector<vector<CellType> > getCarteId(void);
     vector<vector<Cell> > getCellules(void);
 
     unsigned int getHeightMap(void);
     unsigned int getWidthMap(void);
+
+    void setNbTresors(unsigned int nbTresors);
+    void setNbMonstres(unsigned int nbMonstres);
 
     Cell* getCell( glm::vec2 pos ) {
         return &cellules[(int)pos.x][(int)pos.y];
