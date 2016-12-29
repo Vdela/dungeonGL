@@ -7,18 +7,6 @@
 #include "../include/Player.h"
 #include "../include/Porte.h"
 
-class Porte : public Object3D {
-
-private:
-
-    bool  ouverture;
-    Mesh3D * battant_porte;
-    //glm::vec2 porte_Position;
-
-public:
-    Porte();
-    void draw();
-};
 GameManager GameManager::instance = GameManager();
 
 GameManager::GameManager() {
@@ -68,6 +56,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     Porte porte1;
     porte1.setScale(0.02f,0.025f,0.05f);
     porte1.setTranslation( 1, -0.5f, 2 );
+
    // porte1.setRotation( glm::vec3(0, 0, 0), 270 );
     //=================================//
     //========== Loop du jeu ==========//

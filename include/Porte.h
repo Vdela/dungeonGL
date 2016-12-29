@@ -14,15 +14,16 @@
 #include "Object3D.h"
 
 #include "Mesh3D.h"
+
 class Porte : public Object3D {
 
 private:
-
-    bool  ouverture;
+    bool ouverture;
     Mesh3D * battant_porte;
 public:
     Porte();
     void draw();
+
 };
 
 

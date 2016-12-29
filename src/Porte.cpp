@@ -7,10 +7,11 @@
 #define GLEW_STATIC
 
 Porte::Porte() {
-    battant_porte= new Mesh3D( "porte.obj", "", "texture_porte.jpg" );
+    battant_porte = new Mesh3D( "porte.obj", "", "bone02.png" );
 
     battant_porte->setParentMatrix( &modelMatrix );
 }
+
 void Porte::draw() {
 
     // Transformations
@@ -19,7 +20,5 @@ void Porte::draw() {
     if(ouverture==true){
         battant_porte->setTranslation(0.0f,-1.0f,0.0f);
     }
-
-
 
 }
