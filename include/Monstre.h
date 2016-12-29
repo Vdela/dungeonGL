@@ -20,7 +20,7 @@ private:
     string Modele3D;
 public:
     Monstre();
-    Monstre(unsigned int id, float x, float z, string nom, int type, int caracteristique, int nbPtDeVie, string Modele3D);
+    Monstre(unsigned int id, float x, float y, float z, string nom, int type, int caracteristique, int nbPtDeVie);
     ~Monstre();
 
     unsigned int getId(void);
@@ -40,9 +40,6 @@ public:
 
     int getNbPtDeVie(void);
     void setNbPtDeVie(int nbPtDeVie);
-
-    string getModele3D();
-    void setModele3D(string Modele3D);
 };
 
 #endif //IMACGL_MONSTRE_H

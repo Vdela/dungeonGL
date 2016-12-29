@@ -20,6 +20,7 @@
 
 #include "Cell.h"
 #include "Object3D.h"
+#include "Demon3D.h"
 #include "GameManager.h"
 #include "Mesh3D.h"
 #include "Tresor.h"
@@ -44,8 +45,8 @@ public:
     Niveau();
     ~Niveau();
 
-    vector<Monstre> getMonstres(void);
-    vector<Tresor> getTresors(void);
+    vector<Monstre>& getMonstres(void);
+    vector<Tresor>& getTresors(void);
 
     vector<vector<CellType> > getCarteId(void);
     vector<vector<Cell> > getCellules(void);
@@ -66,6 +67,10 @@ public:
     void lectureMap(char* fileName);
 
     void createMap(void);
+
+    void createTresors();
+
+    void createMonstres();
 
 };
 
