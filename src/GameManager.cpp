@@ -41,7 +41,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     // Init Player
     Player& player = Player::getInstance();
     glm::vec2 startPos = pNiveau->getStartPos();
-    player.setPositionOnMap((int)startPos.x, (int)startPos.y); //cran vers le bas ; cran vers la droite
+    player.setPositionOnMap((int)startPos.x, (int)startPos.y, true); //cran vers le bas ; cran vers la droite
 
 /*
     Demon3D demon;
@@ -79,9 +79,6 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
         switch(e.type) {
 
             case SDL_KEYDOWN :
-
-                float moveSpeed = 6.0f;
-                float rotSpeed = 120.0f;
 
                 switch(e.key.keysym.sym) {
 
@@ -132,7 +129,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
 
         // Clear de la fenêtre avant le nouveau rendu
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
         // Rendu des objets de la scene
         for ( std::vector<Object3D*>::const_iterator it = Object3D::getSceneObjects().begin() ;  it != Object3D::getSceneObjects().end() ; it++ ) {

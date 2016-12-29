@@ -201,10 +201,10 @@ void Player::rotateRight() {
 
 }
 
-void Player::setPositionOnMap(int posX, int posY) {
+void Player::setPositionOnMap(int posX, int posY, bool updateCamera) {
     mapPosition = glm::vec2( posX, posY );
     setTranslation( (float)posX, 0, (float)posY);
-    camera.setPosition( glm::vec3(posX, 0, posY) );
+    if (updateCamera) camera.setPosition( glm::vec3(posX, 0, posY) );
 }
 
 glm::vec2 Player::getLeftDirection() {

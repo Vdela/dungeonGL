@@ -94,14 +94,14 @@ void Niveau::createMap(void) {
 
             switch ( carteId[i][j] ) {
                 case CellType::Wall : {
-                    Mesh3D * wall = new Mesh3D( "wall.obj", "wall.mtl", "wood.jpg" );
+                    Mesh3D * wall = new Mesh3D( "wall02.obj", "wall02.mtl", "wall01.png" );
                     Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
                     wall->setTranslation( i, 0, j );
                     break;
                 }
                 case CellType::Floor : {
-                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "bone01.png" );
+                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "floor01.png" );
                     Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "bone01.png" );
                     Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
@@ -119,23 +119,26 @@ void Niveau::createMap(void) {
                     ceiling->setTranslation( i, 0.5f, j );
                     ceiling->setRotation( glm::vec3(1,0,0), 180 );
                     if ( i > 0 && carteId[i-1][j] != CellType::Water) {
-                        Mesh3D *border = new Mesh3D("quad.obj", "quad.mtl", "bone02.png");
+                        Mesh3D *border = new Mesh3D("waterBorder.obj", "quad.mtl", "wood.png");
                         border->setRotation(glm::vec3(0, 0, 1), 270);
+                        border->addRotation(glm::vec3(0, 1, 0), 180);
                         border->setTranslation(i-0.5f, -1, j);
                     }
                     if ( i+1 < widthMap && carteId[i+1][j] != CellType::Water) {
-                        Mesh3D *border = new Mesh3D("quad.obj", "quad.mtl", "bone02.png");
+                        Mesh3D *border = new Mesh3D("waterBorder.obj", "quad.mtl", "wood.png");
                         border->setRotation(glm::vec3(0, 0, 1), 90);
                         border->setTranslation(i+0.5f, -1, j);
                     }
                     if ( j > 0 && carteId[i][j-1] != CellType::Water) {
-                        Mesh3D *border = new Mesh3D("quad.obj", "quad.mtl", "bone02.png");
+                        Mesh3D *border = new Mesh3D("waterBorder.obj", "quad.mtl", "wood.png");
                         border->setRotation(glm::vec3(1, 0, 0), 90);
+                        border->addRotation(glm::vec3(0, 1, 0), 90);
                         border->setTranslation(i, -1, j-0.5f);
                     }
                     if ( j+1 < heightMap && carteId[i][j+1] != CellType::Water) {
-                        Mesh3D *border = new Mesh3D("quad.obj", "quad.mtl", "bone02.png");
+                        Mesh3D *border = new Mesh3D("waterBorder.obj", "quad.mtl", "wood.png");
                         border->setRotation(glm::vec3(1, 0, 0), 270);
+                        border->addRotation(glm::vec3(0, 1, 0), -90);
                         border->setTranslation(i, -1, j+0.5f);
                     }
                     break;
