@@ -43,6 +43,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     glm::vec2 startPos = pNiveau->getStartPos();
     player.setPositionOnMap((int)startPos.x, (int)startPos.y, true); //cran vers le bas ; cran vers la droite
 
+
 /*
     Demon3D demon;
     demon.setScale( 0.05f );
