@@ -43,6 +43,8 @@ protected:
     static GLuint programID;
 public:
     Object3D();
+    bool isGUI = false;
+
     virtual void draw() = 0;
 
     static const std::vector<Object3D*>& getSceneObjects() { return sceneObjects; }

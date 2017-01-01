@@ -2,12 +2,13 @@
 
 
 #include "../include/GameManager.h"
+#include "../include/Interface.h"
 
 
 int main(int argc, char **argv) {
 
     GameManager gameManager = GameManager::getInstance();
-    gameManager.initGame( 800, 800, (char*)"DungeonGL" );
+    gameManager.initGame( Interface::gameWidth, Interface::gameHeight, (char*)"DungeonGL" );
 
     return 0;
 }

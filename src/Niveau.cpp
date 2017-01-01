@@ -200,7 +200,6 @@ void Niveau::createTresors() {
             }
             case 2: {
                 Mesh3D *treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "wood.png");
-                treasure->setScale(0.005f);
                 treasure->setTranslation(tresors[i].getPosition()[0], tresors[i].getPosition()[1],
                                          tresors[i].getPosition()[2]);
                 tresors[i].setObject3D(treasure);
@@ -208,7 +207,7 @@ void Niveau::createTresors() {
             }
             case 3: {
                 Mesh3D *treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "g2.png");
-                treasure->setScale(0.005f);
+                treasure->setScale(0.5f);
                 treasure->setRotation(glm::vec3(1, 1, 0), 70);
                 treasure->setTranslation(tresors[i].getPosition()[0], tresors[i].getPosition()[1],
                                          tresors[i].getPosition()[2]);
@@ -247,7 +246,7 @@ void Niveau::frappeCoffre(glm::vec2 futurePosition) {
         int coupsRestants = tresors[i].getCaracteristique();
         coupsRestants--;
         tresors[i].setCaracteristique(coupsRestants);
-        if(coupsRestants == 0){
+        if(coupsRestants <= 0){
             Object3D::eraseObject3D(tresors[i].getObject3D());
             tresors.erase (tresors.begin() + i);
         }

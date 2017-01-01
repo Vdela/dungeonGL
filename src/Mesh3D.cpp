@@ -40,10 +40,15 @@ void Mesh3D::draw() {
 
     shaderProgram.program.use();
 
-    glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr( projMatrix
-                                                                                * Player::getInstance().camera.getViewMatrix()
-                                                                                * (*parentModel)
-                                                                                * modelMatrix ) );
+    if (!isGUI) {
+        glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr( projMatrix
+                                                                                    * Player::getInstance().camera.getViewMatrix()
+                                                                                    * (*parentModel)
+                                                                                    * modelMatrix ) );
+    } else {
+        glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr( projMatrix
+                                                                                    * modelMatrix ) );
+    }
 
     glUniformMatrix4fv( shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr((*parentModel) * modelMatrix));
     glUniformMatrix4fv( shaderProgram.uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));

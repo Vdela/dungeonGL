@@ -7,6 +7,7 @@
 #include "../include/Player.h"
 #include "../include/Dungeon.h"
 #include "../include/Porte.h"
+#include "../include/Interface.h"
 
 GameManager GameManager::instance = GameManager();
 
@@ -48,6 +49,10 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     Mesh3D * blade = new Mesh3D( "blade.obj", "blade.mtl", "iron.png" );
     blade->setTranslation( (int)startPos.x, 0, (int)startPos.y );
     player.setWeapon( blade );
+
+    // Init Interface
+    Interface interface = Interface::getInstance();
+
 
     int index;
 
