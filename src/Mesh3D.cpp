@@ -45,17 +45,17 @@ void Mesh3D::draw() {
                                                                                     * Player::getInstance().camera.getViewMatrix()
                                                                                     * (*parentModel)
                                                                                     * modelMatrix ) );
+        glm::vec3 camPos = Player::getInstance().camera.getPosition();
+        glUniform3f( shaderProgram.uLightPosLoc, camPos.x, camPos.y, camPos.z );
     } else {
-        glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr( projMatrix
-                                                                                    * modelMatrix ) );
+        glUniformMatrix4fv( shaderProgram.uMVPMatrixLoc ,1,GL_FALSE,glm::value_ptr( projMatrix * modelMatrix ) );
+        glUniform3f( shaderProgram.uLightPosLoc, 0, 3, 16 );
     }
 
     glUniformMatrix4fv( shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr((*parentModel) * modelMatrix));
     glUniformMatrix4fv( shaderProgram.uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
-
-    glm::vec3 camPos = Player::getInstance().camera.getPosition();
-    glUniform3f( shaderProgram.uLightPosLoc, camPos.x, camPos.y, camPos.z );
     glUniform3f( shaderProgram.uLightIntensityLoc, 1,1,1 ); // white
+
 
     glBindVertexArray( meshShared->vao);
 
