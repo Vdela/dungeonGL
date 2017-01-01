@@ -17,6 +17,7 @@
 #include <glimac/glm.hpp>
 #include <glimac/common.hpp>
 #include <vector>
+#include <algorithm>
 
 #include <glimac/Program.hpp>
 #include <glimac/FilePath.hpp>
@@ -65,6 +66,8 @@ public:
     void setParentMatrix( glm::mat4* parentModelMatrix ) { parentModel = parentModelMatrix; }
 
     glm::mat4& getModelMatrix(){ return modelMatrix; }
+
+    static void eraseObject3D(Object3D * object);
 };
 
 

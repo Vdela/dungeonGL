@@ -72,6 +72,11 @@ public:
 
     void createMonstres();
 
+    bool faceCoffre(glm::vec2 futurePosition, int* id);
+    bool faceMonstre(glm::vec2 futurePosition, int* id);
+
+    void frappeCoffre(glm::vec2 futurePosition);
+    void frappeMonstre(glm::vec2 futurePosition);
 };
 
 #endif //IMACGL_NIVEAU_H

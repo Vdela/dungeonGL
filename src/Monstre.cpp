@@ -6,11 +6,14 @@
 
 Monstre::Monstre() {}
 
-Monstre::Monstre(unsigned int id, float x, float y, float z, string nom, int type, int caracteristique, int nbPtDeVie) {
+Monstre::Monstre(unsigned int id, float x, float y, float z, int rotation, string nom, int type, int caracteristique, int nbPtDeVie) {
     this->id = id;
     this->position[0] = x;
     this->position[1] = y;
     this->position[2] = z;
+    this->monstrePosition.x = (int) x;
+    this->monstrePosition.y = (int) z;
+    this->rotation = rotation;
     this->nom = nom;
     this->type = type;
     this->caracteristique = caracteristique;
@@ -35,6 +38,14 @@ void Monstre::setPosition(float x, float y, float z) {
     this->position[0] = x;
     this->position[1] = y;
     this->position[2] = z;
+}
+
+int Monstre::getRotation(void) {
+    return this->rotation;
+}
+
+void Monstre::setRotation(int rotation) {
+    this->rotation = rotation;
 }
 
 string Monstre::getNom(void) {
@@ -69,6 +80,17 @@ void Monstre::setNbPtDeVie(int nbPtDeVie) {
     this->nbPtDeVie = nbPtDeVie;
 }
 
+Object3D *Monstre::getObject3D(void) {
+    return this->object;
+}
+
+void Monstre::setObject3D(Object3D *object) {
+    this->object = object;
+}
+
+bool Monstre::devant_Monstre(glm::vec2 futurePosition) {
+    return (futurePosition == monstrePosition);
+}
 
 
 

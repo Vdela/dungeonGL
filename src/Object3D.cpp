@@ -61,3 +61,10 @@ void Object3D::addScale(glm::vec3 scale) {
 void Object3D::addScale(float x, float y, float z) {
     this->scaleMatrix *= glm::scale( glm::mat4(), glm::vec3(x, y, z) );
 }
+
+void Object3D::eraseObject3D(Object3D *object) {
+    std::vector<Object3D*>::iterator position = std::find(sceneObjects.begin(), sceneObjects.end(), object);
+    if (position != sceneObjects.end())
+        sceneObjects.erase(position);
+
+}

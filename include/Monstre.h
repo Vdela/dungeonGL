@@ -6,21 +6,29 @@
 #define IMACGL_MONSTRE_H
 
 #include <string>
+#include "Object3D.h"
+#include <glm/vec2.hpp>
 
 using namespace std;
 
 class Monstre{
 private:
     unsigned int id;
+
     float position[3];
+    glm::vec2 monstrePosition;
+    int rotation;
+
     string nom;
+
     int type;
     int caracteristique;
     int nbPtDeVie;
-    string Modele3D;
+
+    Object3D * object;
 public:
     Monstre();
-    Monstre(unsigned int id, float x, float y, float z, string nom, int type, int caracteristique, int nbPtDeVie);
+    Monstre(unsigned int id, float x, float y, float z, int rotation, string nom, int type, int caracteristique, int nbPtDeVie);
     ~Monstre();
 
     unsigned int getId(void);
@@ -28,6 +36,9 @@ public:
 
     float* getPosition(void);
     void setPosition(float x, float y, float z);
+
+    int getRotation(void);
+    void setRotation(int rotation);
 
     string getNom(void);
     void setNom(string nom);
@@ -40,6 +51,11 @@ public:
 
     int getNbPtDeVie(void);
     void setNbPtDeVie(int nbPtDeVie);
+
+    Object3D* getObject3D(void);
+    void setObject3D(Object3D* object);
+
+    bool devant_Monstre(glm::vec2 futurePosition);
 };
 
 #endif //IMACGL_MONSTRE_H

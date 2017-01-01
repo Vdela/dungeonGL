@@ -39,6 +39,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     pNiveau->createTresors();
     pNiveau->createMonstres();
 
+    std::cout << "gameManager" << std::endl;
+
     // Init Player
     Player& player = Player::getInstance();
     glm::vec2 startPos = pNiveau->getStartPos();
@@ -46,6 +48,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     Mesh3D * blade = new Mesh3D( "blade.obj", "blade.mtl", "iron.png" );
     blade->setTranslation( (int)startPos.x, 0, (int)startPos.y );
     player.setWeapon( blade );
+
+    int index;
 
     //=================================//
     //========== Loop du jeu ==========//
@@ -81,32 +85,35 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                         break ;
 
                     case SDLK_w: // z en azerty
-                        if ( Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() + player.getLookDirection() ) ) ) {
+                        if ( !(pNiveau->faceCoffre(player.getPositionOnMap() + player.getLookDirection(), &index)) && Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() + player.getLookDirection() ) ) ) {
                             player.stepForward();
                         }
                     break ;
 
                     case SDLK_s:
-                        if ( Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() - player.getLookDirection() ) ) ) {
+                        if ( !(pNiveau->faceCoffre(player.getPositionOnMap() - player.getLookDirection(), &index)) && Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() - player.getLookDirection() ) ) ) {
                             player.stepBack();
                         }
                         break ;
 
                     case SDLK_q: // a en azerty
-                        if ( Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() + player.getLeftDirection() ) ) ) {
+                        if ( !(pNiveau->faceCoffre(player.getPositionOnMap() + player.getLookDirection(), &index)) && Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() + player.getLeftDirection() ) ) ) {
                             player.stepLeft();
                         }
                         break ;
 
                     case SDLK_e:
-                        if ( Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() - player.getLeftDirection() ) ) ) {
+                        if ( !(pNiveau->faceCoffre(player.getPositionOnMap() - player.getLookDirection(), &index)) && Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() - player.getLeftDirection() ) ) ) {
                             player.stepRight();
                         }
                         break ;
 
-                    case SDLK_SPACE:
-                            player.hit();
-                        break ;
+                    case SDLK_SPACE: {
+                        player.hit();
+                        pNiveau->frappeCoffre(player.getPositionOnMap() + player.getLookDirection());
+                        pNiveau->frappeMonstre(player.getPositionOnMap() + player.getLookDirection());
+                        break;
+                    }
 
                     default:
                         break ;

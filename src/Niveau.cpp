@@ -78,6 +78,14 @@ unsigned int Niveau::getWidthMap(void) {
     return this->widthMap;
 }
 
+vector<Monstre>& Niveau::getMonstres(void) {
+    return monstres;
+}
+
+vector<Tresor>& Niveau::getTresors(void) {
+    return tresors;
+}
+
 void Niveau::setNbTresors(unsigned int nbTresors){
     this->nbTresors = nbTresors;
 }
@@ -183,19 +191,32 @@ void Niveau::createTresors() {
     for(int i = 0; i < nbTresors; i++){
         switch (tresors[i].getType()) {
             case 1: {
-                Mesh3D * treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "heart.png");
+                Mesh3D *treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "heart.png");
                 treasure->setScale(1.0f);
                 treasure->setTranslation(tresors[i].getPosition()[0], tresors[i].getPosition()[1],
-                                        tresors[i].getPosition()[2]);
+                                         tresors[i].getPosition()[2]);
+                tresors[i].setObject3D(treasure);
                 break;
             }
             case 2: {
-                Mesh3D * treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "wood.png");
+                Mesh3D *treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "wood.png");
                 treasure->setScale(0.005f);
                 treasure->setTranslation(tresors[i].getPosition()[0], tresors[i].getPosition()[1],
-                                        tresors[i].getPosition()[2]);
+                                         tresors[i].getPosition()[2]);
+                tresors[i].setObject3D(treasure);
                 break;
             }
+            case 3: {
+                Mesh3D *treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "g2.png");
+                treasure->setScale(0.005f);
+                treasure->setRotation(glm::vec3(1, 1, 0), 70);
+                treasure->setTranslation(tresors[i].getPosition()[0], tresors[i].getPosition()[1],
+                                         tresors[i].getPosition()[2]);
+                tresors[i].setObject3D(treasure);
+                break;
+            }
+            default:
+                break;
         }
     }
 }
@@ -205,16 +226,54 @@ void Niveau::createMonstres() {
         Demon3D * demon = new Demon3D();
         demon->setScale( 0.05f );
         demon->setTranslation( monstres[i].getPosition()[0], monstres[i].getPosition()[1], monstres[i].getPosition()[2] );
-        demon->setRotation( glm::vec3(0, 1, 0), 270 );
+        demon->setRotation( glm::vec3(0, 1, 0), monstres[i].getRotation() );
+        monstres[i].setObject3D(demon);
     }
 }
 
-vector<Monstre>& Niveau::getMonstres(void) {
-    return monstres;
+bool Niveau::faceCoffre(glm::vec2 futurePosition, int* id) {
+    for(int i = 0; i < nbTresors; i++){
+        if(tresors[i].devant_Tresor(futurePosition)) {
+            *id = i;
+            return true;
+        }
+    }
+    return false;
 }
 
-vector<Tresor>& Niveau::getTresors(void) {
-    return tresors;
+void Niveau::frappeCoffre(glm::vec2 futurePosition) {
+    int i;
+    if(faceCoffre(futurePosition, &i)){
+        int coupsRestants = tresors[i].getCaracteristique();
+        coupsRestants--;
+        tresors[i].setCaracteristique(coupsRestants);
+        if(coupsRestants == 0){
+            Object3D::eraseObject3D(tresors[i].getObject3D());
+            tresors.erase (tresors.begin() + i);
+        }
+    }
 }
 
+bool Niveau::faceMonstre(glm::vec2 futurePosition, int* id) {
+    for(int i = 0; i < nbMonstres; i++){
+        if(monstres[i].devant_Monstre(futurePosition)) {
+            *id = i;
+            return true;
+        }
+    }
+    return false;
+}
+
+void Niveau::frappeMonstre(glm::vec2 futurePosition) {
+    int i;
+    if(faceMonstre(futurePosition, &i)){
+        int ptVie = monstres[i].getNbPtDeVie();
+        ptVie = ptVie - 10;
+        monstres[i].setNbPtDeVie(ptVie);
+        if(ptVie == 0){
+            Object3D::eraseObject3D(monstres[i].getObject3D());
+            monstres.erase(monstres.begin() + i);
+        }
+    }
+}
 

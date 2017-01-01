@@ -25,7 +25,6 @@ enum LookDirEnum {
 
 class Player : public Object3D {
 
-
 private:
     Player();
     static Player * instance;

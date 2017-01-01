@@ -2,8 +2,8 @@
 1
 map2.ppm
 2
-1:1:0:5:coeur:1:5:heart.obj:heart.mtl
-2:1:-0.5f:6:tresor:2:6:boite_tresor.obj:boite_tresor.mtl
+1:1:-0.5f:5:tresor:2:1:boite_tresor.obj:boite_tresor.mtl
+2:1:-0.40f:5:piece:3:10:piece.obj:piece.mtl
 2
-1:1:-0.5f:2:demon:1:15:40
-2:3:-0.5f:6:demon:1:30:40
+1:1:-0.5f:2:270:demon:1:30:40
+2:3:-0.5f:6:180:demon:1:30:40

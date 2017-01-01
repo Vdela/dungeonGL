@@ -57,7 +57,7 @@ void Dungeon::chargementDonjon(char* fileName) {
         for(int j = 0; j < nbMonstres; j++){
             getline(fichier, line);
             vector<string> splitLine = split(line);
-            Monstre monstre(atoi(splitLine[0].c_str()), atof(splitLine[1].c_str()), atof(splitLine[2].c_str()), atof(splitLine[3].c_str()), splitLine[4], atoi(splitLine[5].c_str()), atoi(splitLine[6].c_str()), atoi(splitLine[7].c_str()));
+            Monstre monstre(atoi(splitLine[0].c_str()), atof(splitLine[1].c_str()), atof(splitLine[2].c_str()), atof(splitLine[3].c_str()), atoi(splitLine[4].c_str()), splitLine[5], atoi(splitLine[6].c_str()), atoi(splitLine[7].c_str()), atoi(splitLine[8].c_str()));
             niveau.getMonstres().push_back(monstre);
 
         }

@@ -6,18 +6,29 @@
 #define IMACGL_TRESOR_H
 
 #include <string>
+#include <glm/vec2.hpp>
+#include "Object3D.h"
 
 using namespace std;
 
 class Tresor{
 private:
     unsigned int id;
+
     float position[3];
+    glm::vec2 positionT;
+
     string nom;
+
     int type;
     int caracteristique;
+
     string Modele3Dobj;
     string Modele3Dmtl;
+
+    bool recupere;
+
+    Object3D * object;
 
 public:
     Tresor();
@@ -44,6 +55,11 @@ public:
 
     string getModele3Dmtl();
     void setModele3Dmtl(string Modele3Dmtl);
+
+    Object3D* getObject3D(void);
+    void setObject3D(Object3D* object);
+
+    bool devant_Tresor(glm::vec2 futurePosition);
 };
 
 #endif //IMACGL_TRESOR_H
