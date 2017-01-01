@@ -45,8 +45,8 @@ private:
     float currentRot;
     float startingRot;
 
-    float moveSpeed = 2.0f;
-    float rotSpeed = 2.0f;
+    float moveSpeed = 6.0f;
+    float rotSpeed = 6.0f;
 
     float minDistSecurity;
 

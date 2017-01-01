@@ -37,7 +37,6 @@ protected:
     glm::mat4 rotationMatrix;
     glm::mat4 scaleMatrix;
 
-
     static const glm::mat4 projMatrix;
 
     static std::vector<Object3D*> sceneObjects;
@@ -61,6 +60,7 @@ public:
     void setScale(float x, float y, float z);
     void setScale(float xyz);
     void addScale(glm::vec3 scale);
+    void addScale(float xyz);
     void addScale(float x, float y, float z);
 
     void setParentMatrix( glm::mat4* parentModelMatrix ) { parentModel = parentModelMatrix; }

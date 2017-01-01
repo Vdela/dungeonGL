@@ -7,6 +7,7 @@
 
 #include <string>
 #include "Object3D.h"
+#include "Demon3D.h"
 #include <glm/vec2.hpp>
 
 using namespace std;
@@ -25,7 +26,7 @@ private:
     int caracteristique;
     int nbPtDeVie;
 
-    Object3D * object;
+    Demon3D * object;
 public:
     Monstre();
     Monstre(unsigned int id, float x, float y, float z, int rotation, string nom, int type, int caracteristique, int nbPtDeVie);
@@ -52,8 +53,8 @@ public:
     int getNbPtDeVie(void);
     void setNbPtDeVie(int nbPtDeVie);
 
-    Object3D* getObject3D(void);
-    void setObject3D(Object3D* object);
+    Demon3D* getObject3D(void);
+    void setObject3D(Demon3D* object);
 
     bool devant_Monstre(glm::vec2 futurePosition);
 };

@@ -80,11 +80,11 @@ void Monstre::setNbPtDeVie(int nbPtDeVie) {
     this->nbPtDeVie = nbPtDeVie;
 }
 
-Object3D *Monstre::getObject3D(void) {
+Demon3D *Monstre::getObject3D(void) {
     return this->object;
 }
 
-void Monstre::setObject3D(Object3D *object) {
+void Monstre::setObject3D(Demon3D *object) {
     this->object = object;
 }
 

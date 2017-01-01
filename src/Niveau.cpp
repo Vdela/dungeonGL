@@ -270,8 +270,8 @@ void Niveau::frappeMonstre(glm::vec2 futurePosition) {
         int ptVie = monstres[i].getNbPtDeVie();
         ptVie = ptVie - 10;
         monstres[i].setNbPtDeVie(ptVie);
-        if(ptVie == 0){
-            Object3D::eraseObject3D(monstres[i].getObject3D());
+        if(ptVie <= 0){
+            monstres[i].getObject3D()->die();
             monstres.erase(monstres.begin() + i);
         }
     }

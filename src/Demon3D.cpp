@@ -33,6 +33,7 @@ void Demon3D::draw() {
     // Transformations
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 
+    if ( dying == false ) {
     bodyOscillation.nextValueSmooth();
     bodyOscillation2.nextValueSmooth();
 
@@ -44,6 +45,26 @@ void Demon3D::draw() {
     leftHand->setTranslation( bodyOscillation2.getValue(), bodyOscillation.getValue() * -1.0f , bodyOscillation2.getValue() );
     rightHand->setTranslation( bodyOscillation2.getValue(), bodyOscillation.getValue() * -1.0f , bodyOscillation2.getValue() );
 
+    } else {
+        addRotation( glm::vec3(0,1,0), (float)Time::deltaTime * 720 );
+        addTranslation( 0, -(float)Time::deltaTime * 0.2f, 0);
+        addScale( 1 - (float)Time::deltaTime * 2.0f );
+
+        if ( Time::getElapsedTime() >= deadTime + 1.0f ) {
+            Object3D::eraseObject3D( skull );
+            Object3D::eraseObject3D( leftHand );
+            Object3D::eraseObject3D( rightHand );
+            Object3D::eraseObject3D( shoulders );
+            Object3D::eraseObject3D( chest );
+            Object3D::eraseObject3D( this );
+        }
+
+    }
 
 
+}
+
+void Demon3D::die() {
+    dying = true;
+    deadTime = Time::getElapsedTime();
 }

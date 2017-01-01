@@ -71,15 +71,15 @@ MeshShared::MeshShared(std::string meshName, std::string meshMtl, Texture * text
 
 
     // Chargement Texture
-    std::unique_ptr<Image> textureImg = loadImage( path.dirPath() + "\\..\\..\\assets\\textures\\" + texture->textureName);
+    //std::unique_ptr<Image> textureImg = loadImage( path.dirPath() + "\\..\\..\\assets\\textures\\" + texture->textureName);
 
-    if ( textureImg == NULL ) {
+    if ( texture->textureImg == NULL ) {
         std::cerr << "IMAGE NOT FOUND!" << std::endl;
     }
 
     glGenTextures( 1, &texture->textId );
     glBindTexture( GL_TEXTURE_2D, texture->textId );
-    glTexImage2D( GL_TEXTURE_2D, 0, 4, textureImg->getWidth(), textureImg->getHeight(), 0, GL_RGBA, GL_FLOAT, textureImg->getPixels() );
+    glTexImage2D( GL_TEXTURE_2D, 0, 4, texture->textureImg->getWidth(), texture->textureImg->getHeight(), 0, GL_RGBA, GL_FLOAT, texture->textureImg->getPixels() );
 
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

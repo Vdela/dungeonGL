@@ -13,3 +13,7 @@ void Time::updateDeltaTime() {
     Time::deltaTime *= 0.001f;
     Time::lastElapsedTime = elapsedTime;
 }
+
+float Time::getElapsedTime() {
+    return  glutGet(GLUT_ELAPSED_TIME) * 0.001f;
+}

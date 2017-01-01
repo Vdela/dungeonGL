@@ -14,6 +14,7 @@ public:
     static int lastElapsedTime;
     static double deltaTime;
     static void updateDeltaTime();
+    static float getElapsedTime();
 
 };
 

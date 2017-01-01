@@ -27,10 +27,13 @@ private:
     Oscillation bodyOscillation;
     Oscillation bodyOscillation2;
 
+    bool dying;
+    float deadTime;
+
 public:
     Demon3D();
     void draw();
-
+    void die();
 };
 
 
