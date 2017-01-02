@@ -1,9 +1,10 @@
 #Donjon naheulbeuk
 1
 map2.ppm
+3
+1:1:-0.3:6:coeur:1:1:heart.obj:heart.mtl
+2:1:-0.5f:5:tresor:2:2:boite_tresor.obj:boite_tresor.mtl
+3:1:-0.40f:4:piece:3:10:piece.obj:piece.mtl
 2
-1:1:-0.5f:5:tresor:2:1:boite_tresor.obj:boite_tresor.mtl
-2:1:-0.40f:5:piece:3:10:piece.obj:piece.mtl
-2
-1:1:-0.5f:2:270:demon:1:30:40
-2:3:-0.5f:6:180:demon:1:30:40
+1:1:-0.5f:2:270:demon:1:30:4
+2:3:-0.5f:6:180:demon:1:30:4

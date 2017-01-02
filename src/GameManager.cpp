@@ -40,8 +40,6 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     pNiveau->createTresors();
     pNiveau->createMonstres();
 
-    std::cout << "gameManager" << std::endl;
-
     // Init Player
     Player& player = Player::getInstance();
     glm::vec2 startPos = pNiveau->getStartPos();
@@ -90,29 +88,69 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                         break ;
 
                     case SDLK_w: // z en azerty
-                        if ( !(pNiveau->faceCoffre(player.getPositionOnMap() + player.getLookDirection(), &index)) && Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() + player.getLookDirection() ) ) ) {
+                    {
+                        if (!(pNiveau->faceCoffre(player.getPositionOnMap() + player.getLookDirection(), &index)) &&
+                            Cell::walkableCell(
+                                    pNiveau->getCell(player.getPositionOnMap() + player.getLookDirection()))) {
                             player.stepForward();
+                        } else if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
+                            if (pNiveau->getTresors()[index].getType() == 1 && !(player.vieMax())){
+                                pNiveau->associationPt(player.getPtVie(), index);
+                            }
+                            else if(pNiveau->getTresors()[index].getType() == 3){
+                                pNiveau->associationPt(player.getArgent(), index);
+                            }
                         }
-                    break ;
+                        break;
+                    }
 
-                    case SDLK_s:
-                        if ( !(pNiveau->faceCoffre(player.getPositionOnMap() - player.getLookDirection(), &index)) && Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() - player.getLookDirection() ) ) ) {
+                    case SDLK_s: {
+                        if (!(pNiveau->faceCoffre(player.getPositionOnMap() - player.getLookDirection(), &index)) &&
+                            Cell::walkableCell(
+                                    pNiveau->getCell(player.getPositionOnMap() - player.getLookDirection()))) {
                             player.stepBack();
+                        } else if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
+                            if (pNiveau->getTresors()[index].getType() == 1 && !(player.vieMax())){
+                                pNiveau->associationPt(player.getPtVie(), index);
+                            }
+                            else if(pNiveau->getTresors()[index].getType() == 3){
+                                pNiveau->associationPt(player.getArgent(), index);
+                            }
                         }
-                        break ;
-
+                        break;
+                    }
                     case SDLK_q: // a en azerty
-                        if ( !(pNiveau->faceCoffre(player.getPositionOnMap() + player.getLookDirection(), &index)) && Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() + player.getLeftDirection() ) ) ) {
+                    {
+                        if (!(pNiveau->faceCoffre(player.getPositionOnMap() + player.getLookDirection(), &index)) &&
+                            Cell::walkableCell(
+                                    pNiveau->getCell(player.getPositionOnMap() + player.getLeftDirection()))) {
                             player.stepLeft();
+                        } else if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
+                            if (pNiveau->getTresors()[index].getType() == 1 && !(player.vieMax())){
+                                pNiveau->associationPt(player.getPtVie(), index);
+                            }
+                            else if(pNiveau->getTresors()[index].getType() == 3){
+                                pNiveau->associationPt(player.getArgent(), index);
+                            }
                         }
-                        break ;
+                        break;
+                    }
 
-                    case SDLK_e:
-                        if ( !(pNiveau->faceCoffre(player.getPositionOnMap() - player.getLookDirection(), &index)) && Cell::walkableCell( pNiveau->getCell( player.getPositionOnMap() - player.getLeftDirection() ) ) ) {
+                    case SDLK_e: {
+                        if (!(pNiveau->faceCoffre(player.getPositionOnMap() - player.getLookDirection(), &index)) &&
+                            Cell::walkableCell(
+                                    pNiveau->getCell(player.getPositionOnMap() - player.getLeftDirection()))) {
                             player.stepRight();
+                        } else if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
+                            if (pNiveau->getTresors()[index].getType() == 1 && !(player.vieMax())){
+                                pNiveau->associationPt(player.getPtVie(), index);
+                            }
+                            else if(pNiveau->getTresors()[index].getType() == 3){
+                                pNiveau->associationPt(player.getArgent(), index);
+                            }
                         }
-                        break ;
-
+                        break;
+                    }
                     case SDLK_SPACE: {
                         player.hit();
                         pNiveau->frappeCoffre(player.getPositionOnMap() + player.getLookDirection());
@@ -122,13 +160,9 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
                     default:
                         break ;
-
-
-
-
                 }
 
-
+            default:break;
         }
 
         // Jeu

@@ -47,7 +47,7 @@ public:
     int getType(void);
     void setType(int type);
 
-    int getCaracteristique(void);
+    int* getCaracteristique(void);
     void setCaracteristique(int caracteristique);
 
     string getModele3Dobj();
@@ -60,6 +60,7 @@ public:
     void setObject3D(Object3D* object);
 
     bool devant_Tresor(glm::vec2 futurePosition);
+    bool sur_Tresor(glm::vec2 positionJoueur);
 };
 
 #endif //IMACGL_TRESOR_H

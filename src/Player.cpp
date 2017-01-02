@@ -21,6 +21,9 @@ Player::Player() {
     weapon = NULL;
     hitOscillation = new Oscillation( 0, 300, 260 );
 
+    argent = 0;
+    nbPtVie = 5;
+
 }
 
 Player& Player::getInstance() {
@@ -261,4 +264,24 @@ void Player::hit() {
     if (hitting) return;
     inAnim = true;
     hitting = true;
+}
+
+int* Player::getArgent(void){
+    return &(this->argent);
+}
+
+void Player::setArgent(int* argent){
+    this->argent = *argent;
+}
+
+int* Player::getPtVie(void){
+    return &(this->nbPtVie);
+}
+
+void Player::setPtVie(int* nbPtVie){
+    this->nbPtVie = *nbPtVie;
+}
+
+bool Player::vieMax(void){
+    return (this->nbPtVie >= 6);
 }

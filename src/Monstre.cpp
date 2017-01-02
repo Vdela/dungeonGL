@@ -72,8 +72,8 @@ void Monstre::setCaracteristique(int caracteristique) {
     this->caracteristique = caracteristique;
 }
 
-int Monstre::getNbPtDeVie(void) {
-    return this->nbPtDeVie;
+int* Monstre::getNbPtDeVie(void) {
+    return &(this->nbPtDeVie);
 }
 
 void Monstre::setNbPtDeVie(int nbPtDeVie) {

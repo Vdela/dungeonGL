@@ -57,8 +57,8 @@ void Tresor::setType(int type) {
     this->type = type;
 }
 
-int Tresor::getCaracteristique(void) {
-    return this->caracteristique;
+int* Tresor::getCaracteristique(void) {
+    return &(this->caracteristique);
 }
 
 void Tresor::setCaracteristique(int caracteristique) {
@@ -91,6 +91,10 @@ void Tresor::setObject3D(Object3D *object) {
 
 bool Tresor::devant_Tresor(glm::vec2 futurePosition) {
     return (futurePosition == positionT && type == 2);
+}
+
+bool Tresor::sur_Tresor(glm::vec2 positionJoueur) {
+    return (positionJoueur == positionT);
 }
 
 

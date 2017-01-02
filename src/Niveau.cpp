@@ -243,10 +243,9 @@ bool Niveau::faceCoffre(glm::vec2 futurePosition, int* id) {
 void Niveau::frappeCoffre(glm::vec2 futurePosition) {
     int i;
     if(faceCoffre(futurePosition, &i)){
-        int coupsRestants = tresors[i].getCaracteristique();
-        coupsRestants--;
-        tresors[i].setCaracteristique(coupsRestants);
-        if(coupsRestants <= 0){
+        int* coupsRestants = tresors[i].getCaracteristique();
+        *coupsRestants = *coupsRestants - 1;
+        if(*coupsRestants <= 0){
             Object3D::eraseObject3D(tresors[i].getObject3D());
             tresors.erase (tresors.begin() + i);
         }
@@ -264,15 +263,33 @@ bool Niveau::faceMonstre(glm::vec2 futurePosition, int* id) {
 }
 
 void Niveau::frappeMonstre(glm::vec2 futurePosition) {
-    int i;
-    if(faceMonstre(futurePosition, &i)){
-        int ptVie = monstres[i].getNbPtDeVie();
-        ptVie = ptVie - 10;
-        monstres[i].setNbPtDeVie(ptVie);
-        if(ptVie <= 0){
-            monstres[i].getObject3D()->die();
-            monstres.erase(monstres.begin() + i);
+    if(nbMonstres > 0) {
+        int i;
+        if (faceMonstre(futurePosition, &i)) {
+            int* ptVie = monstres[i].getNbPtDeVie();
+            *ptVie = *ptVie - 1;
+            //monstres[i].setNbPtDeVie(ptVie);
+            if (ptVie <= 0) {
+                monstres[i].getObject3D()->die();
+                monstres.erase(monstres.begin() + i);
+            }
         }
     }
 }
 
+bool Niveau::recupTresor(glm::vec2 futurePosition, int* id){
+    for(int i = 0; i < nbTresors; i++){
+        if(tresors[i].sur_Tresor(futurePosition)) {
+            *id = i;
+            return true;
+        }
+    }
+    return false;
+}
+
+void Niveau::associationPt(int* nmb, int i){
+        int val = *nmb + *(tresors[i].getCaracteristique());
+        *nmb = val;
+        Object3D::eraseObject3D(tresors[i].getObject3D());
+        tresors.erase(tresors.begin() + i);
+}

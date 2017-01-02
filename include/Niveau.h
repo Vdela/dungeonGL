@@ -77,6 +77,9 @@ public:
 
     void frappeCoffre(glm::vec2 futurePosition);
     void frappeMonstre(glm::vec2 futurePosition);
+
+    bool recupTresor(glm::vec2 futurePosition, int* id);
+    void associationPt(int* nmb, int i);
 };
 
 #endif //IMACGL_NIVEAU_H

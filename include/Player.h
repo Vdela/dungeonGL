@@ -54,6 +54,9 @@ private:
     Oscillation * hitOscillation;
     bool hitting;
 
+    int argent;
+    int nbPtVie;
+
 public:
     static Player& getInstance();
     FreeflyCamera camera;
@@ -73,6 +76,13 @@ public:
     void setWeapon(Mesh3D * weapon);
     void hit();
 
+    int* getArgent(void);
+    void setArgent(int* argent);
+
+    int* getPtVie(void);
+    void setPtVie(int* nbPtVie);
+
+    bool vieMax(void);
 };
 
 #endif //IMACGL_PLAYER_H

@@ -50,7 +50,7 @@ public:
     int getCaracteristique(void);
     void setCaracteristique(int caracteristique);
 
-    int getNbPtDeVie(void);
+    int* getNbPtDeVie(void);
     void setNbPtDeVie(int nbPtDeVie);
 
     Demon3D* getObject3D(void);
