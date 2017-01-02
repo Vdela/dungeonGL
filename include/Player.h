@@ -56,6 +56,7 @@ private:
 
     int argent;
     int nbPtVie;
+    int nbPtVieMax;
 
 public:
     static Player& getInstance();
@@ -81,6 +82,7 @@ public:
 
     int* getPtVie(void);
     void setPtVie(int nbPtVie);
+    int getPtVieMax() { return nbPtVieMax; };
 
     bool vieMax(void);
 

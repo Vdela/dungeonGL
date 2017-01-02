@@ -22,7 +22,8 @@ Player::Player() {
     hitOscillation = new Oscillation( 0, 300, 260 );
 
     argent = 0;
-    nbPtVie = 5;
+    nbPtVieMax = 6;
+    nbPtVie = 1;
 
 }
 
@@ -283,5 +284,5 @@ void Player::setPtVie(int nbPtVie){
 }
 
 bool Player::vieMax(void){
-    return (this->nbPtVie >= 6);
+    return (this->nbPtVie >= nbPtVieMax);
 }

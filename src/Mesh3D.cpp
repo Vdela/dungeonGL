@@ -54,7 +54,8 @@ void Mesh3D::draw() {
 
     glUniformMatrix4fv( shaderProgram.uMVMatrixLoc,1,GL_FALSE,glm::value_ptr((*parentModel) * modelMatrix));
     glUniformMatrix4fv( shaderProgram.uNormalMatrixLoc,1,GL_FALSE,glm::value_ptr(normalMatrix));
-    glUniform3f( shaderProgram.uLightIntensityLoc, 1,1,1 ); // white
+    float healthRatio = ( (float)(*Player::getInstance().getPtVie()) ) / ( (float)Player::getInstance().getPtVieMax() );
+    glUniform3f( shaderProgram.uLightIntensityLoc, 1,healthRatio,healthRatio ); // white
 
 
     glBindVertexArray( meshShared->vao);
