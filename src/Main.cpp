@@ -6,7 +6,6 @@
 
 
 int main(int argc, char **argv) {
-
     GameManager gameManager = GameManager::getInstance();
     gameManager.initGame( Interface::gameWidth, Interface::gameHeight, (char*)"DungeonGL" );
 
