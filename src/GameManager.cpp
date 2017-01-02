@@ -183,6 +183,9 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                         }
                         break;
                     }
+                    case SDLK_ESCAPE: {
+                        exit(0);
+                    }
 
                     default:
                         break ;
@@ -193,7 +196,9 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
         // Jeu
         if ( *player.getPtVie() <= 0 ) {
-            done = true;
+            *player.getPtVie() = Player::getInstance().getPtVieMax();
+            glm::vec2 startPos = pNiveau->getStartPos();
+            player.setPositionOnMap((int)startPos.x, (int)startPos.y, true); //cran vers le bas ; cran vers la droite
         }
 
         // Clear de la fenêtre avant le nouveau rendu

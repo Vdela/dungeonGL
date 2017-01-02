@@ -232,7 +232,7 @@ void Niveau::createTresors() {
             }
             case 4: {
                 Mesh3D *treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "g2.png");
-                treasure->setScale(0.03f);
+                treasure->setScale(0.45f);
                 treasure->setRotation(glm::vec3(0.5, 0.5, -1), 90);
                 treasure->setTranslation(tresors[i].getPosition()[0], tresors[i].getPosition()[1],
                                          tresors[i].getPosition()[2]);
