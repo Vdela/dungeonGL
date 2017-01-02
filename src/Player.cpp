@@ -270,16 +270,16 @@ int* Player::getArgent(void){
     return &(this->argent);
 }
 
-void Player::setArgent(int* argent){
-    this->argent = *argent;
+void Player::setArgent(int argent){
+    this->argent = argent;
 }
 
 int* Player::getPtVie(void){
     return &(this->nbPtVie);
 }
 
-void Player::setPtVie(int* nbPtVie){
-    this->nbPtVie = *nbPtVie;
+void Player::setPtVie(int nbPtVie){
+    this->nbPtVie = nbPtVie;
 }
 
 bool Player::vieMax(void){

@@ -93,7 +93,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                             Cell::walkableCell(
                                     pNiveau->getCell(player.getPositionOnMap() + player.getLookDirection()))) {
                             player.stepForward();
-                        } else if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
+                        }
+                        if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
                             if (pNiveau->getTresors()[index].getType() == 1 && !(player.vieMax())){
                                 pNiveau->associationPt(player.getPtVie(), index);
                             }
@@ -109,7 +110,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                             Cell::walkableCell(
                                     pNiveau->getCell(player.getPositionOnMap() - player.getLookDirection()))) {
                             player.stepBack();
-                        } else if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
+                        }
+                        if (pNiveau->recupTresor(player.getPositionOnMap() , &index)) {
                             if (pNiveau->getTresors()[index].getType() == 1 && !(player.vieMax())){
                                 pNiveau->associationPt(player.getPtVie(), index);
                             }
@@ -125,7 +127,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                             Cell::walkableCell(
                                     pNiveau->getCell(player.getPositionOnMap() + player.getLeftDirection()))) {
                             player.stepLeft();
-                        } else if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
+                        }
+                        if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
                             if (pNiveau->getTresors()[index].getType() == 1 && !(player.vieMax())){
                                 pNiveau->associationPt(player.getPtVie(), index);
                             }
@@ -141,7 +144,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                             Cell::walkableCell(
                                     pNiveau->getCell(player.getPositionOnMap() - player.getLeftDirection()))) {
                             player.stepRight();
-                        } else if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
+                        }
+                        if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
                             if (pNiveau->getTresors()[index].getType() == 1 && !(player.vieMax())){
                                 pNiveau->associationPt(player.getPtVie(), index);
                             }

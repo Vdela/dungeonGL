@@ -278,11 +278,13 @@ void Niveau::frappeMonstre(glm::vec2 futurePosition) {
 }
 
 bool Niveau::recupTresor(glm::vec2 futurePosition, int* id){
-    for(int i = 0; i < nbTresors; i++){
-        if(tresors[i].sur_Tresor(futurePosition)) {
+    int i = 0;
+    for ( vector<Tresor>::iterator it = tresors.begin() ; it != tresors.end() ; it++ ) {
+        if(it->sur_Tresor(futurePosition)) {
             *id = i;
             return true;
         }
+        i++;
     }
     return false;
 }
@@ -292,4 +294,5 @@ void Niveau::associationPt(int* nmb, int i){
         *nmb = val;
         Object3D::eraseObject3D(tresors[i].getObject3D());
         tresors.erase(tresors.begin() + i);
+        nbTresors--;
 }

@@ -45,8 +45,8 @@ private:
     float currentRot;
     float startingRot;
 
-    float moveSpeed = 2.0f;
-    float rotSpeed = 2.0f;
+    float moveSpeed = 6.0f;
+    float rotSpeed = 6.0f;
 
     float minDistSecurity;
 
@@ -77,10 +77,10 @@ public:
     void hit();
 
     int* getArgent(void);
-    void setArgent(int* argent);
+    void setArgent(int argent);
 
     int* getPtVie(void);
-    void setPtVie(int* nbPtVie);
+    void setPtVie(int nbPtVie);
 
     bool vieMax(void);
 };
