@@ -26,8 +26,6 @@ private:
     string Modele3Dobj;
     string Modele3Dmtl;
 
-    bool recupere;
-
     Object3D * object;
 
 public:

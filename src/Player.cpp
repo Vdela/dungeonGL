@@ -25,6 +25,8 @@ Player::Player() {
     nbPtVieMax = 6;
     nbPtVie = 6;
 
+    clef = 0;
+
 }
 
 Player& Player::getInstance() {
@@ -285,4 +287,11 @@ void Player::setPtVie(int nbPtVie){
 
 bool Player::vieMax(void){
     return (this->nbPtVie >= nbPtVieMax);
+}
+
+int* Player::getClef(void){
+    return &(this->clef);
+}
+void Player::setClef(int clef){
+    this->clef = clef;
 }

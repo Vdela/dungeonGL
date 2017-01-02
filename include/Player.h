@@ -58,6 +58,8 @@ private:
     int nbPtVie;
     int nbPtVieMax;
 
+    int clef;
+
 public:
     static Player& getInstance();
     FreeflyCamera camera;
@@ -83,6 +85,9 @@ public:
     int* getPtVie(void);
     void setPtVie(int nbPtVie);
     int getPtVieMax() { return nbPtVieMax; };
+
+    int* getClef(void);
+    void setClef(int clef);
 
     bool vieMax(void);
 
