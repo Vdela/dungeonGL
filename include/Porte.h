@@ -18,18 +18,16 @@
 class Porte : public Object3D {
 
 private:
-    bool ouverture;
+    bool isOpen;
     Mesh3D * battant_porte;
-    float posX_porte;
-    float posY_porte;
+    glm::vec2 pos;
 
 public:
     Porte();
     void draw();
-    float get_posX_porte();
-    float get_posY_porte();
-    void set_posX_porte(float _X);
-    void set_posY_porte(float _Y);
+    glm::vec2 getPos();
+    bool getIsOpen() { return isOpen; }
+    bool setIsOpen( bool state ) { isOpen = state; }
 
 };
 

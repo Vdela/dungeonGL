@@ -36,11 +36,11 @@ private:
     unsigned int nbMonstres;
     vector<Monstre> monstres;
     vector<Tresor> tresors;
+    vector<Porte> portes;
     unsigned int heightMap;
     unsigned int widthMap;
-    vector<vector<CellType > > carteId;
-    vector<vector<Cell> > cellules;
-    vector<glm::vec2> portes;
+    vector<vector<CellType>> carteId;
+    vector<vector<Cell>> cellules;
     glm::vec2 startPos;
     glm::vec2 endPos;
 public:

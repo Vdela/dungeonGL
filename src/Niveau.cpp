@@ -184,14 +184,18 @@ void Niveau::createMap(void) {
                     Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "floor01.png" );
                     Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "bone01.png" );
                     Cell cellule(carteId[i][j], i, j);
-                    cellules[i].push_back(cellule);
                     floor->setTranslation( i, -0.5f, j );
                     ceiling->setTranslation( i, 0.5f, j );
                     ceiling->setRotation( glm::vec3(1,0,0), 180 );
-                    glm::vec2 porte;
-                    porte.x = (float) i;
-                    porte.y = (float) j;
-                    portes.push_back(porte);
+                    Porte * porte = new Porte();
+                    glm::vec2 portePos( i, j );
+                    porte->setTranslation( portePos.x, -0.5f, portePos.y );
+                    porte->setScale( 0.032f );
+                    portes.push_back( *porte );
+
+                    cellule.door = porte;
+                    cellules[i].push_back(cellule);
+
                     break;
                 }
                 case CellType::EmptyCell : {
@@ -258,7 +262,7 @@ void Niveau::createMonstres() {
         monstres[i].setObject3D(demon);
     }
 }
-
+/*
 void Niveau::createPortes() {
     for ( vector<glm::vec2>::iterator it = portes.begin() ; it != portes.end() ; it++ ){
         Porte * porte = new Porte();
@@ -268,7 +272,7 @@ void Niveau::createPortes() {
         //monstres[i].setObject3D(demon);
     }
 }
-
+*/
 bool Niveau::faceCoffre(glm::vec2 futurePosition, int* id) {
     for(int i = 0; i < nbTresors; i++){
         if(tresors[i].devant_Tresor(futurePosition)) {

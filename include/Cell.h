@@ -45,7 +45,7 @@ public:
     static bool devant_Porte( Cell * cell );
 
     glm::vec2 getCellPosition(void);
-    Porte* m_porte;
+    Porte * door;
 
 };
 

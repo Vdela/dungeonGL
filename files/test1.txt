@@ -1,17 +1,16 @@
 #Donjon naheulbeuk
 1
 map.ppm
-10
-1:1:-0.3f:6:coeur:1:1:heart.obj:heart.mtl
-2:1:-0.5f:5:tresor:2:2:boite_tresor.obj:boite_tresor.mtl
+9
+1:2:-0.3f:8:coeur:1:1:heart.obj:heart.mtl
+2:7:-0.5f:4:tresor:2:2:boite_tresor.obj:boite_tresor.mtl
 3:1:-0.40f:5:piece:3:10:piece.obj:piece.mtl
-4:10:-0.5f:5:tresor:2:2:boite_tresor.obj:boite_tresor.mtl
+4:3:-0.5f:6:tresor:2:2:boite_tresor.obj:boite_tresor.mtl
 5:10:-0.40f:5:piece:3:10:piece.obj:piece.mtl
-6:10:-0.3f:6:coeur:1:1:heart.obj:heart.mtl
-7:10:-0.3f:9:coeur:1:1:heart.obj:heart.mtl
-8:10:-0.3f:8:coeur:1:1:heart.obj:heart.mtl
-9:10:-0.5f:3:tresor:2:2:boite_tresor.obj:boite_tresor.mtl
-10:10:-0.30f:3:clef:4:1:clef.obj:clef.mtl
+6:5:-0.3f:5:coeur:1:1:heart.obj:heart.mtl
+7:4:-0.30f:8:clef:4:1:clef.obj:clef.mtl
+3:7:-0.40f:4:piece:3:10:piece.obj:piece.mtl
+3:3:-0.30f:6:clef:4:1:clef.obj:clef.mtl
 2
-1:1:-0.5f:2:270:demon:1:30:4
-2:1:-0.5f:6:180:demon:1:30:4
+1:2:-0.5f:8:180:demon:1:30:4
+2:1:-0.5f:4:180:demon:1:30:4

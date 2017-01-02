@@ -38,14 +38,12 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     pNiveau->createMap();
     pNiveau->createTresors();
     pNiveau->createMonstres();
-    pNiveau->createPortes();
 
     // Init Player
     Player& player = Player::getInstance();
     glm::vec2 startPos = pNiveau->getStartPos();
     player.setPositionOnMap((int)startPos.x, (int)startPos.y, true); //cran vers le bas ; cran vers la droite
     Mesh3D * blade = new Mesh3D( "blade.obj", "blade.mtl", "iron.png" );
-    blade->setTranslation( (int)startPos.x, 0, (int)startPos.y );
     player.setWeapon( blade );
 
     // Init Interface
@@ -94,7 +92,8 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                         if (!(pNiveau->faceCoffre(targetPos, &index)) &&
                             Cell::walkableCell(
                                     pNiveau->getCell(targetPos))
-                                &&  !pNiveau->faceMonstre(targetPos, &monstreIndex)) {
+                                &&  !pNiveau->faceMonstre(targetPos, &monstreIndex))
+                        {
                             player.stepForward();
                         }
                         if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
@@ -224,13 +223,6 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
         // Update the display
         windowManager.swapBuffers();
     }
-
-    //=================================//
-    //=== Liberation des ressources ===//
-    //=================================//
-    // TODO
-    //glDeleteBuffers(1, &vbo);
-    //glDeleteVertexArrays(1, &vao);
 }
 
 

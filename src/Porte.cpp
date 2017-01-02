@@ -8,32 +8,18 @@
 
 Porte::Porte() {
     battant_porte = new Mesh3D( "porte.obj", "porte.mtl", "bone02.png" );
-
     battant_porte->setParentMatrix( &modelMatrix );
+    isOpen = false;
 }
 void Porte::draw() {
 
     // Transformations
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 
-    if(ouverture){
-        battant_porte->setTranslation(0.0f,-1.0f,0.0f);
-    }
 
 }
 
-float Porte::get_posX_porte() {
-    return posX_porte;
+glm::vec2 Porte::getPos() {
+    return pos;
 }
 
-float Porte::get_posY_porte() {
-    return posY_porte;
-}
-
-void Porte::set_posX_porte(float _X) {
-    posX_porte = _X;
-}
-
-void Porte::set_posY_porte(float _Y) {
-    posY_porte = _Y;
-}
