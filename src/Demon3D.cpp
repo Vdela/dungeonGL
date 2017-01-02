@@ -33,7 +33,7 @@ void Demon3D::draw() {
     // Transformations
     modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 
-    if ( dying == false ) {
+    if ( !dying ) {
     bodyOscillation.nextValueSmooth();
     bodyOscillation2.nextValueSmooth();
 
@@ -60,6 +60,7 @@ void Demon3D::draw() {
         }
 
     }
+
 
 
 }

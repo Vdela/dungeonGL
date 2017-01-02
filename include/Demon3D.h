@@ -30,6 +30,7 @@ private:
     bool dying;
     float deadTime;
 
+
 public:
     Demon3D();
     void draw();

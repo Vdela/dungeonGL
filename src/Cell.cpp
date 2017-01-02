@@ -36,20 +36,16 @@ glm::vec2 Cell::getCellPosition(void)
     return this->cellPosition;
 }
 
-bool Cell::walkableCell(Cell *cell) {
+bool Cell::walkableCell(Cell *cell, bool forPlayer) {
     if ( cell == NULL ) return false;
-    if ( cell->type == CellType::Floor || cell->type == CellType::Start || cell->type == CellType::End ) {
-        return true;
+    if ( forPlayer ) {
+        return cell->type == CellType::Floor || cell->type == CellType::Start || cell->type == CellType::End;
     } else {
-        return false;
+        return cell->type == CellType::Floor || cell->type == CellType::Start || cell->type == CellType::End || cell->type == CellType::Water;
     }
 }
 
 bool Cell::devant_Porte(Cell *cell) {
     if ( cell == NULL ) return false;
-    if ( cell->type == CellType::Door ) {
-        return true;
-    } else {
-        return false;
-    }
+    return cell->type == CellType::Door;
 }

@@ -23,7 +23,7 @@ Player::Player() {
 
     argent = 0;
     nbPtVieMax = 6;
-    nbPtVie = 1;
+    nbPtVie = 6;
 
 }
 

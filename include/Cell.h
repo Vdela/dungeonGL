@@ -41,7 +41,7 @@ public:
     CellType getType(void);
     void setType(CellType type);
 
-    static bool walkableCell( Cell * cell );
+    static bool walkableCell( Cell * cell, bool forPlayer = true );
     static bool devant_Porte( Cell * cell );
 
     glm::vec2 getCellPosition(void);

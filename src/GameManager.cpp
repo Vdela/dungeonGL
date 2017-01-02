@@ -74,6 +74,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
         SDL_PollEvent(&e);
 
         switch(e.type) {
+            int monstreIndex;
 
             case SDL_KEYDOWN :
 
@@ -89,9 +90,11 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
                     case SDLK_w: // z en azerty
                     {
-                        if (!(pNiveau->faceCoffre(player.getPositionOnMap() + player.getLookDirection(), &index)) &&
+                        glm::vec2 targetPos = player.getPositionOnMap() + player.getLookDirection();
+                        if (!(pNiveau->faceCoffre(targetPos, &index)) &&
                             Cell::walkableCell(
-                                    pNiveau->getCell(player.getPositionOnMap() + player.getLookDirection()))) {
+                                    pNiveau->getCell(targetPos))
+                                &&  !pNiveau->faceMonstre(targetPos, &monstreIndex)) {
                             player.stepForward();
                         }
                         if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
@@ -106,9 +109,11 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                     }
 
                     case SDLK_s: {
-                        if (!(pNiveau->faceCoffre(player.getPositionOnMap() - player.getLookDirection(), &index)) &&
+                        glm::vec2 targetPos = player.getPositionOnMap() - player.getLookDirection();
+                        if (!(pNiveau->faceCoffre(targetPos, &index)) &&
                             Cell::walkableCell(
-                                    pNiveau->getCell(player.getPositionOnMap() - player.getLookDirection()))) {
+                                    pNiveau->getCell(targetPos))
+                            &&  !pNiveau->faceMonstre(targetPos, &monstreIndex)) {
                             player.stepBack();
                         }
                         if (pNiveau->recupTresor(player.getPositionOnMap() , &index)) {
@@ -123,9 +128,11 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                     }
                     case SDLK_q: // a en azerty
                     {
-                        if (!(pNiveau->faceCoffre(player.getPositionOnMap() + player.getLookDirection(), &index)) &&
+                        glm::vec2 targetPos = player.getPositionOnMap() + player.getLeftDirection();
+                        if (!(pNiveau->faceCoffre(targetPos, &index)) &&
                             Cell::walkableCell(
-                                    pNiveau->getCell(player.getPositionOnMap() + player.getLeftDirection()))) {
+                                    pNiveau->getCell(targetPos))
+                            &&  !pNiveau->faceMonstre(targetPos, &monstreIndex)) {
                             player.stepLeft();
                         }
                         if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
@@ -140,9 +147,10 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                     }
 
                     case SDLK_e: {
-                        if (!(pNiveau->faceCoffre(player.getPositionOnMap() - player.getLookDirection(), &index)) &&
-                            Cell::walkableCell(
-                                    pNiveau->getCell(player.getPositionOnMap() - player.getLeftDirection()))) {
+                        glm::vec2 targetPos = player.getPositionOnMap() - player.getLeftDirection();
+                        if (!(pNiveau->faceCoffre(targetPos, &index)) &&
+                            Cell::walkableCell( pNiveau->getCell(targetPos))
+                            &&  !pNiveau->faceMonstre(targetPos, &monstreIndex)) {
                             player.stepRight();
                         }
                         if (pNiveau->recupTresor(player.getPositionOnMap(), &index)) {
@@ -175,6 +183,11 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
 
         // Clear de la fenêtre avant le nouveau rendu
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+        // Comportement des monstres
+        for ( std::vector<Monstre>::iterator it = pNiveau->getMonstres().begin() ;  it != pNiveau->getMonstres().end() ; it++ ) {
+            it->update(pNiveau);
+        }
 
         // Rendu des objets de la scene
         for ( std::vector<Object3D*>::const_iterator it = Object3D::getSceneObjects().begin() ;  it != Object3D::getSceneObjects().end() ; it++ ) {

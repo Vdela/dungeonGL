@@ -8,7 +8,11 @@
 #include <string>
 #include "Object3D.h"
 #include "Demon3D.h"
+#include "Cell.h"
+#include "Player.h"
 #include <glm/vec2.hpp>
+
+class Niveau;
 
 using namespace std;
 
@@ -20,6 +24,9 @@ private:
     glm::vec2 monstrePosition;
     int rotation;
 
+    glm::vec2 lookDirection;
+    LookDirEnum lookDirFlag;
+
     string nom;
 
     int type;
@@ -27,6 +34,19 @@ private:
     int nbPtDeVie;
 
     Demon3D * object;
+
+    float moveSpeed = 1.0f;
+    float rotSpeed = 1.0f;
+
+    bool inAnim;
+    bool moving;
+    bool rotating;
+
+    glm::vec3 targetPos;
+    glm::vec3 currentPos;
+    glm::vec3 startingMovePos;
+
+    float minDistSecurity;
 public:
     Monstre();
     Monstre(unsigned int id, float x, float y, float z, int rotation, string nom, int type, int caracteristique, int nbPtDeVie);
@@ -57,6 +77,10 @@ public:
     void setObject3D(Demon3D* object);
 
     bool devant_Monstre(glm::vec2 futurePosition);
+
+    void move();
+
+    void update(Niveau * pNiveau);
 };
 
 #endif //IMACGL_MONSTRE_H

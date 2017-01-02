@@ -265,18 +265,16 @@ bool Niveau::faceMonstre(glm::vec2 futurePosition, int* id) {
 }
 
 void Niveau::frappeMonstre(glm::vec2 futurePosition) {
-    //if(nbMonstres > 0) {
-        int i;
-        if (faceMonstre(futurePosition, &i)) {
-            int* ptVie = monstres[i].getNbPtDeVie();
-            *ptVie -= 1;
-            //monstres[i].setNbPtDeVie(ptVie);
-            if (*ptVie <= 0) {
-                monstres[i].getObject3D()->die();
-                monstres.erase(monstres.begin() + i);
-            }
+    int i;
+    if (faceMonstre(futurePosition, &i)) {
+        int* ptVie = monstres[i].getNbPtDeVie();
+        *ptVie -= 1;
+        //monstres[i].setNbPtDeVie(ptVie);
+        if (*ptVie <= 0) {
+            monstres[i].getObject3D()->die();
+            monstres.erase(monstres.begin() + i);
         }
-    //}
+    }
 }
 
 bool Niveau::recupTresor(glm::vec2 futurePosition, int* id){
