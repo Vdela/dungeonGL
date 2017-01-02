@@ -6,7 +6,6 @@
 #include "../include/Demon3D.h"
 #include "../include/Player.h"
 #include "../include/Dungeon.h"
-#include "../include/Porte.h"
 #include "../include/Interface.h"
 
 GameManager GameManager::instance = GameManager();
@@ -39,6 +38,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
     pNiveau->createMap();
     pNiveau->createTresors();
     pNiveau->createMonstres();
+    pNiveau->createPortes();
 
     // Init Player
     Player& player = Player::getInstance();
@@ -101,6 +101,9 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                             else if(pNiveau->getTresors()[index].getType() == 3){
                                 pNiveau->associationPt(player.getArgent(), index);
                             }
+                            else if(pNiveau->getTresors()[index].getType() == 4){
+                                pNiveau->associationPt(player.getClef(), index);
+                            }
                         }
                         break;
                     }
@@ -117,6 +120,9 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                             }
                             else if(pNiveau->getTresors()[index].getType() == 3){
                                 pNiveau->associationPt(player.getArgent(), index);
+                            }
+                            else if(pNiveau->getTresors()[index].getType() == 4){
+                                pNiveau->associationPt(player.getClef(), index);
                             }
                         }
                         break;
@@ -135,6 +141,9 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                             else if(pNiveau->getTresors()[index].getType() == 3){
                                 pNiveau->associationPt(player.getArgent(), index);
                             }
+                            else if(pNiveau->getTresors()[index].getType() == 4){
+                                pNiveau->associationPt(player.getClef(), index);
+                            }
                         }
                         break;
                     }
@@ -152,6 +161,9 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                             else if(pNiveau->getTresors()[index].getType() == 3){
                                 pNiveau->associationPt(player.getArgent(), index);
                             }
+                            else if(pNiveau->getTresors()[index].getType() == 4){
+                                pNiveau->associationPt(player.getClef(), index);
+                            };
                         }
                         break;
                     }

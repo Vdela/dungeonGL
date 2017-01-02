@@ -46,6 +46,9 @@ void Niveau::lectureMap(char* fileName){
                 else if(r == 0 && g == 0 && b == 255){
                     carteId[i].push_back( CellType::Water );
                 }
+                else if(r == 104 && g == 60 && b == 17){
+                    carteId[i].push_back( CellType::Door );
+                }
                 else {
                     carteId[i].push_back( CellType::EmptyCell ); // Autre couleur
                 }
@@ -173,6 +176,20 @@ void Niveau::createMap(void) {
                     endPos = glm::vec2( i, j );
                     break;
                 }
+                case CellType::Door : {
+                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "floor01.png" );
+                    Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "bone01.png" );
+                    Cell cellule(carteId[i][j], i, j);
+                    cellules[i].push_back(cellule);
+                    floor->setTranslation( i, -0.5f, j );
+                    ceiling->setTranslation( i, 0.5f, j );
+                    ceiling->setRotation( glm::vec3(1,0,0), 180 );
+                    glm::vec2 porte;
+                    porte.x = (float) i;
+                    porte.y = (float) j;
+                    portes.push_back(porte);
+                    break;
+                }
                 case CellType::EmptyCell : {
                     Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
@@ -184,7 +201,6 @@ void Niveau::createMap(void) {
 
         }
     }
-
 }
 
 void Niveau::createTresors() {
@@ -214,6 +230,15 @@ void Niveau::createTresors() {
                 tresors[i].setObject3D(treasure);
                 break;
             }
+            case 4: {
+                Mesh3D *treasure = new Mesh3D(tresors[i].getModele3Dobj(), tresors[i].getModele3Dmtl(), "g2.png");
+                treasure->setScale(0.03f);
+                treasure->setRotation(glm::vec3(0.5, 0.5, -1), 90);
+                treasure->setTranslation(tresors[i].getPosition()[0], tresors[i].getPosition()[1],
+                                         tresors[i].getPosition()[2]);
+                tresors[i].setObject3D(treasure);
+                break;
+            }
             default:
                 break;
         }
@@ -227,6 +252,16 @@ void Niveau::createMonstres() {
         demon->setTranslation( monstres[i].getPosition()[0], monstres[i].getPosition()[1], monstres[i].getPosition()[2] );
         demon->setRotation( glm::vec3(0, 1, 0), monstres[i].getRotation() );
         monstres[i].setObject3D(demon);
+    }
+}
+
+void Niveau::createPortes() {
+    for ( vector<glm::vec2>::iterator it = portes.begin() ; it != portes.end() ; it++ ){
+        Porte * porte = new Porte();
+        porte->setScale( 0.032f );
+        porte->setTranslation( it->x, -0.5f, it->y );
+        //porte->setRotation( glm::vec3(0, 1, 0), monstres[it].getRotation() );
+        //monstres[i].setObject3D(demon);
     }
 }
 

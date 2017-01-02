@@ -25,6 +25,7 @@
 #include "Mesh3D.h"
 #include "Tresor.h"
 #include "Monstre.h"
+#include "Porte.h"
 
 using namespace std;
 
@@ -39,6 +40,7 @@ private:
     unsigned int widthMap;
     vector<vector<CellType > > carteId;
     vector<vector<Cell> > cellules;
+    vector<glm::vec2> portes;
     glm::vec2 startPos;
     glm::vec2 endPos;
 public:
@@ -69,8 +71,8 @@ public:
     void createMap(void);
 
     void createTresors();
-
     void createMonstres();
+    void createPortes();
 
     bool faceCoffre(glm::vec2 futurePosition, int* id);
     bool faceMonstre(glm::vec2 futurePosition, int* id);
