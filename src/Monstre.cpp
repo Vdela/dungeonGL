@@ -6,6 +6,8 @@
 #include "../include/Niveau.h"
 #include "../include/Player.h"
 
+float Monstre::hitSecondsReload = 1.0f;
+
 Monstre::Monstre() {}
 
 Monstre::Monstre(unsigned int id, float x, float y, float z, int rotation, string nom, int type, int caracteristique, int nbPtDeVie) {
@@ -23,30 +25,8 @@ Monstre::Monstre(unsigned int id, float x, float y, float z, int rotation, strin
 
     currentPos = glm::vec3(x,y,z);
     targetPos = currentPos;
+    lastHit = Time::getElapsedTime();
 
-    switch (rotation) {
-        case 0 :
-            lookDirection = glm::vec2( 0, -1 );
-            lookDirFlag = LookDirEnum::lookNorth;
-            break;
-        case 90 :
-            lookDirection = glm::vec2( -1, 0 );
-            lookDirFlag = LookDirEnum::lookWest;
-            break;
-        case 180 :
-            lookDirection = glm::vec2( 0, 1 );
-            lookDirFlag = LookDirEnum::lookSouth;
-            break;
-        case 270 :
-            lookDirection = glm::vec2( 1, 01 );
-            lookDirFlag = LookDirEnum::lookEast;
-            break;
-        default :
-            rotation = 0;
-            lookDirection = glm::vec2( 0, -1 );
-            lookDirFlag = LookDirEnum::lookNorth;
-            break;
-    }
 }
 
 Monstre::~Monstre() {}
@@ -123,52 +103,67 @@ bool Monstre::devant_Monstre(glm::vec2 futurePosition) {
 void Monstre::update(Niveau * pNiveau) {
     int index;
     Player player = Player::getInstance();
-    if ( !inAnim && !moving && (player.getPositionOnMap().x == monstrePosition.x || player.getPositionOnMap().y  == monstrePosition.y) ) {
-        glm::vec2 targetMap;
-        minDistSecurity = 100.0f;
-        if ( player.getPositionOnMap().x == monstrePosition.x ) {
-            int diff = (int)player.getPositionOnMap().y - (int)monstrePosition.y;
-            targetMap = monstrePosition + glm::vec2( 0, diff / abs(diff) );
-            if ( diff < 0 ) object->setRotation( glm::vec3(0,1,0), 90 );
-            else object->setRotation( glm::vec3(0,1,0), 270 );
-            if ( abs(diff) >= 2
-                 && !(pNiveau->faceCoffre(targetMap, &index))
-                 && Cell::walkableCell( pNiveau->getCell(targetMap), false)
-                 && !pNiveau->faceMonstre(targetMap, &index))
-            {
-                targetPos = currentPos + glm::vec3(0, 0, diff / abs(diff));
-            } else {
-                return;
+    int diffX = (int)abs((int)player.getPositionOnMap().x - (int)monstrePosition.x);
+    int diffY = (int)abs((int)player.getPositionOnMap().y - (int)monstrePosition.y);
+
+    if ( diffX >= 2 || diffY >= 2 ) {
+        if (!inAnim && !moving &&
+            (player.getPositionOnMap().x == monstrePosition.x || player.getPositionOnMap().y == monstrePosition.y)) {
+            glm::vec2 targetMap;
+            minDistSecurity = 100.0f;
+            if (player.getPositionOnMap().x == monstrePosition.x) {
+                int diff = (int) player.getPositionOnMap().y - (int) monstrePosition.y;
+                targetMap = monstrePosition + glm::vec2(0, diff / abs(diff));
+                if (diff < 0) object->setRotation(glm::vec3(0, 1, 0), 90);
+                else object->setRotation(glm::vec3(0, 1, 0), 270);
+                if (abs(diff) >= 2
+                    && !(pNiveau->faceCoffre(targetMap, &index))
+                    && Cell::walkableCell(pNiveau->getCell(targetMap), false)
+                    && !pNiveau->faceMonstre(targetMap, &index)) {
+                    targetPos = currentPos + glm::vec3(0, 0, diff / abs(diff));
+                } else {
+                    return;
+                }
+            } else if (player.getPositionOnMap().y == monstrePosition.y) {
+                int diff = (int) player.getPositionOnMap().x - (int) monstrePosition.x;
+                targetMap = monstrePosition + glm::vec2(diff / abs(diff), 0);
+                if (diff < 0) object->setRotation(glm::vec3(0, 1, 0), 180);
+                else object->setRotation(glm::vec3(0, 1, 0), 0);
+                if (abs(diff) >= 2
+                    && !(pNiveau->faceCoffre(targetMap, &index))
+                    && Cell::walkableCell(pNiveau->getCell(targetMap), false)
+                    && !pNiveau->faceMonstre(targetMap, &index)) {
+                    targetPos = currentPos + glm::vec3(diff / abs(diff), 0, 0);
+                } else {
+                    return;
+                }
             }
-        } else if ( player.getPositionOnMap().y == monstrePosition.y ) {
-            int diff = (int)player.getPositionOnMap().x - (int)monstrePosition.x;
-            targetMap = monstrePosition + glm::vec2( diff / abs(diff), 0 );
-            if ( diff < 0 ) object->setRotation( glm::vec3(0,1,0), 180 );
-            else object->setRotation( glm::vec3(0,1,0), 0 );
-            if ( abs(diff) >= 2
-                 && !(pNiveau->faceCoffre(targetMap, &index))
-                 && Cell::walkableCell( pNiveau->getCell(targetMap), false)
-                 && !pNiveau->faceMonstre(targetMap, &index))
-            {
-                targetPos = currentPos + glm::vec3(diff / abs(diff), 0, 0);
-            } else {
-                return;
-            }
+
+
+            moving = true;
+            inAnim = true;
+            startingMovePos = currentPos;
         }
-
-
-        moving = true;
-        inAnim = true;
-        startingMovePos = currentPos;
+    } else {
+        // Attack
+        if ( ((diffX <= 1 && diffY == 0) || (diffX == 0 && diffY <= 1))
+             && !inAnim
+             && !moving
+             && ((Time::getElapsedTime()-lastHit) > Monstre::hitSecondsReload)
+                ) {
+            hitPlayer();
+        }
     }
+
     move();
+
 }
 
 void Monstre::move() {
     if ( !moving ) return;
     if ( !inAnim ) return;
     float newMinDist;
-    glm::vec3 step = (targetPos - startingMovePos) * (float) Time::deltaTime * moveSpeed * 0.5f;
+    glm::vec3 step = (targetPos - startingMovePos) * (float) Time::deltaTime * moveSpeed;
     object->addTranslation(step);
     currentPos += step;
     monstrePosition = glm::vec2(targetPos.x, targetPos.z);
@@ -183,6 +178,11 @@ void Monstre::move() {
         inAnim = false;
     }
     minDistSecurity = newMinDist;
+}
+
+void Monstre::hitPlayer() {
+    lastHit = Time::getElapsedTime();
+    (*Player::getInstance().getPtVie())--;
 }
 
 

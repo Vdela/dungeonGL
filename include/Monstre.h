@@ -24,9 +24,6 @@ private:
     glm::vec2 monstrePosition;
     int rotation;
 
-    glm::vec2 lookDirection;
-    LookDirEnum lookDirFlag;
-
     string nom;
 
     int type;
@@ -35,18 +32,18 @@ private:
 
     Demon3D * object;
 
-    float moveSpeed = 1.0f;
-    float rotSpeed = 1.0f;
+    float moveSpeed = 0.5f;
 
     bool inAnim;
     bool moving;
-    bool rotating;
 
     glm::vec3 targetPos;
     glm::vec3 currentPos;
     glm::vec3 startingMovePos;
 
     float minDistSecurity;
+    static float hitSecondsReload;
+    float lastHit;
 public:
     Monstre();
     Monstre(unsigned int id, float x, float y, float z, int rotation, string nom, int type, int caracteristique, int nbPtDeVie);
@@ -81,6 +78,8 @@ public:
     void move();
 
     void update(Niveau * pNiveau);
+
+    void hitPlayer();
 };
 
 #endif //IMACGL_MONSTRE_H
