@@ -184,7 +184,7 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                         break;
                     }
                     case SDLK_ESCAPE: {
-                        exit(0);
+                        return;
                     }
 
                     default:

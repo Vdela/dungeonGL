@@ -6,7 +6,7 @@
 #include "../include/Niveau.h"
 #include "../include/Player.h"
 
-float Monstre::hitSecondsReload = 1.0f;
+float Monstre::hitSecondsReload = 1.5f;
 
 Monstre::Monstre() {}
 

@@ -1,6 +1,6 @@
 #Donjon naheulbeuk
 1
-map2bis.ppm
+map.ppm
 10
 1:1:-0.3f:6:coeur:1:1:heart.obj:heart.mtl
 2:1:-0.5f:5:tresor:2:2:boite_tresor.obj:boite_tresor.mtl
