@@ -156,9 +156,11 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
                         break;
                     }
                     case SDLK_SPACE: {
-                        player.hit();
-                        pNiveau->frappeCoffre(player.getPositionOnMap() + player.getLookDirection());
-                        pNiveau->frappeMonstre(player.getPositionOnMap() + player.getLookDirection());
+                        if ( !player.isInAnim() ) {
+                            pNiveau->frappeCoffre(player.getPositionOnMap() + player.getLookDirection());
+                            pNiveau->frappeMonstre(player.getPositionOnMap() + player.getLookDirection());
+                            player.hit();
+                        }
                         break;
                     }
 

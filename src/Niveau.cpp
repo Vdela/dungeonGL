@@ -253,28 +253,30 @@ void Niveau::frappeCoffre(glm::vec2 futurePosition) {
 }
 
 bool Niveau::faceMonstre(glm::vec2 futurePosition, int* id) {
-    for(int i = 0; i < nbMonstres; i++){
-        if(monstres[i].devant_Monstre(futurePosition)) {
+    int i = 0;
+    for ( vector<Monstre>::iterator it = monstres.begin() ; it != monstres.end() ; it++ ) {
+        if(it->devant_Monstre(futurePosition)) {
             *id = i;
             return true;
         }
+        i++;
     }
     return false;
 }
 
 void Niveau::frappeMonstre(glm::vec2 futurePosition) {
-    if(nbMonstres > 0) {
+    //if(nbMonstres > 0) {
         int i;
         if (faceMonstre(futurePosition, &i)) {
             int* ptVie = monstres[i].getNbPtDeVie();
-            *ptVie = *ptVie - 1;
+            *ptVie -= 1;
             //monstres[i].setNbPtDeVie(ptVie);
-            if (ptVie <= 0) {
+            if (*ptVie <= 0) {
                 monstres[i].getObject3D()->die();
                 monstres.erase(monstres.begin() + i);
             }
         }
-    }
+    //}
 }
 
 bool Niveau::recupTresor(glm::vec2 futurePosition, int* id){

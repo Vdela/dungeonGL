@@ -7,4 +7,4 @@ map2.ppm
 3:1:-0.40f:4:piece:3:10:piece.obj:piece.mtl
 2
 1:1:-0.5f:2:270:demon:1:30:4
-2:3:-0.5f:6:180:demon:1:30:4
+2:1:-0.5f:6:180:demon:1:30:4

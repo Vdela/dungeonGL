@@ -83,6 +83,8 @@ public:
     void setPtVie(int nbPtVie);
 
     bool vieMax(void);
+
+    bool isInAnim() { return inAnim; }
 };
 
 #endif //IMACGL_PLAYER_H
