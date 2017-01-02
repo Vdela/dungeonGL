@@ -41,6 +41,7 @@ private:
     void initGlew();
 
     FilePath applicationPath;
+    float endTime = -1.0f;
 
 };
 

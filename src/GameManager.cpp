@@ -200,6 +200,12 @@ void GameManager::initGame(uint32_t width, uint32_t height, char* gameName) {
             glm::vec2 startPos = pNiveau->getStartPos();
             player.setPositionOnMap((int)startPos.x, (int)startPos.y, true); //cran vers le bas ; cran vers la droite
         }
+        if ( player.getPositionOnMap() == pNiveau->getEndPos() ) {
+            endTime = Time::getElapsedTime();
+        }
+        if ( endTime > 0 && endTime + 1.0f <= Time::getElapsedTime() ) {
+            done = true;
+        }
 
         // Clear de la fenêtre avant le nouveau rendu
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );

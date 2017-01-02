@@ -155,24 +155,28 @@ void Niveau::createMap(void) {
                     break;
                 }
                 case CellType::Start : {
-                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "water.png" );
-                    Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "bone02.png" );
+                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "floor01.png" );
+                    Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "bone01.png" );
+                    Mesh3D * gate = new Mesh3D( "levelGate.obj", "levelGate.mtl", "wall01.png" );
                     Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
                     floor->setTranslation( i, -0.5f, j );
                     ceiling->setTranslation( i, 0.5f, j );
                     ceiling->setRotation( glm::vec3(1,0,0), 180 );
+                    gate->setTranslation( i, -0.5f, j );
                     startPos = glm::vec2( i, j );
                     break;
                 }
                 case CellType::End : {
-                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "bone02.png" );
-                    Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "water.png" );
+                    Mesh3D * floor = new Mesh3D( "quad.obj", "quad.mtl", "floor01.png" );
+                    Mesh3D * ceiling = new Mesh3D( "quad.obj", "quad.mtl", "bone01.png" );
+                    Mesh3D * gate = new Mesh3D( "levelGate.obj", "levelGate.mtl", "g2.png" );
                     Cell cellule(carteId[i][j], i, j);
                     cellules[i].push_back(cellule);
                     floor->setTranslation( i, -0.5f, j );
                     ceiling->setTranslation( i, 0.5f, j );
                     ceiling->setRotation( glm::vec3(1,0,0), 180 );
+                    gate->setTranslation( i, -0.5f, j );
                     endPos = glm::vec2( i, j );
                     break;
                 }
